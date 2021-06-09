@@ -31,7 +31,7 @@ const prefixes = {
   "nav-item": "sidebar-menu-nav-item",
   "navbar": "sidebar-menu-navbar",
   "navbar-toggler": "sidebar-menu-navbar-toggler",
-  "navbar-brand": "sidebar-menu-header",
+  "navbar-brand": "sidebar-menu-brand",
   "navbar-collapse": "sidebar-menu-navbar-collapse",
   "navbar-text": "sidebar-menu-navbar-text",
   "nav-link": "sidebar-menu-nav-link"
@@ -67,7 +67,7 @@ const SidebarMenu: SidebarMenu = (React.forwardRef((props: SidebarMenuProps, ref
   return (
     <SidebarMenuContext.Provider value={sidebarMenuContext}>
       <SelectableContext.Provider value={handleCollapse}>
-        <Component ref={ref} className={classNames(className, prefix)} {...controlledProps}>
+        <Component ref={ref} className={classNames(className, !expanded && 'collapsed', prefix)} {...controlledProps}>
           <ThemeProvider prefixes={prefixes} children={children} />
         </Component>
       </SelectableContext.Provider>

@@ -3,11 +3,11 @@ import React from "react"
 import { BsPrefixPropsWithChildren } from "react-bootstrap/esm/helpers"
 import { useBootstrapPrefix } from "react-bootstrap/esm/ThemeProvider"
 
-export type SidebarMenuNavIconProps = BsPrefixPropsWithChildren;
+export type SidebarMenuNavTitleProps = BsPrefixPropsWithChildren;
 
-export type SidebarMenuNavIcon = React.ForwardRefExoticComponent<React.RefAttributes<HTMLElement> & SidebarMenuNavIconProps> & {};
+export type SidebarMenuNavTitle = React.ForwardRefExoticComponent<React.RefAttributes<HTMLElement> & SidebarMenuNavTitleProps> & {};
 
-const SidebarMenuNavIcon: SidebarMenuNavIcon = React.forwardRef(({
+const SidebarMenuNavTitle: SidebarMenuNavTitle = React.forwardRef(({
   as: Component = 'span',
   children,
   bsPrefix,
@@ -15,11 +15,11 @@ const SidebarMenuNavIcon: SidebarMenuNavIcon = React.forwardRef(({
   ...props
 }, ref) => {
 
-  bsPrefix = useBootstrapPrefix(bsPrefix, 'sidebar-menu-nav-icon');
+  bsPrefix = useBootstrapPrefix(bsPrefix, 'sidebar-menu-nav-title');
 
   return <Component ref={ref} {...props} className={classNames(className, bsPrefix)} >
     {children || <span className={`${bsPrefix}`} />}
   </Component>
 });
 
-export default SidebarMenuNavIcon;
+export default SidebarMenuNavTitle;

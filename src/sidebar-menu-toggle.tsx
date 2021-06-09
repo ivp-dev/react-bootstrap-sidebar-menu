@@ -33,7 +33,7 @@ const SidebarMenuToggle: SidebarMenuToggle = React.forwardRef(({
   }
 
   return <Component onClick={handleClick} ref={ref} {...props} className={classNames(className, bsPrefix, !expanded && 'collapsed')} >
-    {children || <span className={`${bsPrefix}-icon`} />}
+    {children || <span className={`${bsPrefix}`} />}
   </Component>
 });
 
