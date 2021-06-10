@@ -1,20 +1,26 @@
 import React, { } from 'react';
-import { Nav, NavProps } from "react-bootstrap";
+import { Nav, NavItem, NavLink, NavProps } from "react-bootstrap";
+import { BsPrefixRefForwardingComponent } from 'react-bootstrap/esm/helpers';
 import SidebarMenuNavIcon from './sidebar-menu-nav-icon'
 import SidebarMenuNavTitle from './sidebar-menu-nav-title'
 
-type SidebarMenuNav = Nav & {
+type SidebarMenuNavProps = Omit<NavProps, "variant">
+
+type SidebarMenuNav = BsPrefixRefForwardingComponent<'div', SidebarMenuNavProps> & {
+  Item: typeof NavItem;
+  Link: typeof NavLink;
   Icon: typeof SidebarMenuNavIcon,
   Title: typeof SidebarMenuNavTitle
-};
+}
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-const SidebarMenuNav: SidebarMenuNav =
-  (React.forwardRef(({ as = "div", ...props }: NavProps, ref) => <Nav ref={ref} as={as} {...props} />) as unknown) as SidebarMenuNav;
+const SidebarMenuNav = React.forwardRef(({ as = "div", ...props }: SidebarMenuNavProps, ref) => <Nav ref={ref} as={as} {...props} />)
 
-SidebarMenuNav.Item = Nav.Item;
-SidebarMenuNav.Link = Nav.Link;
-SidebarMenuNav.Title = SidebarMenuNavTitle;
-SidebarMenuNav.Icon = SidebarMenuNavIcon;
+SidebarMenuNav.displayName = "SidebarMenuNav"
 
-export default SidebarMenuNav;
+
+export default Object.assign(SidebarMenuNav, {
+  Item: NavItem,
+  Link: NavLink,
+  Icon: SidebarMenuNavIcon,
+  Title: SidebarMenuNavTitle
+});

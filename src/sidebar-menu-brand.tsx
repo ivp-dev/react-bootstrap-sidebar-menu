@@ -5,8 +5,8 @@ type SidebarMenuBrand = NavbarBrand;
 
 type SidebarMenuBrandProps = NavbarBrandProps
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-const SidebarMenuBrand =
-  (React.forwardRef((props: SidebarMenuBrandProps, ref) => <NavbarBrand ref={ref} {...props} />) as unknown) as SidebarMenuBrand;
+const SidebarMenuBrand: SidebarMenuBrand = React.forwardRef((props: SidebarMenuBrandProps, ref) => <NavbarBrand ref={ref} {...props} />)
+
+SidebarMenuBrand.displayName = "SidebarMenuBrand"
 
 export default SidebarMenuBrand;

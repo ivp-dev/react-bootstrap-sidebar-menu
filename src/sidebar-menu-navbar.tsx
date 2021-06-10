@@ -1,15 +1,25 @@
 import React from 'react';
 import { Navbar, NavbarProps } from "react-bootstrap";
+import { BsPrefixRefForwardingComponent } from 'react-bootstrap/esm/helpers';
 
-type SidebarMenuNavbar = Navbar;
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-const SidebarMenuNavbar: SidebarMenuNavbar =
-  (React.forwardRef(({ as = "div", ...props }: NavbarProps, ref) => <Navbar ref={ref} as={as} {...props} />) as unknown) as Navbar;
+type SidebarMenuNavProps = NavbarProps;
 
-SidebarMenuNavbar.Brand = Navbar.Brand;
-SidebarMenuNavbar.Collapse = Navbar.Collapse;
-SidebarMenuNavbar.Text = Navbar.Text;
-SidebarMenuNavbar.Toggle = Navbar.Toggle;
+type SidebarMenuNavbar = BsPrefixRefForwardingComponent<'nav', SidebarMenuNavProps> & {
+  Brand: typeof Navbar.Brand;
+  Collapse: typeof Navbar.Collapse;
+  Text: typeof Navbar.Text;
+  Toggle: typeof Navbar.Toggle;
+};
 
-export default SidebarMenuNavbar;
+const SidebarMenuNavbar = React.forwardRef(({ as = "div", ...props }: SidebarMenuNavProps, ref) => <Navbar ref={ref} as={as} {...props} />);
+
+SidebarMenuNavbar.propTypes = Navbar.propTypes;
+SidebarMenuNavbar.displayName = "SidebarMenuNavbar"
+
+export default Object.assign(SidebarMenuNavbar, {
+  Brand: Navbar.Brand,
+  Collapse: Navbar.Collapse,
+  Text: Navbar.Text,
+  Toggle: Navbar.Toggle
+});

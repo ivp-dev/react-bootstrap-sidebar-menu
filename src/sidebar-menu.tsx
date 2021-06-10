@@ -40,8 +40,8 @@ const prefixes = {
 const SidebarMenu: SidebarMenu = (React.forwardRef((props: SidebarMenuProps, ref) => {
   const {
     bsPrefix: initialBsPrefix,
-    className,
     expanded = true,
+    className,
     children,
     onToggle,
     expand,
@@ -55,8 +55,10 @@ const SidebarMenu: SidebarMenu = (React.forwardRef((props: SidebarMenuProps, ref
   const prefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu');
 
   const handleCollapse = React.useCallback<SelectCallback>((...args) => {
-    console.log(args)
-  }, []);
+    if (expanded) {
+      onToggle?.(false);
+    }
+  }, [expanded, onToggle]);
 
   const sidebarMenuContext = React.useMemo<SidebarMenuContextProps>(() => ({
     expanded: !!expanded,
@@ -68,7 +70,9 @@ const SidebarMenu: SidebarMenu = (React.forwardRef((props: SidebarMenuProps, ref
     <SidebarMenuContext.Provider value={sidebarMenuContext}>
       <SelectableContext.Provider value={handleCollapse}>
         <Component ref={ref} className={classNames(className, !expanded && 'collapsed', prefix)} {...controlledProps}>
-          <ThemeProvider prefixes={prefixes} children={children} />
+          <ThemeProvider prefixes={prefixes}>
+            {children}
+          </ThemeProvider>
         </Component>
       </SelectableContext.Provider>
     </SidebarMenuContext.Provider>)
