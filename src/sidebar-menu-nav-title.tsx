@@ -8,7 +8,7 @@ export type SidebarMenuNavTitleProps = BsPrefixProps & React.HTMLAttributes<HTML
 export type SidebarMenuNavTitle = BsPrefixRefForwardingComponent<'span', SidebarMenuNavTitleProps>;
 
 const propTypes = {
-  /** @default 'sidebar-menu-nav-icon' */
+  /** @default 'sidebar-menu-nav-title' */
   bsPrefix: PropTypes.string,
 
   /**

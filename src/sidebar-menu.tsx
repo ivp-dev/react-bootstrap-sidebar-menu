@@ -30,7 +30,7 @@ const prefixes = {
   "nav": "sidebar-menu-nav",
   "nav-item": "sidebar-menu-nav-item",
   "navbar": "sidebar-menu-navbar",
-  "navbar-toggler": "sidebar-menu-navbar-toggler",
+  "navbar-toggler": "sidebar-menu-navbar-toggle",
   "navbar-brand": "sidebar-menu-brand",
   "navbar-collapse": "sidebar-menu-navbar-collapse",
   "navbar-text": "sidebar-menu-navbar-text",

@@ -40,5 +40,4 @@ const SidebarMenuNavIcon: SidebarMenuNavIcon = React.forwardRef(({
 SidebarMenuNavIcon.propTypes = propTypes;
 SidebarMenuNavIcon.displayName = "SidebarMenuNavIcon";
 
-
 export default SidebarMenuNavIcon;

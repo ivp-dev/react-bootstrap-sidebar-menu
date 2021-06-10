@@ -2,7 +2,6 @@ import React from 'react';
 import { Navbar, NavbarProps } from "react-bootstrap";
 import { BsPrefixRefForwardingComponent } from 'react-bootstrap/esm/helpers';
 
-
 type SidebarMenuNavProps = NavbarProps;
 
 type SidebarMenuNavbar = BsPrefixRefForwardingComponent<'nav', SidebarMenuNavProps> & {
@@ -15,7 +14,7 @@ type SidebarMenuNavbar = BsPrefixRefForwardingComponent<'nav', SidebarMenuNavPro
 const SidebarMenuNavbar = React.forwardRef(({ as = "div", ...props }: SidebarMenuNavProps, ref) => <Navbar ref={ref} as={as} {...props} />);
 
 SidebarMenuNavbar.propTypes = Navbar.propTypes;
-SidebarMenuNavbar.displayName = "SidebarMenuNavbar"
+SidebarMenuNavbar.displayName = "SidebarMenuNavbar";
 
 export default Object.assign(SidebarMenuNavbar, {
   Brand: Navbar.Brand,

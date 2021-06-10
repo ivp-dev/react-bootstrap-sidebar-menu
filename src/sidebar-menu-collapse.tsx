@@ -11,7 +11,7 @@ type SidebarMenuCollapseProps = Omit<CollapseProps, "children"> & HTMLAttributes
 }
 
 const propTypes = {
-  /** @default 'navbar-collapse' */
+  /** @default 'sidebar-menu-collapse' */
   bsPrefix: PropTypes.string,
 };
 
@@ -42,7 +42,7 @@ const SidebarMenuCollapse =
   });
 
 
-SidebarMenuCollapse.displayName = "SidebarMenuCollapse"
+SidebarMenuCollapse.displayName = "SidebarMenuCollapse";
 SidebarMenuCollapse.propTypes = propTypes;
 
 export default SidebarMenuCollapse;

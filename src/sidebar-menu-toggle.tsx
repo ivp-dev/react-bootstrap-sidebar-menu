@@ -35,7 +35,7 @@ const SidebarMenuToggle: SidebarMenuToggle = React.forwardRef(({
   ...props
 }, ref) => {
 
-  bsPrefix = useBootstrapPrefix(bsPrefix, 'sidebar-menu-toggler');
+  bsPrefix = useBootstrapPrefix(bsPrefix, 'sidebar-menu-toggle');
 
   const { onToggle, expanded } = useContext(SidebarMenuContext) || {};
 

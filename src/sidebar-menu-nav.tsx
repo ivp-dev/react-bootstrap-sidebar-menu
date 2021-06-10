@@ -17,7 +17,6 @@ const SidebarMenuNav = React.forwardRef(({ as = "div", ...props }: SidebarMenuNa
 
 SidebarMenuNav.displayName = "SidebarMenuNav"
 
-
 export default Object.assign(SidebarMenuNav, {
   Item: NavItem,
   Link: NavLink,
