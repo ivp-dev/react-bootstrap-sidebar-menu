@@ -6,7 +6,7 @@ import { SidebarMenuContext } from './sidebar-menu-context';
 import createChainedFunction from 'react-bootstrap/createChainedFunction'
 import PropTypes from "prop-types";
 
-type SidebarMenuCollapseProps = Omit<CollapseProps, "children"> & HTMLAttributes<HTMLDivElement> & BsPrefixProps & {
+type SidebarMenuCollapseProps = CollapseProps & HTMLAttributes<HTMLDivElement> & BsPrefixProps & {
   getScrollValue?: (el: HTMLElement) => number
 }
 
@@ -32,10 +32,8 @@ const SidebarMenuCollapse =
 
     return (<SidebarMenuContext.Consumer>
       {(context) => (
-        <Collapse onEntering={handleEntering} dimension="width" in={!!(context && context.expanded)} ref={ref} {...props}>
-          <div ref={ref as any} className={bsPrefix}>
-            {children}
-          </div>
+        <Collapse className={bsPrefix} onEntering={handleEntering} dimension="width" in={!!(context && context.expanded)} ref={ref} {...props}>
+          {children}
         </Collapse>
       )}
     </SidebarMenuContext.Consumer>)

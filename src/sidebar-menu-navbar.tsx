@@ -11,7 +11,9 @@ type SidebarMenuNavbar = BsPrefixRefForwardingComponent<'nav', SidebarMenuNavPro
   Toggle: typeof Navbar.Toggle;
 };
 
-const SidebarMenuNavbar = React.forwardRef(({ as = "div", ...props }: SidebarMenuNavProps, ref) => <Navbar ref={ref} as={as} {...props} />);
+const SidebarMenuNavbar = React.forwardRef(({ as = "nav", ...props }: SidebarMenuNavProps, ref) => {
+  return <Navbar expand={false} ref={ref} as={as} {...props} />;
+});
 
 SidebarMenuNavbar.propTypes = Navbar.propTypes;
 SidebarMenuNavbar.displayName = "SidebarMenuNavbar";

@@ -56,11 +56,11 @@ $sidebar-menu-color: #adadad !default;
 $sidebar-menu-width: 200px !default;
 $sidebar-menu-header-height: $header-height;
 $sidebar-menu-footer-height: $footer-height;
-$sidebar-menu-collapsed-width: 60px !default;
+$sidebar-menud-width: 60px !default;
 $sidebar-menu-highlight-color: #d8d8d8 !default;
 
 $submenu-bg-color: #2b2b2b !default;
-$submenu-bg-color-collapsed: #2b2b2b !default;
+$submenu-bg-color-collapse: #2b2b2b !default;
 $icon-bg-color: #2b2b2b !default;
 $icon-size: 35px !default;
 
@@ -111,6 +111,30 @@ body {
 }
 
 .sidebar-menu {
+  overflow-y: auto;
+}
+
+.sidebar-menu.show {
+  width: $sidebar-menu-width;
+}
+
+.sidebar-menu.collapse {
+  display: block;
+}
+
+.sidebar-menu:not(.show) {
+  width: $sidebar-menud-width;
+  .sidebar-menu-nav-title {
+    display: none;
+  }
+}
+
+.sidebar-menu.collapsing.width {
+  transition: width 0.35s;
+  height: auto;
+}
+
+.sidebar-menu {
   color: $sidebar-menu-color;
   height: 100%;
   text-align: left;
@@ -123,11 +147,8 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-
-  &.collapsed {
-    .sidebar-menu-header {
-      display: hidden;
-    }
+  &.collapse {
+    display: flex;
   }
 
   .sidebar-menu-toggle {
@@ -144,29 +165,8 @@ body {
     }
   }
 
-  .sidebar-menu-collapse.show {
-    width: $sidebar-menu-width;
-  }
-
-  .sidebar-menu-collapse.collapse {
-    display: block;
-  }
-
-  .sidebar-menu-collapse:not(.show) {
-    width: $sidebar-menu-collapsed-width;
-    .sidebar-menu-nav-title {
-      display: none;
-    }
-  }
-
-  .sidebar-menu-collapse.collapsing.width {
-    transition: width 0.35s;
-    height: auto;
-  }
-
   .sidebar-menu-brand {
     height: $sidebar-menu-header-height;
-    border-bottom: 1px solid rgba($sidebar-menu-color, 0.2);
     display: inline-block;
     line-height: inherit;
     white-space: nowrap;
@@ -184,8 +184,9 @@ body {
   }
 
   .sidebar-menu-footer {
+    position: absolute;
+    bottom: 0;
     height: $sidebar-menu-footer-height;
-    border-top: 1px solid rgba($sidebar-menu-color, 0.2);
   }
 
   .sidebar-menu-nav-item {
