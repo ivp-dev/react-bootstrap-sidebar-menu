@@ -1,6 +1,6 @@
 import React from 'react';
 import { CollapseProps, NavbarProps } from "react-bootstrap";
-import { BsPrefixPropsWithChildren, BsPrefixRefForwardingComponent, SelectCallback } from 'react-bootstrap/helpers';
+import { BsPrefixRefForwardingComponent, SelectCallback } from 'react-bootstrap/helpers';
 import SelectableContext from 'react-bootstrap/SelectableContext'
 import ThemeProvider, { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import SidebarMenuToggle from './sidebar-menu-toggle';
@@ -15,13 +15,11 @@ import SidebarMenuHeader from './sidebar-menu-header';
 import SidebarMenuFooter from './sidebar-menu-footer';
 import { Collapse } from "react-bootstrap";
 
-import createChainedFunction from 'react-bootstrap/esm/createChainedFunction';
-
-type SidebarMenuProps = Omit<CollapseProps, "children"> & Omit<NavbarProps, "onSelect" | "sticky" | "fixed"> & {
+type SidebarMenuProps = Omit<CollapseProps, "children" | "getDimensionValue"> & Omit<NavbarProps, "onSelect" | "sticky" | "fixed"> & {
   rtl?: boolean
   width?: number | string
   collapsed?: boolean
-  scrollValue?: ((el: HTMLElement) => number) | string | number
+  getDimensionValue?: ((el: HTMLElement) => number) | string | number
 };
 
 type SidebarMenu = BsPrefixRefForwardingComponent<'div', SidebarMenuProps> & {
@@ -47,14 +45,17 @@ const prefixes = {
 
 const SidebarMenu = React.forwardRef((props: SidebarMenuProps, ref) => {
   const {
-    bsPrefix: initialBsPrefix,
     expanded = true,
     dimension = "width",
-    scrollValue,
+    bsPrefix: initialBsPrefix,
+    getDimensionValue,
+    mountOnEnter,
+    unmountOnExit,
     className,
     children,
     appear,
     onToggle,
+    timeout,
     expand,
     width,
     rtl,
@@ -66,7 +67,9 @@ const SidebarMenu = React.forwardRef((props: SidebarMenuProps, ref) => {
   const prefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu');
   const computedDimension = typeof dimension === 'function' ? dimension() : dimension;
 
-  const handleCollapse = React.useCallback<SelectCallback>((...args) => {
+  //TODO: get prefixes from external theme provider and merge with existed
+
+  const handleCollapse = React.useCallback<SelectCallback>(() => {
     if (expanded) {
       onToggle?.(false);
     }
@@ -74,15 +77,15 @@ const SidebarMenu = React.forwardRef((props: SidebarMenuProps, ref) => {
 
   const handleEntering = React.useMemo(
     () => (elem: HTMLElement) => {
-      if (typeof scrollValue === 'function') {
-        elem.style[computedDimension] = `${scrollValue(elem)}px`;
-      } else if (typeof scrollValue === 'number') {
-        elem.style[computedDimension] = `${scrollValue}px`;
-      } else if (typeof scrollValue === 'string') {
-        elem.style[computedDimension] = `${scrollValue}`;
+      if (typeof getDimensionValue === 'function') {
+        elem.style[computedDimension] = `${getDimensionValue(elem)}px`;
+      } else if (typeof getDimensionValue === 'number') {
+        elem.style[computedDimension] = `${getDimensionValue}px`;
+      } else if (typeof getDimensionValue === 'string') {
+        elem.style[computedDimension] = `${getDimensionValue}`;
       }
     },
-    [computedDimension, scrollValue],
+    [computedDimension, getDimensionValue],
   );
 
   const sidebarMenuContext = React.useMemo<SidebarMenuContextProps>(() => ({
@@ -95,7 +98,7 @@ const SidebarMenu = React.forwardRef((props: SidebarMenuProps, ref) => {
   return (
     <SidebarMenuContext.Provider value={sidebarMenuContext}>
       <SelectableContext.Provider value={handleCollapse}>
-        <Collapse dimension={dimension} onEntering={handleEntering} in={expanded} appear={appear}>
+        <Collapse mountOnEnter={mountOnEnter} unmountOnExit={unmountOnExit} dimension={dimension} onEntering={handleEntering} in={expanded} timeout={timeout} appear={appear}>
           <Component ref={ref} className={classNames(className, prefix)} {...controlledProps}>
             <ThemeProvider prefixes={prefixes}>
               {children}

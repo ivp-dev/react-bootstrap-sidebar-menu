@@ -32,7 +32,7 @@ const SidebarMenuCollapse =
 
     return (<SidebarMenuContext.Consumer>
       {(context) => (
-        <Collapse className={bsPrefix} onEntering={handleEntering} dimension="width" in={!!(context && context.expanded)} ref={ref} {...props}>
+        <Collapse {...props} className={bsPrefix} onEntering={handleEntering} dimension="width" in={!!(context && context.expanded)} ref={ref}>
           {children}
         </Collapse>
       )}

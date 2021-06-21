@@ -6,17 +6,19 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from "react-bootstrap/e
 import { useBootstrapPrefix } from "react-bootstrap/esm/ThemeProvider"
 import { SidebarMenuContext } from './sidebar-menu-context'
 
-export type SidebarMenuToggleProps = BsPrefixProps & React.HTMLAttributes<HTMLElement>
+export type SidebarMenuToggleProps = BsPrefixProps & React.HTMLAttributes<HTMLElement> & {
+  label?: string
+}
 
-export type SidebarMenuToggle = BsPrefixRefForwardingComponent<'button', SidebarMenuToggleProps>;
+export type SidebarMenuToggle = BsPrefixRefForwardingComponent<'button', SidebarMenuToggleProps> ;
 
 const propTypes = {
   /** @default 'sidebar-menu-toggle' */
   bsPrefix: PropTypes.string,
-
+  /** An accessible ARIA label for the toggler button. */
+  label: PropTypes.string,
   /** @private */
   onClick: PropTypes.func,
-
   /**
    * The toggle content. When empty, the default toggle will be rendered.
    */
@@ -27,11 +29,17 @@ const propTypes = {
   className: PropTypes.string
 };
 
+const defaultProps = {
+  label: 'Toggle navigation',
+};
+
 const SidebarMenuToggle: SidebarMenuToggle = React.forwardRef(({
   as: Component = 'button',
   children,
+  onClick,
   bsPrefix,
   className,
+  label,
   ...props
 }, ref) => {
 
@@ -39,8 +47,14 @@ const SidebarMenuToggle: SidebarMenuToggle = React.forwardRef(({
 
   const { onToggle, expanded } = useContext(SidebarMenuContext) || {};
 
-  const handleOnClick = useEventCallback((e) => {
-    if (onToggle) onToggle();
+  const handleOnClick = useEventCallback((event) => {
+    if (onClick) {
+      onClick(event);
+    }
+
+    if (onToggle) {
+      onToggle();
+    }
   });
 
   if (Component === 'button') {
@@ -48,12 +62,13 @@ const SidebarMenuToggle: SidebarMenuToggle = React.forwardRef(({
     (props as any).type = 'button';
   }
 
-  return <Component onClick={handleOnClick} ref={ref} className={classNames(className, bsPrefix, !expanded && 'collapsed')} {...props}>
-    {children || <span className={`${bsPrefix}`} />}
+  return <Component {...props} onClick={handleOnClick} ref={ref} className={classNames(className, bsPrefix, !expanded && 'collapsed')} aria-label={label}>
+    {children || <span className={`${bsPrefix}-icon`} />}
   </Component>
 });
 
-SidebarMenuToggle.propTypes = propTypes;
 SidebarMenuToggle.displayName = "SidebarMenuToggle";
+SidebarMenuToggle.propTypes = propTypes;
+SidebarMenuToggle.defaultProps = defaultProps;
 
 export default SidebarMenuToggle;

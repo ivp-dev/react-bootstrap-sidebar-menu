@@ -1,25 +1,26 @@
 import React, { } from 'react';
-import { Nav, NavItem, NavLink, NavProps } from "react-bootstrap";
+import { Nav, NavItem, NavLink, NavProps } from 'react-bootstrap';
 import { BsPrefixRefForwardingComponent } from 'react-bootstrap/esm/helpers';
-import SidebarMenuNavIcon from './sidebar-menu-nav-icon'
-import SidebarMenuNavTitle from './sidebar-menu-nav-title'
 
-type SidebarMenuNavProps = Omit<NavProps, "variant">
+import { default as NavTitle } from './sidebar-menu-nav-title';
+import { default as NavIcon } from './sidebar-menu-nav-icon'
+
+type SidebarMenuNavProps = Omit<NavProps, 'variant' | 'cardHeaderBsPrefix'>;
 
 type SidebarMenuNav = BsPrefixRefForwardingComponent<'div', SidebarMenuNavProps> & {
   Item: typeof NavItem;
   Link: typeof NavLink;
-  Icon: typeof SidebarMenuNavIcon,
-  Title: typeof SidebarMenuNavTitle
+  Icon: typeof NavIcon,
+  Title: typeof NavTitle
 }
 
-const SidebarMenuNav = React.forwardRef(({ as = "div", ...props }: SidebarMenuNavProps, ref) => <Nav ref={ref} as={as} {...props} />)
+const SidebarMenuNav = React.forwardRef(({ ...props }: SidebarMenuNavProps, ref) => <Nav ref={ref} {...props} />);
 
-SidebarMenuNav.displayName = "SidebarMenuNav"
+SidebarMenuNav.displayName = 'SidebarMenuNav'
 
 export default Object.assign(SidebarMenuNav, {
   Item: NavItem,
   Link: NavLink,
-  Icon: SidebarMenuNavIcon,
-  Title: SidebarMenuNavTitle
+  Icon: NavIcon,
+  Title: NavTitle
 });
