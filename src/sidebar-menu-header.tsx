@@ -1,3 +1,3 @@
 import createWithBsPrefix from 'react-bootstrap/createWithBsPrefix';
 
-export default createWithBsPrefix<'div'>('sidebar-menu-header', { displayName: 'SidebarMenuHeader', Component: 'div' });
+export default createWithBsPrefix<'header'>('sidebar-menu-header', { displayName: 'SidebarMenuHeader', Component: 'header' });

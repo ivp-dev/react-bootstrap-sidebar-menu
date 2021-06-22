@@ -45,24 +45,7 @@
 @import "../../node_modules/bootstrap/scss/utilities/api";
 // scss-docs-end import-stack
 
-$font-color: #242424e0;
-
-$footer-height: 50px !default;
-$header-height: 50px !default;
-
-$sidebar-menu-bg-color: #1d1d1d !default;
-$sidebar-menu-bg-highlight-color: #1d1d1dc2 !default;
-$sidebar-menu-color: #adadad !default;
-$sidebar-menu-width: 200px !default;
-$sidebar-menu-header-height: $header-height;
-$sidebar-menu-footer-height: $footer-height;
-$sidebar-menud-width: 60px !default;
-$sidebar-menu-highlight-color: #d8d8d8 !default;
-
-$submenu-bg-color: #2b2b2b !default;
-$submenu-bg-color-collapse: #2b2b2b !default;
-$icon-bg-color: #2b2b2b !default;
-$icon-size: 35px !default;
+@import "../../src/sidebar-menu.scss";
 
 body {
   margin: 0;
@@ -78,13 +61,17 @@ body {
   width: 100%;
 }
 
+.sidebar-menu-header {
+  
+}
+
 .main-wrapper {
   background: #f3f4f6;
   grid-area: main;
   overflow-y: auto;
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: $header-height 1fr $footer-height;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "sidebar header"
     "sidebar main"
@@ -114,124 +101,7 @@ body {
   overflow-y: auto;
 }
 
-.sidebar-menu.show {
-  width: $sidebar-menu-width;
-}
 
-.sidebar-menu.collapse {
-  display: block;
-}
-
-.sidebar-menu:not(.show) {
-  width: $sidebar-menud-width;
-  .sidebar-menu-nav-title {
-    display: none;
-  }
-}
-
-.sidebar-menu.collapsing.width {
-  transition: width 0.35s;
-  height: auto;
-}
-
-.sidebar-menu {
-  color: $sidebar-menu-color;
-  height: 100%;
-  text-align: left;
-  position: relative;
-  background: $sidebar-menu-bg-color;
-  position: relative;
-  z-index: 101;
-  overflow-y: auto;
-  overflow-x: hidden;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  &.collapse {
-    display: flex;
-  }
-
-  .sidebar-menu-toggle {
-    position: absolute;
-    width: 65px;
-    height: 50px;
-    right: 0;
-    background: transparent;
-    color: white;
-    border: none;
-    fill: $sidebar-menu-color;
-    :hover {
-      fill: $sidebar-menu-highlight-color;
-    }
-  }
-
-  .sidebar-menu-brand {
-    height: $sidebar-menu-header-height;
-    display: inline-block;
-    line-height: inherit;
-    white-space: nowrap;
-  }
-
-  .sidebar-menu-navbar-toggle {
-    background: transparent;
-    border: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .sidebar-menu-content {
-    flex-grow: 1;
-  }
-
-  .sidebar-menu-footer {
-    position: absolute;
-    bottom: 0;
-    height: $sidebar-menu-footer-height;
-  }
-
-  .sidebar-menu-nav-item {
-    padding: 10px;
-    &:hover {
-      background-color: $sidebar-menu-bg-highlight-color;
-      .sidebar-menu-navbar-toggle,
-      .sidebar-menu-nav-link {
-        color: $sidebar-menu-highlight-color;
-      }
-      .sidebar-menu-navbar-toggle,
-      .sidebar-menu-nav-icon {
-        fill: $sidebar-menu-highlight-color;
-      }
-    }
-  }
-
-  .sidebar-menu-nav-icon {
-    white-space: nowrap;
-    margin-left: 10px;
-    margin-right: 20px;
-    fill: $sidebar-menu-color;
-  }
-
-  .sidebar-menu-navbar-toggle, 
-  .sidebar-menu-nav-link {
-    text-decoration: none;
-    display: flex;
-    width: 100%;
-    white-space: nowrap;
-    align-items: center;
-    text-decoration: none;
-    color: $sidebar-menu-color;
-  }
-
-  .sidebar-menu-sidebar {
-    position: relative;
-    display: block;
-    border-bottom: 1px solid #ffffff1c;
-  }
-
-  .sidebar-menu-sidebar-collapse {
-    padding-left: 10px;
-  }
-}
 
 .octicon {
   display: inline-block;

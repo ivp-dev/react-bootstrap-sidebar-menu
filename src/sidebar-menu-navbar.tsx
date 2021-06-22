@@ -5,17 +5,17 @@ import PropTypes from "prop-types";
 import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider';
 import { useUncontrolled } from 'uncontrollable';
 import SelectableContext from 'react-bootstrap/esm/SelectableContext';
-import NavbarContext, {NavbarContextType} from 'react-bootstrap/esm/NavbarContext';
+import NavbarContext, { NavbarContextType } from 'react-bootstrap/esm/NavbarContext';
 import classNames from 'classnames';
 
-type SidebarMenuNavbarProps = BsPrefixProps & Omit<NavbarProps, 'sticky'> & {
-  bg?: string
+type SidebarMenuNavbarProps = BsPrefixProps & Omit<NavbarProps,
+  'sticky' | 'bg' | 'variant' | 'fixed' | 'expand'
+> & {
   onToggle?: (expanded: boolean) => void;
   expanded?: boolean;
 };
 
 const propTypes = {
-  bg: PropTypes.string,
 
   /**
    * Set a custom element for this component.
@@ -31,6 +31,7 @@ const propTypes = {
    */
   onToggle: PropTypes.func,
 
+  collapseOnSelect: PropTypes.bool,
   /**
    * Controls the visiblity of the navbar body
    *
@@ -38,34 +39,31 @@ const propTypes = {
    */
   expanded: PropTypes.bool,
 
-  expand: PropTypes.bool,
-
   /**
    * The ARIA role for the SidebarMenuNavbar.
    *
    * @default 'navigation'
    */
-  role: PropTypes.string
+  role: PropTypes.string,
+
+  className: PropTypes.string
 };
 
-type SidebarMenuNavbar = BsPrefixRefForwardingComponent<'nav', SidebarMenuNavbarProps> & {
-  Brand: typeof Navbar.Brand;
-  Collapse: typeof Navbar.Collapse;
-  Text: typeof Navbar.Text;
-  Toggle: typeof Navbar.Toggle;
+const defaultProps = {
+  expand: false,
+  collapseOnSelect: false,
 };
 
-const SidebarMenuNavbar = React.forwardRef<HTMLElement, SidebarMenuNavbarProps>((props, ref) => {
+const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'nav', SidebarMenuNavbarProps> = React.forwardRef<HTMLElement, SidebarMenuNavbarProps>((props, ref) => {
   const {
     bsPrefix: initialBsPrefix,
-    expanded,
     as: Component = 'nav',
-    onSelect,
     collapseOnSelect,
+    expanded,
+    onSelect,
     onToggle,
     className,
-    bg,
-    ...controlledProps 
+    ...controlledProps
   } = useUncontrolled(props, {
     expanded: 'onToggle',
   });
@@ -91,22 +89,23 @@ const SidebarMenuNavbar = React.forwardRef<HTMLElement, SidebarMenuNavbarProps>(
     [onSelect, collapseOnSelect, expanded, onToggle],
   );
 
+  if (controlledProps.role === undefined && Component !== 'nav') {
+    controlledProps.role = 'navigation';
+  }
+
   return <NavbarContext.Provider value={navbarContext}>
     <SelectableContext.Provider value={handleCollapse}>
-      <Component 
-        ref={ref} {...props}
+      <Component
+        ref={ref}
         {...controlledProps}
-        className={classNames(
-          className,
-          bsPrefix,
-          bg && `bg-${bg}`
-        )}/>
+        className={classNames(className, bsPrefix)} />
     </SelectableContext.Provider>
   </NavbarContext.Provider>;
 });
 
-//SidebarMenuNavbar.propTypes = propTypes;
 SidebarMenuNavbar.displayName = "SidebarMenuNavbar";
+SidebarMenuNavbar.defaultProps = defaultProps;
+SidebarMenuNavbar.propTypes = propTypes;
 
 export default Object.assign(SidebarMenuNavbar, {
   Brand: Navbar.Brand,

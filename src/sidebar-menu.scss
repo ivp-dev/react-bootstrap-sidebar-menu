@@ -1,0 +1,325 @@
+// Contents
+//
+// SidebarMenu
+// SidebarMenu brand
+// SidebarMenu nav
+
+// Responsive SidebarMenu
+// SidebarMenu position
+// SidebarMenu themes
+
+// SidebarMenu
+//
+// Provide a static SidebarMenu from which we expand to create full-width, fixed, and
+// other navbar variations.
+
+// Navbar
+
+$sidebar-menu-width-expanded: 200px !default;
+$sidebar-menu-width-collapsed: 60px !default;
+
+$sidebar-menu-padding-y: $navbar-padding-y !default;
+$sidebar-menu-padding-x: $navbar-padding-x !default;
+$sidebar-menu-nav-link-padding-x: $navbar-nav-link-padding-x !default;
+$sidebar-menu-brand-font-size: $navbar-brand-font-size !default;
+$sidebar-menu-nav-link-height: $nav-link-height !default;
+$sidebar-menu-brand-height: $navbar-brand-height !default;
+$sidebar-menu-brand-padding-y: $navbar-brand-padding-y !default;
+$sidebar-menu-brand-margin-end: $navbar-brand-margin-end !default;
+$sidebar-menu-toggler-padding-y: $navbar-toggler-padding-y !default;
+$sidebar-menu-toggler-padding-x: $navbar-toggler-padding-x !default;
+$sidebar-menu-toggler-font-size: $navbar-toggler-font-size !default;
+$sidebar-menu-toggler-border-radius: $navbar-toggler-border-radius !default;
+$sidebar-menu-toggler-focus-width: $navbar-toggler-focus-width !default;
+$sidebar-menu-toggler-transition: $navbar-toggler-transition !default;
+$sidebar-menu-dark-color: $navbar-dark-color !default;
+$sidebar-menu-dark-hover-color: $navbar-dark-hover-color !default;
+$sidebar-menu-dark-active-color: $navbar-dark-active-color !default;
+$sidebar-menu-dark-disabled-color: $navbar-dark-disabled-color !default;
+$sidebar-menu-dark-toggler-icon-bg: $navbar-dark-toggler-icon-bg !default;
+$sidebar-menu-dark-toggler-border-color: $navbar-dark-toggler-border-color !default;
+$sidebar-menu-light-color: $navbar-light-color !default;
+$sidebar-menu-light-hover-color: $navbar-light-hover-color !default;
+$sidebar-menu-light-active-color: $navbar-light-active-color !default;
+$sidebar-menu-light-disabled-color: $navbar-light-disabled-color !default;
+$sidebar-menu-light-toggler-icon-bg: $navbar-light-toggler-icon-bg !default;
+$sidebar-menu-light-toggler-border-color: $navbar-light-toggler-border-color !default;
+$sidebar-menu-light-brand-color: $navbar-light-brand-color !default;
+$sidebar-menu-light-brand-hover-color: $navbar-light-brand-hover-color !default;
+$sidebar-menu-dark-brand-color: $navbar-dark-brand-color !default;
+$sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
+
+.sidebar-menu-collapse.show {
+  width: $sidebar-menu-width-expanded;
+}
+
+.sidebar-menu-collapse.collapse {
+  display: block;
+}
+
+.sidebar-menu-collapse:not(.show) {
+  width: $sidebar-menu-width-collapsed;
+  .sidebar-menu-nav-title {
+    display: none;
+  }
+}
+
+.sidebar-menu-collapse.collapsing.width {
+  transition: width 0.35s;
+  height: auto;
+}
+
+$sidebar-menu-light-color: rgba($white, 0.55) !default;
+$sidebar-menu-dark-color: rgba($black, 0.55) !default;
+
+.sidebar-menu {
+  padding-top: $sidebar-menu-padding-y;
+  padding-right: $sidebar-menu-padding-x; // default: null
+  padding-bottom: $sidebar-menu-padding-y;
+  padding-left: $sidebar-menu-padding-x; // default: null
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; // space out brand from logo
+
+  @include gradient-bg();
+
+  // Because flex properties aren't inherited, we need to redeclare these first
+  // few properties so that content nested within behave properly.
+  // The `flex-wrap` property is inherited to simplify the expanded navbars
+  %container-flex-properties {
+    display: flex;
+    flex-wrap: inherit;
+    justify-content: flex-start;
+  }
+
+  @each $breakpoint, $container-max-width in $container-max-widths {
+    > .container#{breakpoint-infix($breakpoint, $container-max-widths)} {
+      @extend %container-flex-properties;
+    }
+  }
+}
+
+.sidebar-menu:not(.show) {
+  .sidebar-menu-brand {
+    display: none;
+  }
+}
+
+// Navbar brand
+//
+// Used for brand, project, or site names.
+
+.sidebar-menu-header {
+  padding-top: $sidebar-menu-padding-y;
+  padding-right: $sidebar-menu-padding-x; // default: null
+  padding-bottom: $sidebar-menu-padding-y;
+  padding-left: $sidebar-menu-padding-x; // default: null
+}
+
+.sidebar-menu-brand {
+  padding-top: $sidebar-menu-brand-padding-y;
+  padding-bottom: $sidebar-menu-brand-padding-y;
+  margin-right: $sidebar-menu-brand-margin-end;
+  @include font-size($sidebar-menu-brand-font-size);
+  text-decoration: if($link-decoration == none, null, none);
+  white-space: nowrap;
+
+  &:hover,
+  &:focus {
+    text-decoration: if($link-hover-decoration == underline, none, null);
+  }
+}
+
+// Navbar nav
+//
+// Custom navbar navigation (doesn't require `.nav`, but does make use of `.sidebar-menu-nav-link`).
+
+.sidebar-menu-navbar-nav {
+  display: flex;
+  flex-direction: column; // cannot use `inherit` to get the `.navbar`s value
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+
+  .sidebar-menu-nav-link {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+// Responsive navbar
+
+.sidebar-menu-collapse {
+ 
+}
+
+// Button for toggling the navbar when in its collapsed state
+.sidebar-menu-toggler {
+  padding: $sidebar-menu-toggler-padding-y $sidebar-menu-toggler-padding-x;
+  @include font-size($sidebar-menu-toggler-font-size);
+  line-height: 1;
+  background-color: transparent; // remove default button style
+  border: $border-width solid transparent; // remove default button style
+  @include border-radius($sidebar-menu-toggler-border-radius);
+  @include transition($sidebar-menu-toggler-transition);
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: 0 0 0 $sidebar-menu-toggler-focus-width;
+  }
+}
+
+// Keep as a separate element so folks can easily override it with another icon
+// or image file as needed.
+.sidebar-menu-toggler-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
+// scss-docs-start navbar-expand-loop
+// Generate series of `.sidebar-menu-expand-*` responsive classes for configuring
+// where your navbar collapses.
+.sidebar-menu-expand {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    // stylelint-disable-next-line scss/selector-no-union-class-name
+    &#{$infix} {
+      @include media-breakpoint-up($next) {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+
+        .sidebar-menu-navbar-nav {
+
+          .sidebar-menu-nav-link {
+            padding-right: $sidebar-menu-nav-link-padding-x;
+            padding-left: $sidebar-menu-nav-link-padding-x;
+          }
+        }
+
+        .sidebar-menu-collapse {
+          display: flex !important; // stylelint-disable-line declaration-no-important
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
+// scss-docs-end navbar-expand-loop
+
+// Navbar themes
+//
+// Styles for switching between navbars with light or dark background.
+
+// Dark links against a light background
+.sidebar-menu-light {
+  .sidebar-menu-brand {
+    color: $sidebar-menu-light-brand-color;
+
+    &:hover,
+    &:focus {
+      color: $sidebar-menu-light-brand-hover-color;
+    }
+  }
+
+  .sidebar-menu-navbar-nav {
+    .sidebar-menu-nav-link {
+      color: $sidebar-menu-light-color;
+
+      &:hover,
+      &:focus {
+        color: $sidebar-menu-light-hover-color;
+      }
+
+      &.disabled {
+        color: $sidebar-menu-light-disabled-color;
+      }
+    }
+
+    .show > .sidebar-menu-nav-link,
+    .sidebar-menu-nav-link.active {
+      color: $sidebar-menu-light-active-color;
+    }
+  }
+
+  .sidebar-menu-toggler {
+    color: $sidebar-menu-light-color;
+    border-color: $sidebar-menu-light-toggler-border-color;
+  }
+
+  .sidebar-menu-toggler-icon {
+    background-image: escape-svg($sidebar-menu-light-toggler-icon-bg);
+  }
+
+  .sidebar-menu-text {
+    color: $sidebar-menu-light-color;
+
+    a,
+    a:hover,
+    a:focus {
+      color: $sidebar-menu-light-active-color;
+    }
+  }
+}
+
+// White links against a dark background
+.sidebar-menu-dark {
+  .sidebar-menu-brand {
+    color: $sidebar-menu-dark-brand-color;
+
+    &:hover,
+    &:focus {
+      color: $sidebar-menu-dark-brand-hover-color;
+    }
+  }
+
+  .sidebar-menu-navbar-nav {
+    .sidebar-menu-nav-link {
+      color: $sidebar-menu-dark-color;
+
+      &:hover,
+      &:focus {
+        color: $sidebar-menu-dark-hover-color;
+      }
+
+      &.disabled {
+        color: $sidebar-menu-dark-disabled-color;
+      }
+    }
+
+    .show > .sidebar-menu-nav-link,
+    .sidebar-menu-nav-link.active {
+      color: $sidebar-menu-dark-active-color;
+    }
+  }
+
+  .sidebar-menu-toggler {
+    color: $sidebar-menu-dark-color;
+    border-color: $sidebar-menu-dark-toggler-border-color;
+  }
+
+  .sidebar-menu-toggler-icon {
+    background-image: escape-svg($sidebar-menu-dark-toggler-icon-bg);
+  }
+
+  .sidebar-menu-text {
+    color: $sidebar-menu-dark-color;
+    a,
+    a:hover,
+    a:focus {
+      color: $sidebar-menu-dark-active-color;
+    }
+  }
+}
