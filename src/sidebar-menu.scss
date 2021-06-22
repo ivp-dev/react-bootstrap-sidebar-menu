@@ -15,7 +15,7 @@
 
 // Navbar
 
-$sidebar-menu-width-expanded: 200px !default;
+$sidebar-menu-width-expanded: 250px !default;
 $sidebar-menu-width-collapsed: 60px !default;
 
 $sidebar-menu-padding-y: $navbar-padding-y !default;
@@ -49,6 +49,8 @@ $sidebar-menu-light-brand-hover-color: $navbar-light-brand-hover-color !default;
 $sidebar-menu-dark-brand-color: $navbar-dark-brand-color !default;
 $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 
+
+
 .sidebar-menu-collapse.show {
   width: $sidebar-menu-width-expanded;
 }
@@ -69,14 +71,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
   height: auto;
 }
 
-$sidebar-menu-light-color: rgba($white, 0.55) !default;
-$sidebar-menu-dark-color: rgba($black, 0.55) !default;
-
 .sidebar-menu {
-  padding-top: $sidebar-menu-padding-y;
-  padding-right: $sidebar-menu-padding-x; // default: null
-  padding-bottom: $sidebar-menu-padding-y;
-  padding-left: $sidebar-menu-padding-x; // default: null
   position: relative;
   display: flex;
   flex-direction: column;
@@ -111,6 +106,16 @@ $sidebar-menu-dark-color: rgba($black, 0.55) !default;
 // Used for brand, project, or site names.
 
 .sidebar-menu-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: $sidebar-menu-padding-y;
+  padding-right: $sidebar-menu-padding-x; // default: null
+  padding-bottom: $sidebar-menu-padding-y;
+  padding-left: $sidebar-menu-padding-x; // default: null
+}
+
+.sidebar-menu-toggler {
   padding-top: $sidebar-menu-padding-y;
   padding-right: $sidebar-menu-padding-x; // default: null
   padding-bottom: $sidebar-menu-padding-y;
@@ -118,12 +123,12 @@ $sidebar-menu-dark-color: rgba($black, 0.55) !default;
 }
 
 .sidebar-menu-brand {
-  padding-top: $sidebar-menu-brand-padding-y;
-  padding-bottom: $sidebar-menu-brand-padding-y;
   margin-right: $sidebar-menu-brand-margin-end;
   @include font-size($sidebar-menu-brand-font-size);
   text-decoration: if($link-decoration == none, null, none);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover,
   &:focus {
@@ -156,7 +161,7 @@ $sidebar-menu-dark-color: rgba($black, 0.55) !default;
 
 // Button for toggling the navbar when in its collapsed state
 .sidebar-menu-toggler {
-  padding: $sidebar-menu-toggler-padding-y $sidebar-menu-toggler-padding-x;
+  //padding: $sidebar-menu-toggler-padding-y $sidebar-menu-toggler-padding-x;
   @include font-size($sidebar-menu-toggler-font-size);
   line-height: 1;
   background-color: transparent; // remove default button style
