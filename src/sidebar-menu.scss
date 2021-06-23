@@ -15,20 +15,28 @@
 
 // Navbar
 
-$sidebar-menu-width-expanded: 250px !default;
-$sidebar-menu-width-collapsed: 60px !default;
+$sidebar-menu-toggler-icon-width: 1.5em !default;
+$sidebar-menu-toggler-icon-height: 1.5em !default;
+$sidebar-menu-toggler-padding-x: $navbar-toggler-padding-x !default;
+$sidebar-menu-width-expanded: 300px !default;
+$sidebar-menu-header-padding-x: .5rem !default;
+$sidebar-menu-header-padding-y: .25rem !default;
+$sidebar-menu-toggler-font-size: $navbar-toggler-font-size !default;
+$sidebar-menu-brand-font-size: $navbar-brand-font-size !default;
+
+// Toggle button size with padding
+$sidebar-menu-width-collapsed: calc(#{$sidebar-menu-toggler-icon-width} * 1.25 + #{$sidebar-menu-toggler-padding-x} * 2 + #{$sidebar-menu-header-padding-x} * 2 + #{$border-width} * 2)  !default;
 
 $sidebar-menu-padding-y: $navbar-padding-y !default;
 $sidebar-menu-padding-x: $navbar-padding-x !default;
 $sidebar-menu-nav-link-padding-x: $navbar-nav-link-padding-x !default;
-$sidebar-menu-brand-font-size: $navbar-brand-font-size !default;
+
 $sidebar-menu-nav-link-height: $nav-link-height !default;
 $sidebar-menu-brand-height: $navbar-brand-height !default;
 $sidebar-menu-brand-padding-y: $navbar-brand-padding-y !default;
 $sidebar-menu-brand-margin-end: $navbar-brand-margin-end !default;
 $sidebar-menu-toggler-padding-y: $navbar-toggler-padding-y !default;
-$sidebar-menu-toggler-padding-x: $navbar-toggler-padding-x !default;
-$sidebar-menu-toggler-font-size: $navbar-toggler-font-size !default;
+
 $sidebar-menu-toggler-border-radius: $navbar-toggler-border-radius !default;
 $sidebar-menu-toggler-focus-width: $navbar-toggler-focus-width !default;
 $sidebar-menu-toggler-transition: $navbar-toggler-transition !default;
@@ -50,7 +58,6 @@ $sidebar-menu-dark-brand-color: $navbar-dark-brand-color !default;
 $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 
 
-
 .sidebar-menu-collapse.show {
   width: $sidebar-menu-width-expanded;
 }
@@ -61,6 +68,15 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 
 .sidebar-menu-collapse:not(.show) {
   width: $sidebar-menu-width-collapsed;
+  
+  .sidebar-menu-brand {
+    display: none;
+  }
+
+  .sidebar-menu-header {
+    justify-content: flex-end;
+  }
+
   .sidebar-menu-nav-title {
     display: none;
   }
@@ -72,68 +88,38 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 }
 
 .sidebar-menu {
-  position: relative;
-  display: flex;
   flex-direction: column;
-  justify-content: flex-start; // space out brand from logo
-
-  @include gradient-bg();
-
-  // Because flex properties aren't inherited, we need to redeclare these first
-  // few properties so that content nested within behave properly.
-  // The `flex-wrap` property is inherited to simplify the expanded navbars
-  %container-flex-properties {
-    display: flex;
-    flex-wrap: inherit;
-    justify-content: flex-start;
-  }
-
-  @each $breakpoint, $container-max-width in $container-max-widths {
-    > .container#{breakpoint-infix($breakpoint, $container-max-widths)} {
-      @extend %container-flex-properties;
-    }
-  }
+  @extend .navbar
 }
 
-.sidebar-menu:not(.show) {
-  .sidebar-menu-brand {
-    display: none;
-  }
-}
-
-// Navbar brand
+// Sidebar header
 //
 // Used for brand, project, or site names.
 
 .sidebar-menu-header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  padding-top: $sidebar-menu-padding-y;
-  padding-right: $sidebar-menu-padding-x; // default: null
-  padding-bottom: $sidebar-menu-padding-y;
-  padding-left: $sidebar-menu-padding-x; // default: null
+  padding-top: $sidebar-menu-header-padding-y;
+  padding-bottom: $sidebar-menu-header-padding-y;
+  padding-left: $sidebar-menu-header-padding-x;
+  padding-right: $sidebar-menu-header-padding-x;
 }
 
 .sidebar-menu-toggler {
-  padding-top: $sidebar-menu-padding-y;
-  padding-right: $sidebar-menu-padding-x; // default: null
-  padding-bottom: $sidebar-menu-padding-y;
-  padding-left: $sidebar-menu-padding-x; // default: null
+  @extend .navbar-toggler;
+  &-icon {
+    width: $sidebar-menu-toggler-icon-width;
+    height: $sidebar-menu-toggler-icon-height;
+
+    @extend .navbar-toggler-icon;
+  }
 }
 
 .sidebar-menu-brand {
-  margin-right: $sidebar-menu-brand-margin-end;
-  @include font-size($sidebar-menu-brand-font-size);
-  text-decoration: if($link-decoration == none, null, none);
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
-  &:hover,
-  &:focus {
-    text-decoration: if($link-hover-decoration == underline, none, null);
-  }
+  @extend .navbar-brand;
 }
 
 // Navbar nav
@@ -141,11 +127,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 // Custom navbar navigation (doesn't require `.nav`, but does make use of `.sidebar-menu-nav-link`).
 
 .sidebar-menu-navbar-nav {
-  display: flex;
-  flex-direction: column; // cannot use `inherit` to get the `.navbar`s value
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
+  @extend .navbar-nav;
 
   .sidebar-menu-nav-link {
     padding-right: 0;
@@ -156,28 +138,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 // Responsive navbar
 
 .sidebar-menu-collapse {
- 
-}
-
-// Button for toggling the navbar when in its collapsed state
-.sidebar-menu-toggler {
-  //padding: $sidebar-menu-toggler-padding-y $sidebar-menu-toggler-padding-x;
-  @include font-size($sidebar-menu-toggler-font-size);
-  line-height: 1;
-  background-color: transparent; // remove default button style
-  border: $border-width solid transparent; // remove default button style
-  @include border-radius($sidebar-menu-toggler-border-radius);
-  @include transition($sidebar-menu-toggler-transition);
-
-  &:hover {
-    text-decoration: none;
-  }
-
-  &:focus {
-    text-decoration: none;
-    outline: 0;
-    box-shadow: 0 0 0 $sidebar-menu-toggler-focus-width;
-  }
+  
 }
 
 // Keep as a separate element so folks can easily override it with another icon
