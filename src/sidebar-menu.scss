@@ -127,11 +127,17 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 // Custom navbar navigation (doesn't require `.nav`, but does make use of `.sidebar-menu-nav-link`).
 
 .sidebar-menu-navbar-nav {
+  padding: .5rem;
+
   @extend .navbar-nav;
+  @extend .nav-pills;
+
+  .sidebar-menu-nav-item {
+    @extend .nav-item;
+  }
 
   .sidebar-menu-nav-link {
-    padding-right: 0;
-    padding-left: 0;
+    @extend .nav-link;
   }
 }
 
