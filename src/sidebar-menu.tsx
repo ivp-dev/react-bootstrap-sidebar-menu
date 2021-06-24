@@ -15,9 +15,11 @@ import SidebarMenuHeader from './sidebar-menu-header';
 import SidebarMenuFooter from './sidebar-menu-footer';
 import PropTypes from "prop-types";
 
+
 type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
-  rtl?: boolean
-  width?: number | string
+  rtl?: boolean;
+  width?: number | string;
+  hide?: boolean | 'sm' | 'md' | 'lg' | 'xl';
 };
 
 const propTypes = {
@@ -38,6 +40,12 @@ const propTypes = {
    * When `true` the Navbar will always be expanded regardless of screen size.
    */
   expand: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']).isRequired,
+
+  /**
+  * The breakpoint, below which, the Navbar will hide.
+  * When `true` the Navbar will always be expanded regardless of screen size.
+  */
+  hide: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']).isRequired,
 
   /**
    * Controls the visiblity of the navbar body
@@ -130,9 +138,10 @@ const prefixes = {
 const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = React.forwardRef((props: SidebarMenuProps, ref) => {
   const {
     expanded = true,
-    expand,
     bsPrefix: initialBsPrefix,
     collapseOnSelect,
+    expand,
+    hide,    
     className,
     children,
     variant,
@@ -146,8 +155,6 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     });
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu');
-
-  //TODO: get prefixes from external theme provider and merge with existed
 
   const handleCollapse = useCallback<SelectCallback>(
     (...args) => {
@@ -168,11 +175,17 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     expandClass = `${expandClass}-${expand}`;
   }
 
+  let hideClass = `${bsPrefix}-hide`;
+  if (typeof hide === 'string') {
+    hideClass = `${hideClass}-${hide}`;
+  }
+
   const sidebarMenuContext = React.useMemo<SidebarMenuContextProps>(() => ({
     expanded: !!expanded,
     rtl: !!rtl,
     onToggle: () => onToggle?.(!expanded),
   }), [expanded, onToggle, rtl]);
+
 
 
   return (
@@ -184,6 +197,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
           className={classNames(
             className,
             bsPrefix,
+            hide && hideClass,
             expand && expandClass,
             expanded && 'show',
             variant && `${bsPrefix}-${variant}`,

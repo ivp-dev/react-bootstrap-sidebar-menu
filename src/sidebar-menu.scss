@@ -19,13 +19,16 @@ $sidebar-menu-toggler-icon-width: 1.5em !default;
 $sidebar-menu-toggler-icon-height: 1.5em !default;
 $sidebar-menu-toggler-padding-x: $navbar-toggler-padding-x !default;
 $sidebar-menu-width-expanded: 300px !default;
-$sidebar-menu-header-padding-x: .5rem !default;
-$sidebar-menu-header-padding-y: .25rem !default;
+$sidebar-menu-header-padding-x: 0.5rem !default;
+$sidebar-menu-header-padding-y: 0.5rem !default;
 $sidebar-menu-toggler-font-size: $navbar-toggler-font-size !default;
 $sidebar-menu-brand-font-size: $navbar-brand-font-size !default;
 
 // Toggle button size with padding
-$sidebar-menu-width-collapsed: calc(#{$sidebar-menu-toggler-icon-width} * 1.25 + #{$sidebar-menu-toggler-padding-x} * 2 + #{$sidebar-menu-header-padding-x} * 2 + #{$border-width} * 2)  !default;
+$sidebar-menu-width-collapsed: calc(
+  #{$sidebar-menu-toggler-icon-width} * 1.25 + #{$sidebar-menu-toggler-padding-x} *
+    2 + #{$sidebar-menu-header-padding-x} * 2 + #{$border-width} * 2
+) !default;
 
 $sidebar-menu-padding-y: $navbar-padding-y !default;
 $sidebar-menu-padding-x: $navbar-padding-x !default;
@@ -37,9 +40,6 @@ $sidebar-menu-brand-padding-y: $navbar-brand-padding-y !default;
 $sidebar-menu-brand-margin-end: $navbar-brand-margin-end !default;
 $sidebar-menu-toggler-padding-y: $navbar-toggler-padding-y !default;
 
-$sidebar-menu-toggler-border-radius: $navbar-toggler-border-radius !default;
-$sidebar-menu-toggler-focus-width: $navbar-toggler-focus-width !default;
-$sidebar-menu-toggler-transition: $navbar-toggler-transition !default;
 $sidebar-menu-dark-color: $navbar-dark-color !default;
 $sidebar-menu-dark-hover-color: $navbar-dark-hover-color !default;
 $sidebar-menu-dark-active-color: $navbar-dark-active-color !default;
@@ -57,7 +57,6 @@ $sidebar-menu-light-brand-hover-color: $navbar-light-brand-hover-color !default;
 $sidebar-menu-dark-brand-color: $navbar-dark-brand-color !default;
 $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 
-
 .sidebar-menu-collapse.show {
   width: $sidebar-menu-width-expanded;
 }
@@ -68,7 +67,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 
 .sidebar-menu-collapse:not(.show) {
   width: $sidebar-menu-width-collapsed;
-  
+
   .sidebar-menu-brand {
     display: none;
   }
@@ -88,8 +87,11 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 }
 
 .sidebar-menu {
+  padding-top: 0;
+  padding-bottom: 0;
   flex-direction: column;
-  @extend .navbar
+
+  @extend .navbar;
 }
 
 // Sidebar header
@@ -127,9 +129,10 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 // Custom navbar navigation (doesn't require `.nav`, but does make use of `.sidebar-menu-nav-link`).
 
 .sidebar-menu-navbar-nav {
-  padding: .5rem;
+  padding: 0.5rem;
 
   @extend .navbar-nav;
+
   @extend .nav-pills;
 
   .sidebar-menu-nav-item {
@@ -137,14 +140,24 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
   }
 
   .sidebar-menu-nav-link {
+    padding-left: 1.25rem;
+    padding-right: 1rem;
     @extend .nav-link;
+
+    .sidebar-menu-nav-icon {
+      fill: $light;
+    }
+    
+    .sidebar-menu-nav-title {
+      padding-left: 1.25rem;
+    }
   }
 }
 
 // Responsive navbar
 
 .sidebar-menu-collapse {
-  
+  @extend .navbar-collapse;
 }
 
 // Keep as a separate element so folks can easily override it with another icon
@@ -169,27 +182,38 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 
     // stylelint-disable-next-line scss/selector-no-union-class-name
     &#{$infix} {
-      @include media-breakpoint-up($next) {
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-
-        .sidebar-menu-navbar-nav {
-
-          .sidebar-menu-nav-link {
-            padding-right: $sidebar-menu-nav-link-padding-x;
-            padding-left: $sidebar-menu-nav-link-padding-x;
-          }
+      @include media-breakpoint-down($next) {
+        .sidebar-menu-collapse {
+          width: $sidebar-menu-width-collapsed;
         }
 
-        .sidebar-menu-collapse {
-          display: flex !important; // stylelint-disable-line declaration-no-important
-          flex-direction: column;
+        .sidebar-menu-header,
+        .sidebar-menu-nav-title {
+          display: none;
         }
       }
     }
   }
 }
 // scss-docs-end navbar-expand-loop
+
+// scss-docs-start sidebar-menu-expand-loop
+// Generate series of `.sidebar-menu-collapse-*` responsive classes for configuring
+// where your sidebar-menu hides.
+.sidebar-menu-hide {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    // stylelint-disable-next-line scss/selector-no-union-class-name
+    &#{$infix} {
+      @include media-breakpoint-down($next) {
+        display: none;
+      }
+    }
+  }
+}
+// scss-docs-end sidebar-menu-loop
 
 // Navbar themes
 //
@@ -272,6 +296,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     }
 
     .show > .sidebar-menu-nav-link,
+
     .sidebar-menu-nav-link.active {
       color: $sidebar-menu-dark-active-color;
     }

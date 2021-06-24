@@ -61,10 +61,6 @@ body {
   width: 100%;
 }
 
-.sidebar-menu-header {
-  
-}
-
 .main-wrapper {
   background: #f3f4f6;
   grid-area: main;
@@ -79,9 +75,26 @@ body {
   height: 100vh;
 }
 
+.main-wrapper-responsive {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    // stylelint-disable-next-line scss/selector-no-union-class-name
+    &#{$infix} {
+      @include media-breakpoint-down($next) {
+        grid-template-areas:
+          "header header"
+          "sidebar main"
+          "footer footer";
+      }
+    }
+  }
+}
+
 .main-header {
   grid-area: header;
-  background-color: #648ca6;
+  box-shadow: 2px 0px 10px 0 rgba($dark, .55);
 }
 
 .main-container {
@@ -90,18 +103,12 @@ body {
 
 .main-footer {
   grid-area: footer;
-  background-color: #648ca6;
 }
 
 .sidebar-menu {
   grid-area: sidebar;
+  box-shadow: 2px 0px 10px 0 rgba($dark, .55);
 }
-
-.sidebar-menu {
-  overflow-y: auto;
-}
-
-
 
 .octicon {
   display: inline-block;
