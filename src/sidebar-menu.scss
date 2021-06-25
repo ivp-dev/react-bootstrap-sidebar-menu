@@ -15,6 +15,9 @@
 
 // Navbar
 
+$sidebar-menu-nav-icon-transition: fill 0.15s ease-in-out,
+  background-color 0.15s ease-in-out;
+
 $sidebar-menu-toggler-icon-width: 1.5em !default;
 $sidebar-menu-toggler-icon-height: 1.5em !default;
 $sidebar-menu-toggler-padding-x: $navbar-toggler-padding-x !default;
@@ -68,6 +71,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 .sidebar-menu-collapse:not(.show) {
   width: $sidebar-menu-width-collapsed;
 
+  .sidebar-menu-text,
   .sidebar-menu-brand {
     display: none;
   }
@@ -92,6 +96,10 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
   flex-direction: column;
 
   @extend .navbar;
+}
+
+.sidebar-menu-body {
+  overflow-y: auto;
 }
 
 // Sidebar header
@@ -119,8 +127,6 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 }
 
 .sidebar-menu-brand {
-  overflow: hidden;
-  text-overflow: ellipsis;
   @extend .navbar-brand;
 }
 
@@ -128,7 +134,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 //
 // Custom navbar navigation (doesn't require `.nav`, but does make use of `.sidebar-menu-nav-link`).
 
-.sidebar-menu-navbar-nav {
+.sidebar-menu-nav {
   padding: 0.5rem;
 
   @extend .navbar-nav;
@@ -145,14 +151,25 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     line-height: 1;
     @extend .nav-link;
 
-    .sidebar-menu-nav-icon {
-      fill: $light;
-    }
-    
     .sidebar-menu-nav-title {
       padding-left: 1.25rem;
     }
   }
+}
+
+.sidebar-menu-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @extend .navbar-text;
+}
+
+.sidebar-menu-navbar-toggler {
+  @extend .navbar-toggler;
+}
+
+.sidebar-menu-nav-icon {
+  @include transition($sidebar-menu-nav-icon-transition);
 }
 
 // Responsive navbar
@@ -184,7 +201,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     // stylelint-disable-next-line scss/selector-no-union-class-name
     &#{$infix} {
       @include media-breakpoint-down($next) {
-        .sidebar-menu-collapse {
+        .sidebar-menu-collapse.show {
           width: $sidebar-menu-width-collapsed;
         }
 
@@ -231,23 +248,41 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     }
   }
 
-  .sidebar-menu-navbar-nav {
+  $sidebar-menu-nav-icon-light-fill: $sidebar-menu-light-color;
+  $sidebar-menu-nav-icon-light-hover-fill: $sidebar-menu-light-hover-color;
+  $sidebar-menu-nav-icon-light-disabled-fill: $sidebar-menu-light-disabled-color;
+  $sidebar-menu-nav-icon-light-active-fill: $sidebar-menu-light-active-color;
+
+  .sidebar-menu-nav {
     .sidebar-menu-nav-link {
       color: $sidebar-menu-light-color;
+      fill: $sidebar-menu-nav-icon-light-fill;
 
       &:hover,
       &:focus {
         color: $sidebar-menu-light-hover-color;
+
+        .sidebar-menu-nav-icon {
+          fill: $sidebar-menu-nav-icon-light-hover-fill;
+        }
       }
 
       &.disabled {
         color: $sidebar-menu-light-disabled-color;
+
+        .sidebar-menu-nav-icon {
+          fill: $sidebar-menu-nav-icon-light-disabled-fill;
+        }
       }
     }
 
     .show > .sidebar-menu-nav-link,
     .sidebar-menu-nav-link.active {
       color: $sidebar-menu-light-active-color;
+
+      .sidebar-menu-nav-icon {
+        fill: $sidebar-menu-nav-icon-light-active-fill;
+      }
     }
   }
 
@@ -272,6 +307,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 }
 
 // White links against a dark background
+
 .sidebar-menu-dark {
   .sidebar-menu-brand {
     color: $sidebar-menu-dark-brand-color;
@@ -282,24 +318,41 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     }
   }
 
-  .sidebar-menu-navbar-nav {
+  $sidebar-menu-nav-icon-dark-fill: $sidebar-menu-dark-color;
+  $sidebar-menu-nav-icon-dark-hover-fill: $sidebar-menu-dark-hover-color;
+  $sidebar-menu-nav-icon-dark-disabled-fill: $sidebar-menu-dark-disabled-color;
+  $sidebar-menu-nav-icon-dark-active-fill: $sidebar-menu-dark-active-color;
+
+  .sidebar-menu-nav {
     .sidebar-menu-nav-link {
       color: $sidebar-menu-dark-color;
+      fill: $sidebar-menu-nav-icon-dark-fill;
 
       &:hover,
       &:focus {
         color: $sidebar-menu-dark-hover-color;
+
+        .sidebar-menu-nav-icon {
+          fill: $sidebar-menu-nav-icon-dark-hover-fill;
+        }
       }
 
       &.disabled {
         color: $sidebar-menu-dark-disabled-color;
+
+        .sidebar-menu-nav-icon {
+          fill: $sidebar-menu-nav-icon-dark-disabled-fill;
+        }
       }
     }
 
     .show > .sidebar-menu-nav-link,
-
     .sidebar-menu-nav-link.active {
       color: $sidebar-menu-dark-active-color;
+
+      .sidebar-menu-nav-icon {
+        fill: $sidebar-menu-nav-icon-dark-active-fill;
+      }
     }
   }
 

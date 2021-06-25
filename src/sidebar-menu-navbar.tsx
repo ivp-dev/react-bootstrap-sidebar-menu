@@ -8,7 +8,7 @@ import NavbarContext, { NavbarContextType } from 'react-bootstrap/esm/NavbarCont
 import classNames from 'classnames';
 
 type SidebarMenuNavbarProps = BsPrefixProps & Omit<NavbarProps,
-  'sticky' | 'bg' | 'variant' | 'fixed' | 'expand' | 'collapseOnSelect' | 'onSelect'
+  'sticky' | 'bg' | 'variant' | 'fixed' | 'expand' | 'collapseOnSelect' | 'onSelect' | 'role'
 > & {
   onToggle?: (expanded: boolean) => void;
   expanded?: boolean;
@@ -47,10 +47,10 @@ const propTypes = {
   className: PropTypes.string
 };
 
-const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'nav', SidebarMenuNavbarProps> = React.forwardRef<HTMLElement, SidebarMenuNavbarProps>((props, ref) => {
+const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'div', SidebarMenuNavbarProps> = React.forwardRef<HTMLElement, SidebarMenuNavbarProps>((props, ref) => {
   const {
     bsPrefix: initialBsPrefix,
-    as: Component = 'nav',
+    as: Component = 'div',
     expanded,
     onToggle,
     className,
@@ -69,10 +69,6 @@ const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'nav', SidebarMenuNavbar
     }),
     [bsPrefix, expanded, onToggle],
   );
-
-  if (controlledProps.role === undefined && Component !== 'nav') {
-    controlledProps.role = 'navigation';
-  }
 
   return <NavbarContext.Provider value={navbarContext}>
     <Component

@@ -12,13 +12,18 @@ import { SidebarMenuContext, SidebarMenuContextProps } from './sidebar-menu-cont
 import { useUncontrolled } from 'uncontrollable';
 import SidebarMenuNavbar from './sidebar-menu-navbar';
 import SidebarMenuHeader from './sidebar-menu-header';
+import SidebarMenuBody from './sidebar-menu-body';
 import SidebarMenuFooter from './sidebar-menu-footer';
+import SidebarMenuText from './sidebar-menu-text';
 import PropTypes from "prop-types";
+import AbstractNav from 'react-bootstrap/AbstractNav';
+import { EventKey } from 'react-bootstrap/esm/types';
 
 
 type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
   rtl?: boolean;
   width?: number | string;
+  activeKey?: EventKey;
   hide?: boolean | 'sm' | 'md' | 'lg' | 'xl';
 };
 
@@ -116,6 +121,11 @@ const propTypes = {
    * @default 'navigation'
    */
   role: PropTypes.string,
+
+  /**
+ * Marks the NavItem with a matching `eventKey` (or `href` if present) as active.
+ */
+  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 const defaultProps = {
@@ -125,10 +135,8 @@ const defaultProps = {
 };
 
 const prefixes = {
-  "nav": "sidebar-menu-nav",
   "nav-item": "sidebar-menu-nav-item",
-  "navbar": "sidebar-menu-navbar",
-  "navbar-toggler": "sidebar-menu-navbar-toggle",
+  "navbar-toggler": "sidebar-menu-navbar-toggler",
   "navbar-brand": "sidebar-menu-brand",
   "navbar-collapse": "sidebar-menu-navbar-collapse",
   "navbar-text": "sidebar-menu-navbar-text",
@@ -141,17 +149,18 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     bsPrefix: initialBsPrefix,
     collapseOnSelect,
     expand,
-    hide,    
+    hide,
     className,
-    children,
+    activeKey,
     variant,
     onToggle,
     onSelect,
     bg,
     rtl,
-    as: Component = 'aside',
+    as: As = 'aside',
     ...controlledProps } = useUncontrolled(props, {
       expanded: 'onToggle',
+      activeKey: 'onSelect'
     });
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu');
@@ -166,7 +175,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     [onSelect, collapseOnSelect, expanded, onToggle],
   );
 
-  if (controlledProps.role === undefined && Component !== 'nav') {
+  if (controlledProps.role === undefined && As !== 'nav') {
     controlledProps.role = 'navigation';
   }
 
@@ -191,22 +200,18 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
   return (
     <SidebarMenuContext.Provider value={sidebarMenuContext}>
       <SelectableContext.Provider value={handleCollapse}>
-        <Component
-          ref={ref}
-          {...controlledProps}
-          className={classNames(
-            className,
-            bsPrefix,
-            hide && hideClass,
-            expand && expandClass,
-            expanded && 'show',
-            variant && `${bsPrefix}-${variant}`,
-            bg && `bg-${bg}`,
-          )}>
-          <ThemeProvider prefixes={prefixes}>
-            {children}
-          </ThemeProvider>
-        </Component>
+        <ThemeProvider prefixes={prefixes}>
+          <AbstractNav ref={ref} as={As} activeKey={activeKey} {...controlledProps}
+            className={classNames(
+              className,
+              bsPrefix,
+              hide && hideClass,
+              expand && expandClass,
+              expanded && 'show',
+              variant && `${bsPrefix}-${variant}`,
+              bg && `bg-${bg}`,
+            )}/>
+        </ThemeProvider>
       </SelectableContext.Provider>
     </SidebarMenuContext.Provider>
   )
@@ -223,5 +228,7 @@ export default Object.assign(SidebarMenu, {
   Collapse: SidebarMenuCollapse,
   Toggle: SidebarMenuToggle,
   Header: SidebarMenuHeader,
-  Footer: SidebarMenuFooter
+  Body: SidebarMenuBody,
+  Footer: SidebarMenuFooter,
+  Text: SidebarMenuText
 });
