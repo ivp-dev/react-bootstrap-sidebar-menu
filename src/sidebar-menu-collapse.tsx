@@ -10,10 +10,10 @@ type SidebarMenuCollapseProps = Omit<CollapseProps, 'children'> & HTMLAttributes
   getScrollValue?: ((el: HTMLElement) => number) | number | string
 }
 
-const propTypes = Object.assign({
+const propTypes = {
   /** @default 'sidebar-menu-collapse' */
   bsPrefix: PropTypes.string,
-});
+};
 
 const SidebarMenuCollapse =
   React.forwardRef<HTMLDivElement, SidebarMenuCollapseProps>(({
@@ -21,7 +21,7 @@ const SidebarMenuCollapse =
     children,
     getScrollValue,
     onEntering,
-    bsPrefix,
+    bsPrefix: initialBsPrefix,
     ...props
   }: SidebarMenuCollapseProps, ref) => {
     const computedDimension = typeof dimension === 'function' ? dimension() : dimension;
@@ -43,7 +43,7 @@ const SidebarMenuCollapse =
       [computedDimension, getScrollValue, onEntering],
     );
 
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'sidebar-menu-collapse');
+    const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-collapse');
 
     return (<SidebarMenuContext.Consumer>
       {(context) => {

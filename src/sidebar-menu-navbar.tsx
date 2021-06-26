@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider';
 import { useUncontrolled } from 'uncontrollable';
 import NavbarContext, { NavbarContextType } from 'react-bootstrap/esm/NavbarContext';
+import SidebarMenuNavbarToggle from './sidebar-menu-navbar-toggle';
+import SidebarMenuNavbarCollapse from './sidebar-menu-navbar-collapse';
 import classNames from 'classnames';
 
 type SidebarMenuNavbarProps = BsPrefixProps & Omit<NavbarProps,
@@ -82,8 +84,6 @@ SidebarMenuNavbar.displayName = "SidebarMenuNavbar";
 SidebarMenuNavbar.propTypes = propTypes;
 
 export default Object.assign(SidebarMenuNavbar, {
-  Brand: Navbar.Brand,
-  Collapse: Navbar.Collapse,
-  Text: Navbar.Text,
-  Toggle: Navbar.Toggle
+  Collapse: SidebarMenuNavbarCollapse,
+  Toggle: SidebarMenuNavbarToggle
 });

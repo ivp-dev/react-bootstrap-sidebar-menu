@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import { NavbarProps } from "react-bootstrap";
 import { BsPrefixRefForwardingComponent, SelectCallback } from 'react-bootstrap/helpers';
 import SelectableContext from 'react-bootstrap/SelectableContext'
-import ThemeProvider, { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
-import SidebarMenuToggle from './sidebar-menu-toggler';
+import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
+import SidebarMenuToggle from './sidebar-menu-toggle';
 import SidebarMenuCollapse from './sidebar-menu-collapse'
 import SidebarMenuNav from './sidebar-menu-nav'
 import SidebarMenuBrand from './sidebar-menu-brand'
@@ -28,11 +28,11 @@ type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
 };
 
 const propTypes = {
-  /** @default 'navbar' */
+  /** @default 'sidebar-menu' */
   bsPrefix: PropTypes.string,
 
   /**
-   * The general visual variant a the Navbar.
+   * The general visual variant a the SidebarMenu.
    * Use in combination with the `bg` prop, `background-color` utilities,
    * or your own background styles.
    *
@@ -41,19 +41,19 @@ const propTypes = {
   variant: PropTypes.string,
 
   /**
-   * The breakpoint, below which, the Navbar will collapse.
+   * The breakpoint, below which, the SidebarMenu will collapse.
    * When `true` the Navbar will always be expanded regardless of screen size.
    */
   expand: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']).isRequired,
 
   /**
-  * The breakpoint, below which, the Navbar will hide.
+  * The breakpoint, below which, the SidebarMenu will hide.
   * When `true` the Navbar will always be expanded regardless of screen size.
   */
   hide: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']).isRequired,
 
   /**
-   * Controls the visiblity of the navbar body
+   * Controls the visiblity of the sidebar body
    *
    * @controllable onToggle
    */
@@ -73,8 +73,8 @@ const propTypes = {
   as: PropTypes.elementType,
 
   /**
-   * A callback fired when the `<Navbar>` body collapses or expands. Fired when
-   * a `<Navbar.Toggle>` is clicked and called with the new `expanded`
+   * A callback fired when the `<SidebarMenu>` body collapses or expands. Fired when
+   * a `<SidebarMenu.Toggle>` is clicked and called with the new `expanded`
    * boolean value.
    *
    * @controllable expanded
@@ -82,11 +82,11 @@ const propTypes = {
   onToggle: PropTypes.func,
 
   /**
-   * A callback fired when a descendant of a child `<Nav>` is selected. Should
+   * A callback fired when a descendant of a child `<SidebarMenuNav>` is selected. Should
    * be used to execute complex closing or other miscellaneous actions desired
-   * after selecting a descendant of `<Nav>`. Does nothing if no `<Nav>` or `<Nav>`
+   * after selecting a descendant of `<SidebarMenuNav>`. Does nothing if no `<SidebarMenuNav>` or `<SidebarMenuNav>`
    * descendants exist. The callback is called with an eventKey, which is a
-   * prop from the selected `<Nav>` descendant, and an event.
+   * prop from the selected `<SidebarMenuNav>` descendant, and an event.
    *
    * ```js
    * function (
@@ -95,7 +95,7 @@ const propTypes = {
    * )
    * ```
    *
-   * For basic closing behavior after all `<Nav>` descendant onSelect events in
+   * For basic closing behavior after all `<SidebarMenuNav>` descendant onSelect events in
    * mobile viewports, try using collapseOnSelect.
    *
    * Note: If you are manually closing the navbar using this `OnSelect` prop,
@@ -133,15 +133,6 @@ const defaultProps = {
   variant: 'light' as const,
   collapseOnSelect: false
 };
-
-const prefixes = {
-  "nav-item": "sidebar-menu-nav-item",
-  "navbar-toggler": "sidebar-menu-navbar-toggler",
-  "navbar-brand": "sidebar-menu-brand",
-  "navbar-collapse": "sidebar-menu-navbar-collapse",
-  "navbar-text": "sidebar-menu-navbar-text",
-  "nav-link": "sidebar-menu-nav-link"
-}
 
 const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = React.forwardRef((props: SidebarMenuProps, ref) => {
   const {
@@ -195,23 +186,19 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     onToggle: () => onToggle?.(!expanded),
   }), [expanded, onToggle, rtl]);
 
-
-
   return (
     <SidebarMenuContext.Provider value={sidebarMenuContext}>
       <SelectableContext.Provider value={handleCollapse}>
-        <ThemeProvider prefixes={prefixes}>
-          <AbstractNav ref={ref} as={As} activeKey={activeKey} {...controlledProps}
-            className={classNames(
-              className,
-              bsPrefix,
-              hide && hideClass,
-              expand && expandClass,
-              expanded && 'show',
-              variant && `${bsPrefix}-${variant}`,
-              bg && `bg-${bg}`,
-            )}/>
-        </ThemeProvider>
+        <AbstractNav ref={ref} as={As} activeKey={activeKey} {...controlledProps}
+          className={classNames(
+            className,
+            bsPrefix,
+            hide && hideClass,
+            expand && expandClass,
+            expanded && 'show',
+            variant && `${bsPrefix}-${variant}`,
+            bg && `bg-${bg}`,
+          )} />
       </SelectableContext.Provider>
     </SidebarMenuContext.Provider>
   )

@@ -62,7 +62,7 @@ const SidebarMenuToggle: SidebarMenuToggle = React.forwardRef(({
     (props as any).type = 'button';
   }
 
-  return <Component {...props} onClick={handleOnClick} ref={ref} className={classNames(className, bsPrefix, !expanded && 'collapsed')} aria-label={label}>
+  return <Component ref={ref} {...props} onClick={handleOnClick} className={classNames(className, bsPrefix, !expanded && 'collapsed')} aria-label={label}>
     {children || <span className={`${bsPrefix}-icon`} />}
   </Component>
 });

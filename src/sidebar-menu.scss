@@ -92,8 +92,8 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 
 .sidebar-menu {
   padding-top: 0;
-  padding-bottom: 0;
   flex-direction: column;
+  overflow-y: auto;
 
   @extend .navbar;
 }
@@ -134,6 +134,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 //
 // Custom navbar navigation (doesn't require `.nav`, but does make use of `.sidebar-menu-nav-link`).
 
+
 .sidebar-menu-nav {
   padding: 0.5rem;
 
@@ -151,10 +152,11 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     line-height: 1;
     @extend .nav-link;
 
-    .sidebar-menu-nav-title {
-      padding-left: 1.25rem;
-    }
   }
+}
+
+.sidebar-menu-nav-title {
+  padding-left: 1.25rem;
 }
 
 .sidebar-menu-text {
@@ -165,6 +167,9 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 }
 
 .sidebar-menu-navbar-toggler {
+  margin-left: 1rem;
+  border: none;
+  @extend .sidebar-menu-nav-link;
   @extend .navbar-toggler;
 }
 
