@@ -3,5 +3,5 @@
 /build/
 
 # webpack
-/webpack.config.js
-/tests/dummy/webpack.config.js
+webpack.config.js
+tests/dummy/webpack.config.js

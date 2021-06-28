@@ -4,7 +4,7 @@ const path = require('path')
 
 module.exports = {
   mode: 'development',
-  entry: path.resolve(__dirname, './www/app/index.tsx'),
+  entry: path.resolve(__dirname, './app/index.tsx'),
   module: {
     rules: [
       {
@@ -34,7 +34,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: path.resolve(__dirname, './www/public/index.html')
+      template: path.resolve(__dirname, './public/index.html')
     }),
   ]
 }
