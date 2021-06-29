@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavProps } from 'react-bootstrap';
+import { NavProps, NavLink } from 'react-bootstrap';
 import { BsPrefixRefForwardingComponent } from 'react-bootstrap/esm/helpers';
 import classNames from 'classnames';
 import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider';
@@ -15,15 +15,12 @@ const SidebarMenuNav: BsPrefixRefForwardingComponent<'div', SidebarMenuNavProps>
   as: Component = "div",
   bsPrefix: initialBsPrefix,
   className,
-  children, 
   ...props
 }: SidebarMenuNavProps, ref) => {
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-nav');
 
-  return <Component ref={ref} {...props} className={classNames(className, bsPrefix)}>
-    {children}
-  </Component>;
+  return <Component ref={ref} {...props} className={classNames(className, bsPrefix)}/>;
 });
 
 SidebarMenuNav.displayName = 'SidebarMenuNav';

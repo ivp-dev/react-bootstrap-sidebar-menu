@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, useMemo } from 'react';
 import { Collapse, CollapseProps } from "react-bootstrap";
-import { BsPrefixProps } from 'react-bootstrap/helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import { SidebarMenuContext } from './sidebar-menu-context';
 import createChainedFunction from 'react-bootstrap/createChainedFunction'
@@ -15,7 +15,7 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 };
 
-const SidebarMenuCollapse =
+const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuCollapseProps> =
   React.forwardRef<HTMLDivElement, SidebarMenuCollapseProps>(({
     dimension = "width",
     children,

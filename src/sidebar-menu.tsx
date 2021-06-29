@@ -189,7 +189,10 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
   return (
     <SidebarMenuContext.Provider value={sidebarMenuContext}>
       <SelectableContext.Provider value={handleCollapse}>
-        <AbstractNav ref={ref} as={As} activeKey={activeKey} {...controlledProps}
+        <AbstractNav
+          as={As}
+          ref={ref}
+          activeKey={activeKey}
           className={classNames(
             className,
             bsPrefix,
@@ -198,7 +201,8 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
             expanded && 'show',
             variant && `${bsPrefix}-${variant}`,
             bg && `bg-${bg}`,
-          )} />
+          )}
+          {...controlledProps} />
       </SelectableContext.Provider>
     </SidebarMenuContext.Provider>
   )

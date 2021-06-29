@@ -4,7 +4,7 @@ import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider';
 
 type SidebarMenuNavbarToggle = NavbarToggle;
 
-type SidebarMenuNavbarToggleProps = NavbarToggleProps
+type SidebarMenuNavbarToggleProps = NavbarToggleProps;
 
 const SidebarMenuNavbarToggle: SidebarMenuNavbarToggle = React.forwardRef(({ bsPrefix: initialBsPrefix, ...props }: SidebarMenuNavbarToggleProps, ref) => {
 
