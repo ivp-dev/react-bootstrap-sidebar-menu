@@ -5,3 +5,5 @@
 # webpack
 webpack.config.js
 tests/dummy/webpack.config.js
+
+rollup.config.js

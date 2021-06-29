@@ -6,7 +6,7 @@ import { terser } from "rollup-plugin-terser";
 import { uglify } from "rollup-plugin-uglify";
 
 const input = 'src/index.ts';
-const output = 'build/index';
+const output = 'dist/index';
 const extensions = ['.js', '.ts', '.tsx'];
 
 export default [
