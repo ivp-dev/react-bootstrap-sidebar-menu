@@ -27,7 +27,7 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
   );
 })
 
-SidebarMenuNavLink.displayName = "SidebarMenuLink";
+SidebarMenuNavLink.displayName = "SidebarMenuNavLink";
 SidebarMenuNavLink.propTypes = NavLink.propTypes;
 SidebarMenuNavLink.defaultProps = NavLink.defaultProps;
 
