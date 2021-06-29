@@ -37,11 +37,13 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
 
   return (
     <AbstractNavItem
-      {...props}
       ref={ref}
       as={As}
+      href={href}
       disabled={disabled}
+      active={active}
       className={classNames(className, bsPrefix, disabled && 'disabled')}
+      {...props}
     />
   );
 })
