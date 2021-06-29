@@ -1,2 +1,2 @@
 # react-bootstrap-sidebar-menu
-React sidebar based on bootstrap
+React sidebar based on react-bootstrap
