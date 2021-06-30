@@ -1,20 +1,39 @@
-import React from 'react';
-import NavbarCollapse, { NavbarCollapseProps } from "react-bootstrap/NavbarCollapse";
-import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider';
+import * as React from 'react';
+import { useContext } from 'react';
+import PropTypes from 'prop-types';
 
-type SidebarMenuNavbarCollapse = typeof NavbarCollapse;
+import Collapse, { CollapseProps } from 'react-bootstrap/Collapse';
+import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
+import NavbarContext from 'react-bootstrap/NavbarContext';
+import { BsPrefixProps } from 'react-bootstrap/helpers';
 
-type SidebarMenuNavbarCollapseProps = NavbarCollapseProps
+export interface SidebarMenuNavbarCollapseProps
+  extends Omit<CollapseProps, 'children'>,
+    React.HTMLAttributes<HTMLDivElement>,
+    BsPrefixProps {}
 
-const SidebarMenuNavbarCollapse: SidebarMenuNavbarCollapse = React.forwardRef(({ bsPrefix: initialBsPrefix, ...props }: SidebarMenuNavbarCollapseProps, ref) => {
+const propTypes = {
+  /** @default 'sidebar-menu-navbar-collapse' */
+  bsPrefix: PropTypes.string,
+};
 
-  const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-navbar-collapse');
+const SidebarMenuNavbarCollapse = React.forwardRef<HTMLDivElement, SidebarMenuNavbarCollapseProps>(
+  ({ children, bsPrefix, ...props }, ref) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'sidebar-menu-navbar-collapse');
+    
+    const context = useContext(NavbarContext);
 
-  return <NavbarCollapse ref={ref} bsPrefix={bsPrefix} {...props} />;
-})
+    return (
+      <Collapse in={!!(context && context.expanded)} {...props}>
+        <div ref={ref} className={bsPrefix}>
+          {children}
+        </div>
+      </Collapse>
+    );
+  },
+);
 
-SidebarMenuNavbarCollapse.displayName = "SidebarMenuNavbarCollapse";
-SidebarMenuNavbarCollapse.propTypes = NavbarCollapse.propTypes;
-SidebarMenuNavbarCollapse.defaultProps = NavbarCollapse.defaultProps;
+SidebarMenuNavbarCollapse.displayName = 'SidebarMenuNavbarCollapse';
+SidebarMenuNavbarCollapse.propTypes = propTypes;
 
 export default SidebarMenuNavbarCollapse;

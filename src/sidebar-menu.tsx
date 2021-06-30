@@ -193,6 +193,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
           as={As}
           ref={ref}
           activeKey={activeKey}
+          onKeyDown={() => {console.log(activeKey)}}
           className={classNames(
             className,
             bsPrefix,
