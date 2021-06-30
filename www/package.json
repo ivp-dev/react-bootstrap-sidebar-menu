@@ -20,10 +20,10 @@
     "bootstrap": "file:../node_modules/bootstrap",
     "node-sass": "file:../node_modules/node-sass",
     "react": "file:../node_modules/react",
+    "react-bootstrap-sidebar-menu": "file:..",
     "react-dom": "file:../node_modules/react-dom",
     "react-scripts": "file:../node_modules/react-scripts",
-    "typescript": "file:../node_modules/typescript",
-    "react-bootstrap-sidebar-menu": "file:.."
+    "typescript": "file:../node_modules/typescript"
   },
   "eslintConfig": {
     "extends": [
