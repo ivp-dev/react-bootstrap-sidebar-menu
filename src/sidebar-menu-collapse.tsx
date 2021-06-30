@@ -1,10 +1,12 @@
-import React, { HTMLAttributes, useMemo } from 'react';
+import React, { HTMLAttributes, useCallback, useContext, useMemo, useRef } from 'react';
 import { Collapse, CollapseProps } from "react-bootstrap";
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import { SidebarMenuContext } from './sidebar-menu-context';
+import NavbarContext, { NavbarContextType } from 'react-bootstrap/esm/NavbarContext';
 import createChainedFunction from 'react-bootstrap/createChainedFunction'
 import PropTypes from "prop-types";
+import useMergedRefs from '@restart/hooks/useMergedRefs';
 
 type SidebarMenuCollapseProps = Omit<CollapseProps, 'children'> & HTMLAttributes<HTMLDivElement> & BsPrefixProps & {
   getScrollValue?: ((el: HTMLElement) => number) | number | string
@@ -16,7 +18,7 @@ const propTypes = {
 };
 
 const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuCollapseProps> =
-  React.forwardRef<HTMLDivElement, SidebarMenuCollapseProps>(({
+  React.forwardRef(({
     dimension = "width",
     children,
     getScrollValue,
@@ -25,6 +27,18 @@ const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuColl
     ...props
   }: SidebarMenuCollapseProps, ref) => {
     const computedDimension = typeof dimension === 'function' ? dimension() : dimension;
+
+    const nodeRef = useRef<HTMLElement>();
+    const mergedRefs = useMergedRefs(ref, nodeRef);
+
+    const navbarContext = useContext(NavbarContext)
+
+    const handleKeyDown = useCallback(() => {
+      const hasActive = nodeRef.current?.querySelector(".active");
+      if(hasActive && navbarContext && !navbarContext?.expanded) {
+        navbarContext.onToggle();
+      }
+    }, [navbarContext]);
 
     const handleEntering = useMemo(
       () => createChainedFunction((elem: HTMLElement) => {
@@ -48,7 +62,7 @@ const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuColl
     return (<SidebarMenuContext.Consumer>
       {(context) => {
         return <Collapse dimension={dimension} onEntering={handleEntering} in={!!context?.expanded} {...props}>
-        <div ref={ref} className={bsPrefix}>
+        <div onKeyDown={handleKeyDown} ref={mergedRefs} className={bsPrefix}>
           {children}
         </div>
       </Collapse>

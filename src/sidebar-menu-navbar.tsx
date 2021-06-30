@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
-import { Navbar, NavbarProps } from "react-bootstrap";
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import { NavbarProps } from "react-bootstrap";
+import { } from 'react-bootstrap/'
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/esm/helpers';
 import PropTypes from "prop-types";
 import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider';
@@ -8,6 +9,7 @@ import NavbarContext, { NavbarContextType } from 'react-bootstrap/esm/NavbarCont
 import SidebarMenuNavbarToggle from './sidebar-menu-navbar-toggle';
 import SidebarMenuNavbarCollapse from './sidebar-menu-navbar-collapse';
 import classNames from 'classnames';
+import useMergedRefs from '@restart/hooks/useMergedRefs';
 
 type SidebarMenuNavbarProps = BsPrefixProps & Omit<NavbarProps,
   'sticky' | 'bg' | 'variant' | 'fixed' | 'expand' | 'collapseOnSelect' | 'onSelect' | 'role'
@@ -49,7 +51,7 @@ const propTypes = {
   className: PropTypes.string
 };
 
-const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'div', SidebarMenuNavbarProps> = React.forwardRef<HTMLElement, SidebarMenuNavbarProps>((props, ref) => {
+const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'div', SidebarMenuNavbarProps> = React.forwardRef((props, ref) => {
   const {
     bsPrefix: initialBsPrefix,
     as: Component = 'div',
@@ -65,16 +67,35 @@ const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'div', SidebarMenuNavbar
 
   const navbarContext = useMemo<NavbarContextType>(
     () => ({
-      onToggle: () => onToggle?.(!expanded),
       bsPrefix,
-      expanded: !!expanded,
+      onToggle: () => onToggle?.(!expanded),
+      expanded: !!expanded
     }),
-    [bsPrefix, expanded, onToggle],
+    [bsPrefix, expanded, onToggle]
   );
+
+  const nodeRef = useRef<HTMLElement>(null);
+
+  const mergedRef = useMergedRefs(ref, nodeRef);
+
+  const handleKeyDown = useCallback(() => {
+    if(!expanded && !!nodeRef.current?.querySelector(".active")) {
+      if(onToggle) {
+        //onToggle(true);
+      }
+    }
+  }, [expanded, onToggle]);
+
+  useEffect(() => {
+    if (!expanded && nodeRef.current && !!nodeRef.current.querySelector<HTMLElement>('.active')) {
+      //onToggle && onToggle(true);
+    }
+  }, [expanded, onToggle]);
 
   return <NavbarContext.Provider value={navbarContext}>
     <Component
-      ref={ref}
+      ref={mergedRef}
+      onKeyDown={handleKeyDown}
       {...controlledProps}
       className={classNames(className, bsPrefix)} />
   </NavbarContext.Provider>;
@@ -87,3 +108,4 @@ export default Object.assign(SidebarMenuNavbar, {
   Collapse: SidebarMenuNavbarCollapse,
   Toggle: SidebarMenuNavbarToggle
 });
+
