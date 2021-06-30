@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NavLink, NavLinkProps } from "react-bootstrap";
 import AbstractNavItem from 'react-bootstrap/AbstractNavItem'
 import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider';
@@ -25,23 +25,28 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
   const navbarContext = useContext(NavbarContext);
   const navKey = makeEventKey(href);
 
-  if (navContext) {
-    const isActive = active == null && navKey != null
-      ? navContext.activeKey === navKey
-      : active;
+  const expandedRef = useRef(!!navbarContext?.expanded)
 
+  const isActive = active == null && navKey != null
+    ? navContext && navContext.activeKey === navKey
+    : active;
+
+  useEffect(() => {
     if (navbarContext && !navbarContext.expanded && isActive) {
-      console.log("should be expanded")
+      navbarContext.onToggle()
+      expandedRef.current = navbarContext?.expanded
     }
-  }
+  }, [isActive])
 
   return (
     <AbstractNavItem
-      {...props}
       ref={ref}
       as={As}
+      href={href}
+      active={active}
       disabled={disabled}
       className={classNames(className, bsPrefix, disabled && 'disabled')}
+      {...props}
     />
   );
 })
