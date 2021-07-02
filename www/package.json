@@ -23,6 +23,7 @@
     "react-bootstrap-sidebar-menu": "file:..",
     "react-dom": "file:../node_modules/react-dom",
     "react-scripts": "file:../node_modules/react-scripts",
+    "react-router-dom": "file:../node_modules/react-router-dom",
     "typescript": "file:../node_modules/typescript"
   },
   "eslintConfig": {
