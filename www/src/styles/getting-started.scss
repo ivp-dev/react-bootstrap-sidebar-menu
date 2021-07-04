@@ -1,0 +1,21 @@
+pre {
+  margin: 0;
+  color: #d63384;
+  background-color: lightgray;
+  border-radius:5px;
+  padding: 1rem;
+  > code {
+    display: inline-block;
+  }
+}
+
+aside[role="note"] {
+  background-color: rgba(255, 229, 100, 0.3);
+  border-left: 3px solid #ffe564;
+  padding: 1rem;
+}
+
+section {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}

@@ -1,2 +1,2 @@
-export * from './main-menu';
+export * from './getting-started';
 export * from './layout';

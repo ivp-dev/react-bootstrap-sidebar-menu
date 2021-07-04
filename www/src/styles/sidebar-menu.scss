@@ -35,28 +35,33 @@ $sidebar-menu-width-collapsed: calc(
 
 $sidebar-menu-padding-y: $navbar-padding-y !default;
 $sidebar-menu-padding-x: $navbar-padding-x !default;
-$sidebar-menu-nav-link-padding-x: $navbar-nav-link-padding-x !default;
+
+$sidebar-menu-nav-link-padding-x: 1rem !default;
+$sidebar-menu-nav-link-padding-y: null !default;
 
 $sidebar-menu-nav-link-height: $nav-link-height !default;
+
 $sidebar-menu-brand-height: $navbar-brand-height !default;
 $sidebar-menu-brand-padding-y: $navbar-brand-padding-y !default;
 $sidebar-menu-brand-margin-end: $navbar-brand-margin-end !default;
+
 $sidebar-menu-toggler-padding-y: $navbar-toggler-padding-y !default;
 
-$sidebar-menu-dark-color: $navbar-dark-color !default;
-$sidebar-menu-dark-hover-color: $navbar-dark-hover-color !default;
-$sidebar-menu-dark-active-color: $navbar-dark-active-color !default;
-$sidebar-menu-dark-disabled-color: $navbar-dark-disabled-color !default;
-$sidebar-menu-dark-toggler-icon-bg: $navbar-dark-toggler-icon-bg !default;
-$sidebar-menu-dark-toggler-border-color: $navbar-dark-toggler-border-color !default;
 $sidebar-menu-light-color: $navbar-light-color !default;
 $sidebar-menu-light-hover-color: $navbar-light-hover-color !default;
-$sidebar-menu-light-active-color: $navbar-light-active-color !default;
+$sidebar-menu-light-active-color: $nav-pills-link-active-color !default;
 $sidebar-menu-light-disabled-color: $navbar-light-disabled-color !default;
 $sidebar-menu-light-toggler-icon-bg: $navbar-light-toggler-icon-bg !default;
 $sidebar-menu-light-toggler-border-color: $navbar-light-toggler-border-color !default;
 $sidebar-menu-light-brand-color: $navbar-light-brand-color !default;
 $sidebar-menu-light-brand-hover-color: $navbar-light-brand-hover-color !default;
+
+$sidebar-menu-dark-color: $navbar-dark-color !default;
+$sidebar-menu-dark-hover-color: $navbar-dark-hover-color !default;
+$sidebar-menu-dark-active-color: $nav-pills-link-active-color !default;
+$sidebar-menu-dark-disabled-color: $navbar-dark-disabled-color !default;
+$sidebar-menu-dark-toggler-icon-bg: $navbar-dark-toggler-icon-bg !default;
+$sidebar-menu-dark-toggler-border-color: $navbar-dark-toggler-border-color !default;
 $sidebar-menu-dark-brand-color: $navbar-dark-brand-color !default;
 $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 
@@ -147,8 +152,10 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
   }
 
   .sidebar-menu-nav-link {
-    padding-left: 1.25rem;
-    padding-right: 1rem;
+    padding-left: $sidebar-menu-nav-link-padding-x;
+    padding-right: $sidebar-menu-nav-link-padding-x;
+    padding-top: $sidebar-menu-nav-link-padding-y;
+    padding-bottom: $sidebar-menu-nav-link-padding-y;
     line-height: 1;
     @extend .nav-link;
 
@@ -253,41 +260,22 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     }
   }
 
-  $sidebar-menu-nav-icon-light-fill: $sidebar-menu-light-color;
-  $sidebar-menu-nav-icon-light-hover-fill: $sidebar-menu-light-hover-color;
-  $sidebar-menu-nav-icon-light-disabled-fill: $sidebar-menu-light-disabled-color;
-  $sidebar-menu-nav-icon-light-active-fill: $sidebar-menu-light-active-color;
-
   .sidebar-menu-nav {
     .sidebar-menu-nav-link {
       color: $sidebar-menu-light-color;
-      fill: $sidebar-menu-nav-icon-light-fill;
-
+      
       &:hover,
       &:focus {
         color: $sidebar-menu-light-hover-color;
-
-        .sidebar-menu-nav-icon {
-          fill: $sidebar-menu-nav-icon-light-hover-fill;
-        }
       }
 
       &.disabled {
         color: $sidebar-menu-light-disabled-color;
-
-        .sidebar-menu-nav-icon {
-          fill: $sidebar-menu-nav-icon-light-disabled-fill;
-        }
       }
     }
 
-    .show > .sidebar-menu-nav-link,
     .sidebar-menu-nav-link.active {
       color: $sidebar-menu-light-active-color;
-
-      .sidebar-menu-nav-icon {
-        fill: $sidebar-menu-nav-icon-light-active-fill;
-      }
     }
   }
 
@@ -323,41 +311,23 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     }
   }
 
-  $sidebar-menu-nav-icon-dark-fill: $sidebar-menu-dark-color;
-  $sidebar-menu-nav-icon-dark-hover-fill: $sidebar-menu-dark-hover-color;
-  $sidebar-menu-nav-icon-dark-disabled-fill: $sidebar-menu-dark-disabled-color;
-  $sidebar-menu-nav-icon-dark-active-fill: $sidebar-menu-dark-active-color;
-
   .sidebar-menu-nav {
     .sidebar-menu-nav-link {
       color: $sidebar-menu-dark-color;
-      fill: $sidebar-menu-nav-icon-dark-fill;
+      
 
       &:hover,
       &:focus {
         color: $sidebar-menu-dark-hover-color;
-
-        .sidebar-menu-nav-icon {
-          fill: $sidebar-menu-nav-icon-dark-hover-fill;
-        }
       }
 
       &.disabled {
         color: $sidebar-menu-dark-disabled-color;
-
-        .sidebar-menu-nav-icon {
-          fill: $sidebar-menu-nav-icon-dark-disabled-fill;
-        }
       }
     }
 
-    .show > .sidebar-menu-nav-link,
     .sidebar-menu-nav-link.active {
       color: $sidebar-menu-dark-active-color;
-
-      .sidebar-menu-nav-icon {
-        fill: $sidebar-menu-nav-icon-dark-active-fill;
-      }
     }
   }
 

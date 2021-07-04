@@ -1,5 +1,6 @@
 @import './styles/bootstrap-imports.scss';
 @import './styles/sidebar-menu.scss';
+@import './styles/getting-started.scss';
 
 body {
   margin: 0;
@@ -54,16 +55,16 @@ html, body, #root, .main-wrapper {
 .main-header {
   grid-area: header;
   padding: .5rem;
-  box-shadow: 2px 0px 10px 0 rgba($dark, .55);
 }
 
 .main-container {
   grid-area: main;
+  box-shadow: inset 2px 0px 10px 0 rgba($dark, .55);
+  overflow: auto;
 }
 
 .sidebar-menu {
   grid-area: sidebar;
-  box-shadow: 2px 0px 10px 0 rgba($dark, .55);
 }
 
 .navbar-brand {

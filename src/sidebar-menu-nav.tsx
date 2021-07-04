@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavProps, NavLink } from 'react-bootstrap';
+import { NavProps } from 'react-bootstrap';
 import { BsPrefixRefForwardingComponent } from 'react-bootstrap/esm/helpers';
 import classNames from 'classnames';
 import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider';

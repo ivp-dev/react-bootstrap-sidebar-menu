@@ -24,6 +24,7 @@ type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
   rtl?: boolean;
   width?: number | string;
   activeKey?: EventKey;
+  defaultActiveKey?: EventKey;
   hide?: boolean | 'sm' | 'md' | 'lg' | 'xl';
 };
 
@@ -32,7 +33,7 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * The general visual variant a the SidebarMenu.
+   * The general visual variant of the SidebarMenu.
    * Use in combination with the `bg` prop, `background-color` utilities,
    * or your own background styles.
    *
@@ -42,13 +43,13 @@ const propTypes = {
 
   /**
    * The breakpoint, below which, the SidebarMenu will collapse.
-   * When `true` the Navbar will always be expanded regardless of screen size.
+   * When `true` the SidebarMenu will always be expanded regardless of screen size.
    */
   expand: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']).isRequired,
 
   /**
   * The breakpoint, below which, the SidebarMenu will hide.
-  * When `true` the Navbar will always be expanded regardless of screen size.
+  * When `true` the SidebarMenu will always be hidden regardless of screen size.
   */
   hide: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']).isRequired,
 
@@ -62,8 +63,6 @@ const propTypes = {
   /**
    * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.
    * `light` and `dark` are common choices but any `bg-*` class is supported, including any custom ones you might define.
-   *
-   * Pairs nicely with the `variant` prop.
    */
   bg: PropTypes.string,
 
@@ -106,24 +105,24 @@ const propTypes = {
 
   /**
    * Toggles `expanded` to `false` after the onSelect event of a descendant of a
-   * child `<Nav>` fires. Does nothing if no `<Nav>` or `<Nav>` descendants exist.
+   * child `<SidebarMenu>` fires. Does nothing if no `<SidebarMenu>` or `<SidebarMenu>` descendants exist.
    *
    * Manually controlling `expanded` via the onSelect callback is recommended instead,
    * for more complex operations that need to be executed after
-   * the `select` event of `<Nav>` descendants.
+   * the `select` event of `<SidebarMenu>` descendants.
    */
   collapseOnSelect: PropTypes.bool,
 
   /**
    * The ARIA role for the navbar, will default to 'navigation' for
-   * Navbars whose `as` is something other than `<nav>`.
+   * SidebarMenu whose `as` is something other than `<nav>`.
    *
    * @default 'navigation'
    */
   role: PropTypes.string,
 
   /**
- * Marks the NavItem with a matching `eventKey` (or `href` if present) as active.
+ * Marks the SidebarMenuNavItem with a matching `eventKey` (or `href` if present) as active.
  */
   activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
@@ -193,7 +192,6 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
           as={As}
           ref={ref}
           activeKey={activeKey}
-          onKeyDown={() => {console.log(activeKey)}}
           className={classNames(
             className,
             bsPrefix,
