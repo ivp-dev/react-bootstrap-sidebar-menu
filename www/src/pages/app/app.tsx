@@ -4,7 +4,11 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Layout } from '../../components'
 import { SidebarMenu } from 'react-bootstrap-sidebar-menu';
-import { Theme } from '../../types';
+
+const Theme = {
+  Light: "light" as const,
+  Dark: "dark" as const 
+}
 
 type AppProps = {};
 
