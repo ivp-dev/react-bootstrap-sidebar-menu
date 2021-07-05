@@ -2,8 +2,8 @@ import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 //import external from "rollup-plugin-peer-deps-external";
-//import { terser } from "rollup-plugin-terser";
-//import { uglify } from "rollup-plugin-uglify";
+import { terser } from "rollup-plugin-terser";
+import { uglify } from "rollup-plugin-uglify";
 
 const input = 'src/index.ts';
 const output = 'dist/index';
@@ -49,7 +49,7 @@ export default [
         babelHelpers: 'bundled'
       }),
       //external(),
-      //uglify(),
+      uglify(),
     ],
   },
   {
@@ -76,7 +76,7 @@ export default [
         exclude: "node_modules/**",
         babelHelpers: 'bundled'
       }),
-      //terser(),
+      terser(),
     ],
   }, {
     input: input,
@@ -101,7 +101,7 @@ export default [
         babelHelpers: 'bundled'
       }),
       //external(),
-      //terser(),
+      terser(),
     ]
   }
 ]

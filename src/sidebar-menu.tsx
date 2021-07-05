@@ -19,13 +19,13 @@ import PropTypes from "prop-types";
 import AbstractNav from 'react-bootstrap/AbstractNav';
 import { EventKey } from 'react-bootstrap/esm/types';
 
-
 type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
   rtl?: boolean;
   width?: number | string;
   activeKey?: EventKey;
-  defaultActiveKey?: EventKey;
   hide?: boolean | 'sm' | 'md' | 'lg' | 'xl';
+  defaultActiveKey?: EventKey;
+  defaultExpanded?: boolean
 };
 
 const propTypes = {
@@ -42,6 +42,13 @@ const propTypes = {
   variant: PropTypes.string,
 
   /**
+   * RTL direction.
+   * 
+   * @default false
+   */
+  rtl: PropTypes.bool,
+
+  /**
    * The breakpoint, below which, the SidebarMenu will collapse.
    * When `true` the SidebarMenu will always be expanded regardless of screen size.
    */
@@ -50,6 +57,8 @@ const propTypes = {
   /**
   * The breakpoint, below which, the SidebarMenu will hide.
   * When `true` the SidebarMenu will always be hidden regardless of screen size.
+  * 
+  * * @default false
   */
   hide: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']).isRequired,
 
@@ -128,23 +137,26 @@ const propTypes = {
 };
 
 const defaultProps = {
+  rtl: false,
   expand: true,
+  hide: false,
   variant: 'light' as const,
-  collapseOnSelect: false
+  collapseOnSelect: false,
+  defaultExpanded: true
 };
 
 const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = React.forwardRef((props: SidebarMenuProps, ref) => {
   const {
-    expanded = true,
+    expanded,
     bsPrefix: initialBsPrefix,
     collapseOnSelect,
-    expand,
-    hide,
     className,
     activeKey,
     variant,
     onToggle,
     onSelect,
+    expand,
+    hide,
     bg,
     rtl,
     as: As = 'aside',
@@ -198,6 +210,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
             hide && hideClass,
             expand && expandClass,
             expanded && 'show',
+            rtl && 'rtl',
             variant && `${bsPrefix}-${variant}`,
             bg && `bg-${bg}`,
           )}

@@ -2,18 +2,18 @@ import { useEventCallback } from "@restart/hooks";
 import classNames from "classnames";
 import React, { useContext } from "react"
 import PropTypes from "prop-types";
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from "react-bootstrap/esm/helpers"
-import { useBootstrapPrefix } from "react-bootstrap/esm/ThemeProvider"
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from "react-bootstrap/helpers"
+import { useBootstrapPrefix } from "react-bootstrap/ThemeProvider"
 import { SidebarMenuContext } from './sidebar-menu-context'
 
 export type SidebarMenuToggleProps = BsPrefixProps & React.HTMLAttributes<HTMLElement> & {
   label?: string
 }
 
-export type SidebarMenuToggle = BsPrefixRefForwardingComponent<'button', SidebarMenuToggleProps> ;
+export type SidebarMenuToggle = BsPrefixRefForwardingComponent<'button', SidebarMenuToggleProps>;
 
 const propTypes = {
-  /** @default 'sidebar-menu-toggle' */
+  /** @default 'sidebar-menu-toggler' */
   bsPrefix: PropTypes.string,
   /** An accessible ARIA label for the toggler button. */
   label: PropTypes.string,
@@ -48,13 +48,8 @@ const SidebarMenuToggle: SidebarMenuToggle = React.forwardRef(({
   const { onToggle, expanded } = useContext(SidebarMenuContext) || {};
 
   const handleOnClick = useEventCallback((event) => {
-    if (onClick) {
-      onClick(event);
-    }
-
-    if (onToggle) {
-      onToggle();
-    }
+    if (onClick) onClick(event);
+    if (onToggle) onToggle();
   });
 
   if (Component === 'button') {

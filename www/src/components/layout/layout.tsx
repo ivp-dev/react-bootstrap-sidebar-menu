@@ -1,10 +1,20 @@
 import React from "react";
 import { PropsWithChildren } from "react";
+import classNames from 'classnames';
 
-type Props = {};
+type Props = {
+  rtl?: boolean
+};
 
-const Layout: React.FC<PropsWithChildren<Props>> = ({ children }) => {
-  return <div className={`main-wrapper main-wrapper-responsive-md`} >
+const Layout: React.FC<PropsWithChildren<Props>> = ({ children, rtl }) => {
+
+
+
+  return <div className={classNames(
+    'main-wrapper',
+    'main-wrapper-responsive-lg',
+    rtl && 'rtl'
+  )} >
     {children}
   </div>
 };

@@ -6,6 +6,7 @@ const GettingStarted = () => {
     <p>Customizable and responsive react sidebar menu based on <a href="https://react-bootstrap.github.io/">React-Bootstrap</a>. Includes support for branding, navigation, and more.</p>
 
     <section>
+
       <h3 id="setup">Install</h3>
 
       <pre>
@@ -16,6 +17,7 @@ const GettingStarted = () => {
     </section>
 
     <section>
+
       <h3 id="usage">Usage
         <a href="#usage" className="anchorjs-link">#</a>
       </h3>
@@ -29,6 +31,7 @@ const GettingStarted = () => {
     </section>
 
     <section>
+
       <h3>Overview</h3>
 
       <p>Before getting started with SidebarMenu you need to know that: </p>
@@ -41,6 +44,7 @@ const GettingStarted = () => {
     </section>
 
     <section>
+
       <h3>Responsive behaviors</h3>
 
       <p>Use the expand prop as well as the Navbar.Toggle and Navbar.Collapse components to control when content collapses behind a button.</p>
@@ -51,7 +55,9 @@ const GettingStarted = () => {
     </section>
 
     <section>
+
       <h3>Color schemes</h3>
+
       <p>
         Choose from <code>variant="light"</code> for use with light background colors, or <code>variant="dark"</code> for dark background colors.
         Then, customize with the <code>bg</code> prop or any custom css.
@@ -63,6 +69,7 @@ const GettingStarted = () => {
     </section>
 
     <section>
+
       <h3 id="api">API</h3>
 
       <table className="table">
@@ -87,11 +94,74 @@ const GettingStarted = () => {
             <td></td>
             <td>A convenience prop for adding <code>bg-*</code> utility classes since they are so commonly used here. <code>light</code> and <code>dark</code> are common choices but any <code>bg-*</code> class is supported, including any custom ones you might define.</td>
           </tr>
+          <tr>
+            <td>expand</td>
+            <td><code>boolean</code> | <code>'sm'</code> | <code>'md'</code> | <code>'lg'</code> | <code>'xl'</code> | <code>'xxl'</code></td>
+            <td><code>true</code></td>
+            <td>The breakpoint, below which, the SidebarMenu will collapse. When <code>true</code> the SidebarMenu will always be expanded regardless of screen size.</td>
+          </tr>
+          <tr>
+            <td>expanded</td>
+            <td>boolean</td>
+            <td></td>
+            <td>
+              <small>
+                <em className="text-info">
+                  <span>
+                    controlled by: <code>onToggle</code>, initial prop: <code>defaultExpanded</code>
+                  </span>
+                </em>
+              </small>
+              <br/>
+              Controls the visiblity of the SidebarMenu.
+            </td>
+          </tr>
+          <tr>
+            <td>onSelect</td>
+            <td>function</td>
+            <td></td>
+            <td>A callback fired when a descendant of a child <code>&lt;Sidebar&gt;</code> is selected.</td>
+          </tr>
+          <tr>
+            <td>onToggle</td>
+            <td>function</td>
+            <td></td>
+            <td>
+            <small>
+                <em className="text-info">
+                  <span>
+                    controls: <code>expanded</code>
+                  </span>
+                </em>
+              </small>
+              <br/>
+              A callback fired when the <code>&lt;Navbar&gt;</code> body collapses or expands.
+            </td>
+          </tr>
+          <tr>
+            <td>role</td>
+            <td>string</td>
+            <td><code>'navigation'</code></td>
+            <td>The ARIA role for the Sidebar, will default to 'navigation' for SidebarMenu whose <code>as</code> is something other than <code>&lt;nav&gt;</code>.</td>
+          </tr>
+          <tr>
+            <td>variant</td>
+            <td><code>'light' | 'dark'</code></td>
+            <td><code>'light'</code></td>
+            <td>The general visual variant a the Sidebar. Use in combination with the <code>bg</code> prop, <code>background-color</code> utilities, or your own background styles.</td>
+          </tr>
+          <tr>
+            <td>bsPrefix</td>
+            <td>string</td>
+            <td><code>'navbar'</code></td>
+            <td>Change the underlying component CSS base class name and modifier class names prefix.</td>
+          </tr>
         </tbody>
       </table>
     </section>
 
     <section>
+
       <h3>Supported content</h3>
 
       <p>SidebarMenu come with built-in support for a handful of sub-components. Choose from the following as needed:</p>

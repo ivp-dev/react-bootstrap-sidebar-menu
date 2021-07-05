@@ -1,31 +1,47 @@
 import React, { useState } from 'react';
 import { PropsWithChildren } from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { Layout } from '../../components'
+import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
+import { Layout, CheckBox } from '../../components'
 import { SidebarMenu } from 'react-bootstrap-sidebar-menu';
+import classNames from 'classnames';
 
 const Theme = {
   Light: "light" as const,
-  Dark: "dark" as const 
+  Dark: "dark" as const
 }
 
 type AppProps = {};
 
 const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
-  const [theme, setTheme] = useState(Theme.Dark);
 
-  return <Layout>
-    <Navbar className="main-header" bg={theme} variant={theme}>
+  const [isRtl, setIsRtl] = useState(false);
+
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
+
+  let themeName = isDarkTheme ? Theme.Dark : Theme.Light;
+
+  return <Layout rtl={isRtl}>
+    <Navbar className="main-header" expand="lg" bg={themeName} variant={themeName}>
       <Navbar.Brand className="d-block d-lg-none"><span className="react-bootstrap-img" /></Navbar.Brand>
       <Navbar.Toggle aria-controls="navbarScroll" />
-      <Navbar.Collapse>
+      <Navbar.Collapse className={classNames(!isRtl && 'justify-content-end')}>
         <Nav>
-          <Nav.Link as={Link} to="/examples">Examples</Nav.Link>
+          <NavDropdown title="Settings" id="basic-nav-dropdown">
+            <Nav.Item>
+              <Container fluid={true}>
+                <CheckBox checked={isDarkTheme} onChange={() => setIsDarkTheme(!isDarkTheme)} text={themeName} />
+              </Container>
+            </Nav.Item>
+            <Nav.Item>
+              <Container fluid={true}>
+                <CheckBox checked={isRtl} onChange={() => setIsRtl(!isRtl)} text={isRtl ? "rtl" : "ltr"} />
+              </Container>
+            </Nav.Item>
+          </NavDropdown>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-    <SidebarMenu defaultActiveKey="#setup" bg={theme} variant={theme} expand="md" hide="md">
+    <SidebarMenu rtl={isRtl} defaultActiveKey="#setup" bg={themeName} variant={themeName} expand="lg" hide="md">
       <SidebarMenu.Collapse getScrollValue={() => 300}>
         <SidebarMenu.Header>
           <SidebarMenu.Brand>
@@ -52,6 +68,15 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
               <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
           </SidebarMenu.Nav>
+          <SidebarMenu.Navbar>
+            <SidebarMenu.Navbar.Toggle>)</SidebarMenu.Navbar.Toggle>
+            <SidebarMenu.Navbar.Collapse>
+              <SidebarMenu.Nav.Link href="#test">
+                <SidebarMenu.Nav.Icon>4</SidebarMenu.Nav.Icon>
+                <SidebarMenu.Nav.Title></SidebarMenu.Nav.Title>
+              </SidebarMenu.Nav.Link>
+            </SidebarMenu.Navbar.Collapse>
+          </SidebarMenu.Navbar>
         </SidebarMenu.Body>
         <SidebarMenu.Footer>
         </SidebarMenu.Footer>
