@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { App } from './pages';
-import { GettingStarted } from './components'
-
+import App from './pages/app';
+import GettingStarted from './components/getting-started'
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -15,4 +14,5 @@ ReactDOM.render(
         <Route path="/" component={GettingStarted} />
       </Switch>
     </App>
-  </BrowserRouter>, document.getElementById('root'));
+  </BrowserRouter>, document.getElementById('root')
+);

@@ -47,11 +47,11 @@ const GettingStarted = () => {
 
       <h3>Responsive behaviors</h3>
 
-      <p>Use the expand prop as well as the Navbar.Toggle and Navbar.Collapse components to control when content collapses behind a button.</p>
+      <p>Use the expand prop as well as the SidebarMenu.Toggle and SidebarMenu.Collapse components to control when content collapses behind a button.</p>
 
-      <p>Set the defaultExpanded prop to make the Navbar start expanded. Set collapseOnSelect to make the Navbar collapse automatically when the user selects an item. You can also finely control the collapsing behavior by using the expanded and onToggle props.</p>
+      <p>Set the defaultExpanded prop to make the SidebarMenu start expanded. Set collapseOnSelect to make the SidebarMenu collapse automatically when the user selects an item. You can also finely control the collapsing behavior by using the expanded and onToggle props.</p>
 
-      <aside role="note">Watch out! You need to provide a breakpoint value to expand in order for the Navbar to collapse at all.</aside>
+      <aside role="note">Watch out! You need to provide a breakpoint value to expand in order for the SidebarMenu to collapse at all.</aside>
     </section>
 
     <section>
@@ -72,7 +72,7 @@ const GettingStarted = () => {
 
       <h3 id="api">API</h3>
 
-      <table className="table">
+      <table className="table table-bordered table-responsive">
         <thead>
           <tr>
             <th>Name</th>
@@ -117,10 +117,16 @@ const GettingStarted = () => {
             </td>
           </tr>
           <tr>
+            <td>hide</td>
+            <td><code>boolean</code> | <code>'sm'</code> | <code>'md'</code> | <code>'lg'</code> | <code>'xl'</code></td>
+            <td><code>false</code></td>
+            <td>The breakpoint, below which, the SidebarMenu will hide. When <code>true</code> the SidebarMenu will always be hidden regardless of screen size.</td>
+          </tr>
+          <tr>
             <td>onSelect</td>
             <td>function</td>
             <td></td>
-            <td>A callback fired when a descendant of a child <code>&lt;Sidebar&gt;</code> is selected.</td>
+            <td>A callback fired when a descendant of a child <code>&lt;SidebarMenu&gt;</code> is selected.</td>
           </tr>
           <tr>
             <td>onToggle</td>
@@ -135,7 +141,7 @@ const GettingStarted = () => {
                 </em>
               </small>
               <br/>
-              A callback fired when the <code>&lt;Navbar&gt;</code> body collapses or expands.
+              A callback fired when the <code>&lt;SidebarMenu&gt;</code> body collapses or expands.
             </td>
           </tr>
           <tr>
@@ -153,7 +159,7 @@ const GettingStarted = () => {
           <tr>
             <td>bsPrefix</td>
             <td>string</td>
-            <td><code>'navbar'</code></td>
+            <td><code>'sidebar-menu'</code></td>
             <td>Change the underlying component CSS base class name and modifier class names prefix.</td>
           </tr>
         </tbody>
@@ -170,7 +176,7 @@ const GettingStarted = () => {
 
       <h4>SidebarMenu.Toggle</h4>
 
-      <table className="table">
+      <table className="table table-bordered table-responsive">
         <thead>
           <tr>
             <th>Name</th>
@@ -193,7 +199,7 @@ const GettingStarted = () => {
 
       <h4>SidebarMenu.Navbar</h4>
 
-      <table className="table">
+      <table className="table table-bordered table-responsive">
         <thead>
           <tr>
             <th>Name</th>
@@ -216,4 +222,4 @@ const GettingStarted = () => {
   </div>
 }
 
-export default GettingStarted
+export default GettingStarted;

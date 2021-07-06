@@ -21,7 +21,6 @@ import { EventKey } from 'react-bootstrap/esm/types';
 
 type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
   rtl?: boolean;
-  width?: number | string;
   activeKey?: EventKey;
   hide?: boolean | 'sm' | 'md' | 'lg' | 'xl';
   defaultActiveKey?: EventKey;
@@ -147,9 +146,9 @@ const defaultProps = {
 
 const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = React.forwardRef((props: SidebarMenuProps, ref) => {
   const {
-    expanded,
     bsPrefix: initialBsPrefix,
     collapseOnSelect,
+    expanded,
     className,
     activeKey,
     variant,

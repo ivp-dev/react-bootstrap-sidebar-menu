@@ -52,6 +52,19 @@ body,
   }
 }
 
+.dropdown-left {
+  .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
+}
+
+.navbar-dark {
+  .dropdown-menu {
+    @extend .dropdown-menu-dark
+  }
+}
+
 .main-wrapper-responsive {
   @each $breakpoint in map-keys($grid-breakpoints) {
     $next: breakpoint-next($breakpoint, $grid-breakpoints);

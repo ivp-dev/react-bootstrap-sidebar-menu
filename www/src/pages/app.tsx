@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { PropsWithChildren } from 'react';
-import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
-import { Layout, CheckBox } from '../../components'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import CheckBox from '../components/check-box'
+import Layout from '../components/layout';
 import { SidebarMenu } from 'react-bootstrap-sidebar-menu';
 import classNames from 'classnames';
 
@@ -15,10 +16,8 @@ type AppProps = {};
 const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
 
   const [isRtl, setIsRtl] = useState(false);
-
   const [isDarkTheme, setIsDarkTheme] = useState(true);
-
-  let themeName = isDarkTheme ? Theme.Dark : Theme.Light;
+  const themeName = isDarkTheme ? Theme.Dark : Theme.Light;
 
   return <Layout rtl={isRtl}>
     <Navbar className="main-header" expand="lg" bg={themeName} variant={themeName}>
@@ -26,17 +25,13 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
       <Navbar.Toggle aria-controls="navbarScroll" />
       <Navbar.Collapse className={classNames(!isRtl && 'justify-content-end')}>
         <Nav>
-          <NavDropdown title="Settings" id="basic-nav-dropdown">
-            <Nav.Item>
-              <Container fluid={true}>
-                <CheckBox checked={isDarkTheme} onChange={() => setIsDarkTheme(!isDarkTheme)} text={themeName} />
-              </Container>
-            </Nav.Item>
-            <Nav.Item>
-              <Container fluid={true}>
-                <CheckBox checked={isRtl} onChange={() => setIsRtl(!isRtl)} text={isRtl ? "rtl" : "ltr"} />
-              </Container>
-            </Nav.Item>
+          <NavDropdown className={classNames(!isRtl && 'dropdown-left')} title="Settings" id="basic-nav-dropdown">
+            <NavDropdown.ItemText>
+              <CheckBox id="darkThemeSwitcher" checked={isDarkTheme} onChange={() => setIsDarkTheme(!isDarkTheme)} text={themeName} />
+            </NavDropdown.ItemText>
+            <NavDropdown.ItemText>
+              <CheckBox id="rtlSwitcher" checked={isRtl} onChange={() => setIsRtl(!isRtl)} text={isRtl ? "rtl" : "ltr"} />
+            </NavDropdown.ItemText>
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>

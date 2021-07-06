@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useUncontrolled } from 'uncontrollable';
 
 type CheckBoxType = {
+  id: string,
   checked?: boolean,
   text?: string,
   defaultChecked?: boolean,
@@ -10,9 +11,10 @@ type CheckBoxType = {
 
 const CheckBox = (props: CheckBoxType) => {
   const {
-    text,
-    checked,
     onChange,
+    checked,
+    text,
+    id,
     ...controlledProps
   } = useUncontrolled(props, {
     checked: 'onChange'
@@ -21,8 +23,8 @@ const CheckBox = (props: CheckBoxType) => {
   const handleOnChange = useCallback(() => onChange?.(!checked), [checked, onChange])
 
   return <div className="form-check form-switch">
-    <input checked={checked} onChange={handleOnChange} id="flexSwitchCheckDefault" className="form-check-input" type="checkbox" {...controlledProps}/>
-    <label className="form-check-label" htmlFor="flexSwitchCheckDefault">{text}</label>
+    <input checked={checked} onChange={handleOnChange} id={id} className="form-check-input" type="checkbox" {...controlledProps}/>
+    <label className="form-check-label" htmlFor={id}>{text}</label>
   </div>
 }
 

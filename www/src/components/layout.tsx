@@ -7,9 +7,6 @@ type Props = {
 };
 
 const Layout: React.FC<PropsWithChildren<Props>> = ({ children, rtl }) => {
-
-
-
   return <div className={classNames(
     'main-wrapper',
     'main-wrapper-responsive-lg',
