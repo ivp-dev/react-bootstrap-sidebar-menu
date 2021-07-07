@@ -70,7 +70,7 @@ body,
     $next: breakpoint-next($breakpoint, $grid-breakpoints);
     $infix: breakpoint-infix($next, $grid-breakpoints);
 
-    &.rtl {
+    &.sidebar-menu-rtl {
       grid-template-areas:
         "header sidebar"
         "main sidebar";
@@ -110,14 +110,26 @@ body,
   overflow: auto;
 }
 
+table.api {
+  width: 100%;
+  th.name {
+    width: 20%;
+  }
+  th.type {
+    width: 20%;
+  }
+  th.default {
+    width: 20%;
+  }
+  th.description {
+    width: 40%;
+  }
+}
+
 .sidebar-menu {
   grid-area: sidebar;
 }
 
 .navbar-brand {
   padding-right: 1rem;
-}
-
-.octicon {
-  display: inline-block;
 }

@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
 import { NavbarProps } from "react-bootstrap";
-import { } from 'react-bootstrap/'
-import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/esm/helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import PropTypes from "prop-types";
-import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider';
+import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import { useUncontrolled } from 'uncontrollable';
-import NavbarContext, { NavbarContextType } from 'react-bootstrap/esm/NavbarContext';
+import NavbarContext, { NavbarContextType } from 'react-bootstrap/NavbarContext';
 import SidebarMenuNavbarToggle from './sidebar-menu-navbar-toggle';
 import SidebarMenuNavbarCollapse from './sidebar-menu-navbar-collapse';
 import classNames from 'classnames';
@@ -45,9 +44,7 @@ const propTypes = {
    *
    * @default 'navigation'
    */
-  role: PropTypes.string,
-
-  className: PropTypes.string
+  role: PropTypes.string
 };
 
 const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'div', SidebarMenuNavbarProps> = React.forwardRef((props, ref) => {

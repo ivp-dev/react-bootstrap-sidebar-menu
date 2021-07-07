@@ -1,6 +1,6 @@
 import React from 'react';
 import NavbarToggle, { NavbarToggleProps } from "react-bootstrap/NavbarToggle";
-import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider';
+import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 
 type SidebarMenuNavbarToggle = NavbarToggle;
 

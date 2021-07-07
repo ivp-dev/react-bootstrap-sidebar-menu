@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import CheckBox from '../components/check-box'
 import Layout from '../components/layout';
-import { SidebarMenu } from 'react-bootstrap-sidebar-menu';
+import SidebarMenu from 'react-bootstrap-sidebar-menu';
 import classNames from 'classnames';
 
 const Theme = {
@@ -21,7 +21,7 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
 
   return <Layout rtl={isRtl}>
     <Navbar className="main-header" expand="lg" bg={themeName} variant={themeName}>
-      <Navbar.Brand className="d-block d-lg-none"><span className="react-bootstrap-img" /></Navbar.Brand>
+      <Navbar.Brand title="React-Bootstrap" href="https://github.com/react-bootstrap/react-bootstrap" className="d-block d-lg-none"><span className="react-bootstrap-img" /></Navbar.Brand>
       <Navbar.Toggle aria-controls="navbarScroll" />
       <Navbar.Collapse className={classNames(!isRtl && 'justify-content-end')}>
         <Nav>
@@ -37,41 +37,48 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
       </Navbar.Collapse>
     </Navbar>
     <SidebarMenu rtl={isRtl} defaultActiveKey="#setup" bg={themeName} variant={themeName} expand="lg" hide="md">
-      <SidebarMenu.Collapse getScrollValue={() => 300}>
+      <SidebarMenu.Collapse getScrollValue={300}>
         <SidebarMenu.Header>
-          <SidebarMenu.Brand>
+          <SidebarMenu.Brand title="React-Bootstrap" href="https://github.com/react-bootstrap/react-bootstrap">
             <span className="react-bootstrap-img" />
           </SidebarMenu.Brand>
           <SidebarMenu.Toggle />
         </SidebarMenu.Header>
         <SidebarMenu.Body>
           <SidebarMenu.Nav>
-            <SidebarMenu.Nav.Link href="#setup">
+            <SidebarMenu.Nav.Link eventKey="#setup">
               <SidebarMenu.Nav.Icon className="badge rounded-pill">1</SidebarMenu.Nav.Icon>
               <SidebarMenu.Nav.Title>How to install</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
-            <SidebarMenu.Nav.Link href="#usage">
+            <SidebarMenu.Nav.Link eventKey="#usage">
               <SidebarMenu.Nav.Icon className="badge rounded-pill">2</SidebarMenu.Nav.Icon>
               <SidebarMenu.Nav.Title>Usage</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
-            <SidebarMenu.Nav.Link href="#api">
+            <SidebarMenu.Nav.Link eventKey="#api">
               <SidebarMenu.Nav.Icon className="badge rounded-pill">3</SidebarMenu.Nav.Icon>
               <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
-            <SidebarMenu.Nav.Link href="#api_1">
-              <SidebarMenu.Nav.Icon className="badge rounded-pill">3.1</SidebarMenu.Nav.Icon>
+            <SidebarMenu.Nav.Link eventKey="#api">
+              <SidebarMenu.Nav.Icon className="badge rounded-pill">4</SidebarMenu.Nav.Icon>
+              <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
+            </SidebarMenu.Nav.Link>
+            <SidebarMenu.Nav.Link eventKey="#api">
+              <SidebarMenu.Nav.Icon className="badge rounded-pill">5</SidebarMenu.Nav.Icon>
+              <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
+            </SidebarMenu.Nav.Link>
+            <SidebarMenu.Nav.Link eventKey="#api">
+              <SidebarMenu.Nav.Icon className="badge rounded-pill">6</SidebarMenu.Nav.Icon>
+              <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
+            </SidebarMenu.Nav.Link>
+            <SidebarMenu.Nav.Link eventKey="#api">
+              <SidebarMenu.Nav.Icon className="badge rounded-pill">7</SidebarMenu.Nav.Icon>
+              <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
+            </SidebarMenu.Nav.Link>
+            <SidebarMenu.Nav.Link eventKey="#api_1">
+              <SidebarMenu.Nav.Icon className="badge rounded-pill">8</SidebarMenu.Nav.Icon>
               <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
           </SidebarMenu.Nav>
-          <SidebarMenu.Navbar>
-            <SidebarMenu.Navbar.Toggle>)</SidebarMenu.Navbar.Toggle>
-            <SidebarMenu.Navbar.Collapse>
-              <SidebarMenu.Nav.Link href="#test">
-                <SidebarMenu.Nav.Icon>4</SidebarMenu.Nav.Icon>
-                <SidebarMenu.Nav.Title></SidebarMenu.Nav.Title>
-              </SidebarMenu.Nav.Link>
-            </SidebarMenu.Navbar.Collapse>
-          </SidebarMenu.Navbar>
         </SidebarMenu.Body>
         <SidebarMenu.Footer>
         </SidebarMenu.Footer>

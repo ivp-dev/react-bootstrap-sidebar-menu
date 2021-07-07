@@ -2,12 +2,12 @@ import React, { HTMLAttributes, useContext, useMemo } from 'react';
 import { Collapse, CollapseProps } from "react-bootstrap";
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
-import { SidebarMenuContext } from './sidebar-menu-context';
+import SidebarMenuContext from './sidebar-menu-context';
 import createChainedFunction from 'react-bootstrap/createChainedFunction'
 import PropTypes from "prop-types";
 import classNames from 'classnames';
 
-type SidebarMenuCollapseProps = Omit<CollapseProps, 'children'> & HTMLAttributes<HTMLDivElement> & BsPrefixProps & {
+export type SidebarMenuCollapseProps = Omit<CollapseProps, 'children'> & HTMLAttributes<HTMLDivElement> & BsPrefixProps & {
   getScrollValue?: ((el: HTMLElement) => number) | number | string
 }
 
@@ -17,10 +17,10 @@ const propTypes = {
 };
 
 const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuCollapseProps> =
-  React.forwardRef(({
+  React.forwardRef<HTMLDivElement, SidebarMenuCollapseProps>(({
     dimension = "width",
-    children,
     getScrollValue,
+    children,
     onEntering,
     className,
     bsPrefix: initialBsPrefix,
@@ -49,13 +49,12 @@ const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuColl
 
     const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-collapse');
 
-    return <Collapse ref={ref} {...props} dimension={dimension} onEntering={handleEntering} in={!!sidebarMenuContext?.expanded}>
-      <div className={classNames(className, bsPrefix)}>
+    return <Collapse {...props} dimension={dimension} onEntering={handleEntering} in={!!sidebarMenuContext?.expanded}>
+      <div ref={ref} className={classNames(className, bsPrefix)}>
         {children}
       </div>
     </Collapse>
   });
-
 
 SidebarMenuCollapse.displayName = "SidebarMenuCollapse";
 SidebarMenuCollapse.propTypes = propTypes;

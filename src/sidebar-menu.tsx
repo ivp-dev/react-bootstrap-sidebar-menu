@@ -8,7 +8,7 @@ import SidebarMenuCollapse from './sidebar-menu-collapse'
 import SidebarMenuNav from './sidebar-menu-nav'
 import SidebarMenuBrand from './sidebar-menu-brand'
 import classNames from 'classnames';
-import { SidebarMenuContext, SidebarMenuContextProps } from './sidebar-menu-context';
+import SidebarMenuContext, { SidebarMenuContextProps } from './sidebar-menu-context';
 import { useUncontrolled } from 'uncontrollable';
 import SidebarMenuNavbar from './sidebar-menu-navbar';
 import SidebarMenuHeader from './sidebar-menu-header';
@@ -17,9 +17,9 @@ import SidebarMenuFooter from './sidebar-menu-footer';
 import SidebarMenuText from './sidebar-menu-text';
 import PropTypes from "prop-types";
 import AbstractNav from 'react-bootstrap/AbstractNav';
-import { EventKey } from 'react-bootstrap/esm/types';
+import { EventKey } from 'react-bootstrap/types';
 
-type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
+export type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
   rtl?: boolean;
   activeKey?: EventKey;
   hide?: boolean | 'sm' | 'md' | 'lg' | 'xl';
@@ -209,7 +209,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
             hide && hideClass,
             expand && expandClass,
             expanded && 'show',
-            rtl && 'rtl',
+            rtl && `${bsPrefix}-rtl`,
             variant && `${bsPrefix}-${variant}`,
             bg && `bg-${bg}`,
           )}

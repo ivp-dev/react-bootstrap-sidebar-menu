@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavItem, NavItemProps } from "react-bootstrap";
-import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider';
+import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 
 type SidebarMenuNavItem = NavItem;
 

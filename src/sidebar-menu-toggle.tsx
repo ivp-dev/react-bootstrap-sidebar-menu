@@ -4,7 +4,7 @@ import React, { useContext } from "react"
 import PropTypes from "prop-types";
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from "react-bootstrap/helpers"
 import { useBootstrapPrefix } from "react-bootstrap/ThemeProvider"
-import { SidebarMenuContext } from './sidebar-menu-context'
+import SidebarMenuContext from './sidebar-menu-context'
 
 export type SidebarMenuToggleProps = BsPrefixProps & React.HTMLAttributes<HTMLElement> & {
   label?: string

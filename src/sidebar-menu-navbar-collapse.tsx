@@ -2,36 +2,42 @@ import * as React from 'react';
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import Collapse, { CollapseProps } from 'react-bootstrap/Collapse';
+import { Collapse, CollapseProps } from 'react-bootstrap';
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import NavbarContext from 'react-bootstrap/NavbarContext';
-import { BsPrefixProps } from 'react-bootstrap/helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
+import classNames from 'classnames';
 
-export interface SidebarMenuNavbarCollapseProps
-  extends Omit<CollapseProps, 'children'>,
-    React.HTMLAttributes<HTMLDivElement>,
-    BsPrefixProps {}
+export type SidebarMenuNavbarCollapseProps =
+  Omit<CollapseProps, 'children'> &
+  React.HTMLAttributes<HTMLDivElement> &
+  BsPrefixProps & {
+  }
 
 const propTypes = {
   /** @default 'sidebar-menu-navbar-collapse' */
-  bsPrefix: PropTypes.string,
+  bsPrefix: PropTypes.string
 };
 
-const SidebarMenuNavbarCollapse = React.forwardRef<HTMLDivElement, SidebarMenuNavbarCollapseProps>(
-  ({ children, bsPrefix, ...props }, ref) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'sidebar-menu-navbar-collapse');
-    
-    const context = useContext(NavbarContext);
+const SidebarMenuNavbarCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuNavbarCollapseProps> =
+  React.forwardRef<HTMLDivElement, SidebarMenuNavbarCollapseProps>(({
+    children,
+    bsPrefix: initialBsPrefix,
+    className,
+    ...props
+  }: SidebarMenuNavbarCollapseProps, ref) => {
+    const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-navbar-collapse');
+    const navbarContext = useContext(NavbarContext);
 
     return (
-      <Collapse in={!!(context && context.expanded)} {...props}>
-        <div ref={ref} className={bsPrefix}>
+      <Collapse in={!!(navbarContext && navbarContext.expanded)} {...props}>
+        <div ref={ref} className={classNames(bsPrefix, className)}>
           {children}
         </div>
       </Collapse>
     );
   },
-);
+  );
 
 SidebarMenuNavbarCollapse.displayName = 'SidebarMenuNavbarCollapse';
 SidebarMenuNavbarCollapse.propTypes = propTypes;

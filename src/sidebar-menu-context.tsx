@@ -7,4 +7,4 @@ export interface SidebarMenuContextProps {
   bsPrefix?: string;
 }
 
-export const SidebarMenuContext = createContext<SidebarMenuContextProps | null>(null);
+export default createContext<SidebarMenuContextProps | null>(null);

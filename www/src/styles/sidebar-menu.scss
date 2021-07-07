@@ -52,9 +52,12 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 .sidebar-menu {
   padding-top: 0;
   flex-direction: column;
-  overflow-y: auto;
 
   @extend .navbar;
+}
+
+.sidebar-menu-scroll {
+  overflow-y: auto;
 }
 
 .sidebar-menu-collapse.show {
