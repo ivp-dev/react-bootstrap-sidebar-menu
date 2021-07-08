@@ -17,6 +17,7 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
 
   const [isRtl, setIsRtl] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
+
   const themeName = isDarkTheme ? Theme.Dark : Theme.Light;
 
   return <Layout rtl={isRtl}>

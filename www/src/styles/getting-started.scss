@@ -1,11 +1,70 @@
-pre {
+pre.pre-container {
   margin: 0;
-  color: #d63384;
-  background-color: #2125291f;
-  border-radius:5px;
-  padding: 1rem;
-  > code {
+  border-radius: 5px;
+  padding: 0.8rem;
+
+  code {
     display: inline-block;
+  }
+
+  &.bg-dark {
+    background-color: #343a40;
+
+    code.code-example {
+      color: #d63384;
+      span.code-example-variable {
+        color: #50a14f;
+      }
+
+      span.code-example-directive {
+        color: #c5a5c5;
+      }
+
+      span.code-example-npm {
+        color: #a3bb1f;
+      }
+
+      button.copy-link svg {
+        fill: white;
+      }
+    }
+  }
+
+  &.bg-light {
+    background-color: transparent !important;
+    code.code-example {
+      color: #d63384;
+      span.code-example-variable {
+        color: #50a14f;
+      }
+
+      span.code-example-directive {
+        color: #0130ff;
+      }
+
+      span.code-example-npm {
+        color: #a3bb1f;
+      }
+
+      button.copy-link svg {
+        fill: black;
+      }
+    }
+  }
+
+  code.code-example-copy {
+    .copy-link {
+      visibility: hidden;
+      svg {
+        width: 14px;
+      }
+    }
+
+    &:hover {
+      .copy-link {
+        visibility: visible;
+      }
+    }
   }
 }
 
@@ -15,7 +74,11 @@ aside[role="note"] {
   padding: 1rem;
 }
 
-section {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.component-title {
+  .source-link {
+    width: 0.95rem;
+    display: inline-block;
+    margin-left: 1rem;
+    fill: #d94b17;
+  }
 }

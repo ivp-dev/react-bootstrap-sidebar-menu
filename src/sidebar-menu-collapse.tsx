@@ -8,12 +8,17 @@ import PropTypes from "prop-types";
 import classNames from 'classnames';
 
 export type SidebarMenuCollapseProps = Omit<CollapseProps, 'children'> & HTMLAttributes<HTMLDivElement> & BsPrefixProps & {
-  getScrollValue?: ((el: HTMLElement) => number) | number | string
+  getScrollValue: ((el: HTMLElement) => number) | number | string
 }
 
 const propTypes = {
   /** @default 'sidebar-menu-collapse' */
   bsPrefix: PropTypes.string,
+  getScrollValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.func
+  ]).isRequired
 };
 
 const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuCollapseProps> =
