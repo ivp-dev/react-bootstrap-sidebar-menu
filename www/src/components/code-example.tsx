@@ -23,8 +23,6 @@ const CodeExampleVariable = (props: CodeVariableProps) => {
   return <span {...props} className="code-example-variable" />
 }
 
-
-
 type DirectiveVariableProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {}
 
 const DirectiveExampleVariable = (props: DirectiveVariableProps) => {

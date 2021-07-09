@@ -17,6 +17,7 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
 
   const [isRtl, setIsRtl] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const [collapseOnSelect, setCollapseOnSelect] = useState(false);
 
   const themeName = isDarkTheme ? Theme.Dark : Theme.Light;
 
@@ -31,13 +32,16 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
               <CheckBox id="darkThemeSwitcher" checked={isDarkTheme} onChange={() => setIsDarkTheme(!isDarkTheme)} text={themeName} />
             </NavDropdown.ItemText>
             <NavDropdown.ItemText>
-              <CheckBox id="rtlSwitcher" checked={isRtl} onChange={() => setIsRtl(!isRtl)} text={isRtl ? "rtl" : "ltr"} />
+              <CheckBox id="rtlSwitcher" checked={isRtl} onChange={() => setIsRtl(!isRtl)} text={isRtl ? "right to left" : "left to right"} />
+            </NavDropdown.ItemText>
+            <NavDropdown.ItemText>
+              <CheckBox id="collapseOnSelectSwitcher" checked={collapseOnSelect} onChange={() => setCollapseOnSelect(!collapseOnSelect)} text={"collapse on select"} />
             </NavDropdown.ItemText>
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-    <SidebarMenu rtl={isRtl} defaultActiveKey="#setup" bg={themeName} variant={themeName} expand="lg" hide="md">
+    <SidebarMenu rtl={isRtl} collapseOnSelect={collapseOnSelect} defaultActiveKey="#setup" bg={themeName} variant={themeName} expand="lg" hide="md">
       <SidebarMenu.Collapse getScrollValue={300}>
         <SidebarMenu.Header>
           <SidebarMenu.Brand title="React-Bootstrap" href="https://github.com/react-bootstrap/react-bootstrap">

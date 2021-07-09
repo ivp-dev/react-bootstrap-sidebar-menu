@@ -31,28 +31,24 @@ const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuColl
     bsPrefix: initialBsPrefix,
     ...props
   }: SidebarMenuCollapseProps, ref) => {
+
     const computedDimension = typeof dimension === 'function' ? dimension() : dimension;
+    const sidebarMenuContext = useContext(SidebarMenuContext);
+    const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-collapse');
 
-    const sidebarMenuContext = useContext(SidebarMenuContext)
-
-    const handleEntering = useMemo(
-      () => createChainedFunction((elem: HTMLElement) => {
-        if (typeof getScrollValue === 'function') {
-          elem.style[computedDimension] = `${getScrollValue(elem)}px`;
-        }
-
-        if (typeof getScrollValue === 'number') {
-          elem.style[computedDimension] = `${getScrollValue}px`;
-        }
-
-        if (typeof getScrollValue === 'string') {
-          elem.style[computedDimension] = getScrollValue;
-        }
-      }, onEntering),
+    const handleEntering = useMemo(() => createChainedFunction((elem: HTMLElement) => {
+      if (typeof getScrollValue === 'function') {
+        elem.style[computedDimension] = `${getScrollValue(elem)}px`;
+      } else if (typeof getScrollValue === 'number') {
+        elem.style[computedDimension] = `${getScrollValue}px`;
+      } else if (typeof getScrollValue === 'string') {
+        elem.style[computedDimension] = getScrollValue;
+      } else {
+        throw `Not supported type of the getScrollValue. Function, string or number are only supported, you provided ${typeof getScrollValue}.`
+      }
+    }, onEntering),
       [computedDimension, getScrollValue, onEntering],
     );
-
-    const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-collapse');
 
     return <Collapse {...props} dimension={dimension} onEntering={handleEntering} in={!!sidebarMenuContext?.expanded}>
       <div ref={ref} className={classNames(className, bsPrefix)}>
