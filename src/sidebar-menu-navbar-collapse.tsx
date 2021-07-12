@@ -4,14 +4,17 @@ import PropTypes from 'prop-types';
 
 import { Collapse, CollapseProps } from 'react-bootstrap';
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
-import NavbarContext from 'react-bootstrap/NavbarContext';
+import SidebarMenuNavbarContext from './sidebar-menu-navbar-context'
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import classNames from 'classnames';
+import SidebarMenuContext from './sidebar-menu-context';
+import { EventKey } from 'react-bootstrap/types';
 
 export type SidebarMenuNavbarCollapseProps =
   Omit<CollapseProps, 'children'> &
   React.HTMLAttributes<HTMLDivElement> &
   BsPrefixProps & {
+    //eventKey?: EventKey
   }
 
 const propTypes = {
@@ -27,7 +30,7 @@ const SidebarMenuNavbarCollapse: BsPrefixRefForwardingComponent<'div', SidebarMe
     ...props
   }: SidebarMenuNavbarCollapseProps, ref) => {
     const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-navbar-collapse');
-    const navbarContext = useContext(NavbarContext);
+    const navbarContext = useContext(SidebarMenuNavbarContext);
 
     return (
       <Collapse in={!!(navbarContext && navbarContext.expanded)} {...props}>

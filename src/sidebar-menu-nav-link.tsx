@@ -3,10 +3,11 @@ import { NavLink, NavLinkProps } from "react-bootstrap";
 import AbstractNavItem from 'react-bootstrap/AbstractNavItem'
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import { BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
-import NavbarContext, { NavbarContextType } from 'react-bootstrap/NavbarContext';
+import SidebarMenuNavbarContext, { SidebarMenuNavbarContextType } from './sidebar-menu-navbar-context';
 import NavContext from 'react-bootstrap/NavContext';
 import { makeEventKey } from 'react-bootstrap/SelectableContext';
 import classNames from 'classnames';
+import { SidebarMenuContext } from '.';
 
 type SidebarMenuNavLinkProps = NavLinkProps
 
@@ -22,21 +23,22 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
 }: SidebarMenuNavLinkProps, ref) => {
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-nav-link');
 
-  const navbarContext = useContext(NavbarContext);
+  const { toggleStayExpanded, toggleActiveKey, onToggleSelect } = useContext(SidebarMenuContext);
+  const sidebarMenuNavbarContext = useContext(SidebarMenuNavbarContext);
   const navContext = useContext(NavContext);
   const navKey = makeEventKey(eventKey, href);
 
-  const isExpandable = !!navbarContext;
-  const isExpanded = !!navbarContext?.expanded;
+  const isExpandable = !!sidebarMenuNavbarContext;
+  const isExpanded = !!sidebarMenuNavbarContext?.expanded;
 
   const isActive = active == null && navKey != null
     ? navContext && navContext.activeKey === navKey
     : active;
 
   const isExpandedRef = useRef<boolean>(isExpanded);
-  const navbarContextRef = useRef<NavbarContextType | null>();
+  const navbarContextRef = useRef<SidebarMenuNavbarContextType | null>();
 
-  navbarContextRef.current = navbarContext;
+  navbarContextRef.current = sidebarMenuNavbarContext;
 
   useEffect(() => {
     isExpandedRef.current = isExpanded;
@@ -47,6 +49,14 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
       navbarContextRef.current?.onToggle();
     }
   }, [isActive, isExpandable]);
+
+  useEffect(() => { 
+    if(toggleStayExpanded) {
+      const eventKeyPassed = navbarContextRef.current?.eventKey === toggleActiveKey ? null : eventKey;
+
+      onToggleSelect(eventKeyPassed);
+    }
+  }, [eventKey, onToggleSelect, toggleActiveKey, toggleStayExpanded])
 
   return (
     <AbstractNavItem

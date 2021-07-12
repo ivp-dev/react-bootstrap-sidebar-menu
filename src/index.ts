@@ -12,5 +12,6 @@ export { default as SidebarMenuNavItem } from './sidebar-menu-nav-item';
 export { default as SidebarMenuNavLink } from './sidebar-menu-nav-link';
 export { default as SidebarMenuNavTitle } from './sidebar-menu-nav-title';
 export { default as SidebarMenuNavbar } from './sidebar-menu-navbar';
+export { default as SidebarMenuNavbarContext } from './sidebar-menu-navbar-context';
 
 export default SidebarMenu;

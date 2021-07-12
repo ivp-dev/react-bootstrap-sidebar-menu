@@ -1,19 +1,22 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { NavbarProps } from "react-bootstrap";
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import PropTypes from "prop-types";
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import { useUncontrolled } from 'uncontrollable';
-import NavbarContext, { NavbarContextType } from 'react-bootstrap/NavbarContext';
+import SidebarMenuNavbarContext, { SidebarMenuNavbarContextType } from './sidebar-menu-navbar-context';
 import SidebarMenuNavbarToggle from './sidebar-menu-navbar-toggle';
 import SidebarMenuNavbarCollapse from './sidebar-menu-navbar-collapse';
 import classNames from 'classnames';
+import { EventKey } from 'react-bootstrap/types';
+import { SidebarMenuContext } from '.';
 
 type SidebarMenuNavbarProps = BsPrefixProps & Omit<NavbarProps,
   'sticky' | 'bg' | 'variant' | 'fixed' | 'expand' | 'collapseOnSelect' | 'onSelect' | 'role'
 > & {
-  onToggle?: (expanded: boolean) => void;
-  expanded?: boolean;
+  onToggle?: (expanded: boolean) => void
+  expanded?: boolean
+  eventKey?: EventKey
 };
 
 const propTypes = {
@@ -53,6 +56,7 @@ const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'div', SidebarMenuNavbar
     as: Component = 'div',
     expanded,
     onToggle,
+    eventKey,
     className,
     ...controlledProps
   } = useUncontrolled(props, {
@@ -61,21 +65,26 @@ const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'div', SidebarMenuNavbar
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-navbar');
 
-  const navbarContext = useMemo<NavbarContextType>(
+  const { toggleActiveKey, toggleStayExpanded } = useContext(SidebarMenuContext);
+
+  const sidebarMenuNavbarContext = useMemo<SidebarMenuNavbarContextType>(
     () => ({
       bsPrefix,
       onToggle: () => onToggle?.(!expanded),
-      expanded: !!expanded
+      expanded: toggleStayExpanded ? !!expanded : toggleActiveKey === eventKey,
+      eventKey
     }),
-    [bsPrefix, expanded, onToggle]
+    [bsPrefix, eventKey, expanded, onToggle, toggleActiveKey, toggleStayExpanded]
   );
 
-  return <NavbarContext.Provider value={navbarContext}>
+  console.log(toggleActiveKey)
+
+  return <SidebarMenuNavbarContext.Provider value={sidebarMenuNavbarContext}>
     <Component
       ref={ref}
       {...controlledProps}
       className={classNames(className, bsPrefix)} />
-  </NavbarContext.Provider>;
+  </SidebarMenuNavbarContext.Provider>;
 });
 
 SidebarMenuNavbar.displayName = "SidebarMenuNavbar";

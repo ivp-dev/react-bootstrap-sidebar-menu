@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { NavbarProps } from "react-bootstrap";
 import { BsPrefixRefForwardingComponent, SelectCallback } from 'react-bootstrap/helpers';
 import SelectableContext from 'react-bootstrap/SelectableContext'
@@ -20,11 +20,14 @@ import AbstractNav from 'react-bootstrap/AbstractNav';
 import { EventKey } from 'react-bootstrap/types';
 
 export type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
-  rtl?: boolean;
-  activeKey?: EventKey;
-  hide?: boolean | 'sm' | 'md' | 'lg' | 'xl';
-  defaultActiveKey?: EventKey;
+  rtl?: boolean
+  activeKey?: EventKey
+  toggleActiveKey?: EventKey
+  hide?: boolean | 'sm' | 'md' | 'lg' | 'xl'
+  toggleStayExpanded?: boolean
+  defaultActiveKey?: EventKey
   defaultExpanded?: boolean
+  onToggleSelect?: (eventKey: EventKey | null, e: React.SyntheticEvent<unknown>) => void;
 };
 
 const propTypes = {
@@ -148,12 +151,15 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
   const {
     bsPrefix: initialBsPrefix,
     collapseOnSelect,
+    toggleActiveKey,
+    toggleStayExpanded,
     expanded,
     className,
     activeKey,
     variant,
     onToggle,
     onSelect,
+    onToggleSelect,
     expand,
     hide,
     bg,
@@ -161,7 +167,8 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     as: As = 'aside',
     ...controlledProps } = useUncontrolled(props, {
       expanded: 'onToggle',
-      activeKey: 'onSelect'
+      activeKey: 'onSelect',
+      toggleActiveKey: 'onToggleSelect'
     });
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu');
@@ -190,14 +197,17 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     hideClass = `${hideClass}-${hide}`;
   }
 
-  const sidebarMenuContext = React.useMemo<SidebarMenuContextProps>(() => ({
-    expanded: !!expanded,
+  const sidebarMenuContextValue = useMemo<SidebarMenuContextProps>(() => ({
     rtl: !!rtl,
+    expanded: !!expanded,
     onToggle: () => onToggle?.(!expanded),
-  }), [expanded, onToggle, rtl]);
+    toggleStayExpanded,
+    toggleActiveKey,
+    onToggleSelect
+  }), [expanded, onToggle, onToggleSelect, rtl, toggleActiveKey, toggleStayExpanded]);
 
   return (
-    <SidebarMenuContext.Provider value={sidebarMenuContext}>
+    <SidebarMenuContext.Provider value={sidebarMenuContextValue}>
       <SelectableContext.Provider value={handleCollapse}>
         <AbstractNav
           as={As}

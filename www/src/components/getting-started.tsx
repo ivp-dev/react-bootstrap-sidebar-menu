@@ -31,11 +31,9 @@ const GettingStarted = () => {
 
     <h3>Overview</h3>
 
-    <p>Steps to create dropdown sidebar menu with react bootstrap side menu:</p>
-
-    <ul>
-      <li></li>
-    </ul>
+    <p>Here's a left (right) side vertical sidebar with collapsible menu items. The menu functions like an "accordion" where only a single menu is open at a time. It's also responsive which allows the main content area to be visible. The sidebar shrinks in width, hides the text labels and collapses to icons only on mobile devices.</p>
+    
+    <p>The component supports a header, body, footer and built in toggle button, of which you can optionally disable and provide your own header (if needed)</p>
 
     <br />
 

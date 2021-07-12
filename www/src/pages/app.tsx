@@ -41,7 +41,7 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-    <SidebarMenu rtl={isRtl} collapseOnSelect={collapseOnSelect} defaultActiveKey="#setup" bg={themeName} variant={themeName} expand="lg" hide="md">
+    <SidebarMenu toggleStayExpanded={false} rtl={isRtl} collapseOnSelect={collapseOnSelect} defaultActiveKey="#setup" bg={themeName} variant={themeName} expand="lg" hide="md">
       <SidebarMenu.Collapse getScrollValue={300}>
         <SidebarMenu.Header>
           <SidebarMenu.Brand title="React-Bootstrap" href="https://github.com/react-bootstrap/react-bootstrap">
@@ -83,6 +83,36 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
               <SidebarMenu.Nav.Icon className="badge rounded-pill">8</SidebarMenu.Nav.Icon>
               <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
+            <SidebarMenu.Navbar eventKey={1}>
+              <SidebarMenu.Navbar.Toggle eventKey={1}>x</SidebarMenu.Navbar.Toggle>
+              <SidebarMenu.Navbar.Collapse>
+                <SidebarMenu.Nav>
+                  <SidebarMenu.Nav.Link eventKey="#api_1_1">
+                    <SidebarMenu.Nav.Icon className="badge rounded-pill">7</SidebarMenu.Nav.Icon>
+                    <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
+                  </SidebarMenu.Nav.Link>
+                  <SidebarMenu.Nav.Link eventKey="#api_1_2">
+                    <SidebarMenu.Nav.Icon className="badge rounded-pill">8</SidebarMenu.Nav.Icon>
+                    <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
+                  </SidebarMenu.Nav.Link>
+                </SidebarMenu.Nav>
+              </SidebarMenu.Navbar.Collapse>
+            </SidebarMenu.Navbar>
+            <SidebarMenu.Navbar eventKey={0}>
+              <SidebarMenu.Navbar.Toggle eventKey={0}>x</SidebarMenu.Navbar.Toggle>
+              <SidebarMenu.Navbar.Collapse>
+                <SidebarMenu.Nav>
+                  <SidebarMenu.Nav.Link eventKey="#api_2_1">
+                    <SidebarMenu.Nav.Icon className="badge rounded-pill">7</SidebarMenu.Nav.Icon>
+                    <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
+                  </SidebarMenu.Nav.Link>
+                  <SidebarMenu.Nav.Link eventKey="#api_2_2">
+                    <SidebarMenu.Nav.Icon className="badge rounded-pill">8</SidebarMenu.Nav.Icon>
+                    <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
+                  </SidebarMenu.Nav.Link>
+                </SidebarMenu.Nav>
+              </SidebarMenu.Navbar.Collapse>
+            </SidebarMenu.Navbar>
           </SidebarMenu.Nav>
         </SidebarMenu.Body>
         <SidebarMenu.Footer>
