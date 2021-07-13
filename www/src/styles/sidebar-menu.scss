@@ -37,6 +37,14 @@ $sidebar-menu-navbar-toggle-dark-bg: $gray-800;
 $sidebar-menu-navbar-toggle-padding-x: $sidebar-menu-nav-link-padding-x;
 $sidebar-menu-navbar-toggle-padding-x: $sidebar-menu-nav-link-padding-y;
 
+$sidebar-menu-nav-icon-dark-color: white;
+$sidebar-menu-nav-icon-light-color: gray;
+
+$sidebar-menu-navbar-toggle-light-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$sidebar-menu-nav-icon-light-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
+$sidebar-menu-navbar-toggle-dark-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$sidebar-menu-nav-icon-dark-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
+
+$sidebar-menu-nav-icon-transition: $accordion-icon-transition;
+
 $sidebar-menu-light-color: $navbar-light-color !default;
 $sidebar-menu-light-hover-color: $navbar-light-hover-color !default;
 $sidebar-menu-light-active-color: $nav-pills-link-active-color !default;
@@ -144,6 +152,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     margin-bottom: $sidebar-menu-nav-link-margin-y;
 
     line-height: 1;
+
     @extend .nav-link;
 
   }
@@ -166,11 +175,35 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
   padding-top: $sidebar-menu-nav-link-padding-y;
   padding-bottom: $sidebar-menu-nav-link-padding-y;
 
-  @extend .navbar-toggler;
+  display: flex !important;
+
+  .sidebar-menu-nav-icon {
+    display: block;
+    width: 1.5rem;
+    height: $accordion-icon-width;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: $accordion-icon-width;
+    background-position: center;
+    @include transition($sidebar-menu-nav-icon-transition);
+    transform: rotate(0);
+  }
+
+  &.collapsed {
+    .sidebar-menu-nav-icon {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &:after {
+    content: none;
+  }
 
   @extend .accordion-button;
 
   @extend .sidebar-menu-nav-link;
+
+  @extend .navbar-toggler;
 }
 
 .sidebar-menu-nav-icon {
@@ -262,6 +295,12 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     }
   }
 
+  .sidebar-menu-navbar-toggle {
+    .sidebar-menu-nav-icon {
+      background-image: escape-svg($sidebar-menu-navbar-toggle-light-icon);
+    }
+  }
+
   .sidebar-menu-toggle {
     color: $sidebar-menu-light-color;
     border-color: $sidebar-menu-light-toggler-border-color;
@@ -311,6 +350,12 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 
     .sidebar-menu-nav-link.active {
       color: $sidebar-menu-dark-active-color;
+    }
+  }
+
+  .sidebar-menu-navbar-toggle {
+    .sidebar-menu-nav-icon {
+      background-image: escape-svg($sidebar-menu-navbar-toggle-dark-icon);
     }
   }
 

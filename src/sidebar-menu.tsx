@@ -212,7 +212,6 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
         <AbstractNav
           as={As}
           ref={ref}
-          tabIndex={0}
           activeKey={activeKey}
           className={classNames(
             className,

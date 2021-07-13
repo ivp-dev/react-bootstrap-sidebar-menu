@@ -89,7 +89,7 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
             </SidebarMenu.Nav.Link>
             <SidebarMenu.Navbar eventKey={0}>
               <SidebarMenu.Navbar.Toggle>
-                <SidebarMenu.Nav.Icon className="badge rounded-pill">x</SidebarMenu.Nav.Icon>
+                <SidebarMenu.Nav.Icon className="badge rounded-pill"/>
                 <SidebarMenu.Nav.Title>Group 1</SidebarMenu.Nav.Title>
               </SidebarMenu.Navbar.Toggle>
               <SidebarMenu.Navbar.Collapse>
@@ -107,7 +107,7 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
             </SidebarMenu.Navbar>
             <SidebarMenu.Navbar eventKey={1}>
               <SidebarMenu.Navbar.Toggle>
-                <SidebarMenu.Nav.Icon className="badge rounded-pill">x</SidebarMenu.Nav.Icon>
+                <SidebarMenu.Nav.Icon className="badge rounded-pill" />
                 <SidebarMenu.Nav.Title>Group 2</SidebarMenu.Nav.Title>
               </SidebarMenu.Navbar.Toggle>
               <SidebarMenu.Navbar.Collapse>
@@ -125,7 +125,7 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
             </SidebarMenu.Navbar>
             <SidebarMenu.Navbar eventKey={2}>
               <SidebarMenu.Navbar.Toggle>
-                <SidebarMenu.Nav.Icon className="badge rounded-pill">x</SidebarMenu.Nav.Icon>
+                <SidebarMenu.Nav.Icon className="badge rounded-pill" />
                 <SidebarMenu.Nav.Title>Group 3</SidebarMenu.Nav.Title>
               </SidebarMenu.Navbar.Toggle>
               <SidebarMenu.Navbar.Collapse>
