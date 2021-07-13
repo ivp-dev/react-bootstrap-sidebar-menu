@@ -18,6 +18,7 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
   const [isRtl, setIsRtl] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const [collapseOnSelect, setCollapseOnSelect] = useState(false);
+  const [toggleStayExpanded, setToggleStayExpanded] = useState(false);
 
   const themeName = isDarkTheme ? Theme.Dark : Theme.Light;
 
@@ -37,11 +38,14 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
             <NavDropdown.ItemText>
               <CheckBox id="collapseOnSelectSwitcher" checked={collapseOnSelect} onChange={() => setCollapseOnSelect(!collapseOnSelect)} text={"collapse on select"} />
             </NavDropdown.ItemText>
+            <NavDropdown.ItemText>
+              <CheckBox id="toggleStayExpandedSwitcher" checked={toggleStayExpanded} onChange={() => setToggleStayExpanded(!toggleStayExpanded)} text={"stay expanded"} />
+            </NavDropdown.ItemText>
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-    <SidebarMenu toggleStayExpanded={false} rtl={isRtl} collapseOnSelect={collapseOnSelect} defaultActiveKey="#setup" bg={themeName} variant={themeName} expand="lg" hide="md">
+    <SidebarMenu toggleStayExpanded={toggleStayExpanded} rtl={isRtl} collapseOnSelect={collapseOnSelect} defaultActiveKey="#setup" bg={themeName} variant={themeName} expand="lg" hide="md">
       <SidebarMenu.Collapse getScrollValue={300}>
         <SidebarMenu.Header>
           <SidebarMenu.Brand title="React-Bootstrap" href="https://github.com/react-bootstrap/react-bootstrap">
@@ -63,19 +67,19 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
               <SidebarMenu.Nav.Icon className="badge rounded-pill">3</SidebarMenu.Nav.Icon>
               <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
-            <SidebarMenu.Nav.Link eventKey="#api">
+            <SidebarMenu.Nav.Link eventKey="#api1">
               <SidebarMenu.Nav.Icon className="badge rounded-pill">4</SidebarMenu.Nav.Icon>
               <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
-            <SidebarMenu.Nav.Link eventKey="#api">
+            <SidebarMenu.Nav.Link eventKey="#api2">
               <SidebarMenu.Nav.Icon className="badge rounded-pill">5</SidebarMenu.Nav.Icon>
               <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
-            <SidebarMenu.Nav.Link eventKey="#api">
+            <SidebarMenu.Nav.Link eventKey="#api3">
               <SidebarMenu.Nav.Icon className="badge rounded-pill">6</SidebarMenu.Nav.Icon>
               <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
-            <SidebarMenu.Nav.Link eventKey="#api">
+            <SidebarMenu.Nav.Link eventKey="#api4">
               <SidebarMenu.Nav.Icon className="badge rounded-pill">7</SidebarMenu.Nav.Icon>
               <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
@@ -83,8 +87,29 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
               <SidebarMenu.Nav.Icon className="badge rounded-pill">8</SidebarMenu.Nav.Icon>
               <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
+            <SidebarMenu.Navbar eventKey={0}>
+              <SidebarMenu.Navbar.Toggle>
+                <SidebarMenu.Nav.Icon className="badge rounded-pill">x</SidebarMenu.Nav.Icon>
+                <SidebarMenu.Nav.Title>Group 1</SidebarMenu.Nav.Title>
+              </SidebarMenu.Navbar.Toggle>
+              <SidebarMenu.Navbar.Collapse>
+                <SidebarMenu.Nav>
+                  <SidebarMenu.Nav.Link eventKey="#api_0_0">
+                    <SidebarMenu.Nav.Icon className="badge rounded-pill">7</SidebarMenu.Nav.Icon>
+                    <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
+                  </SidebarMenu.Nav.Link>
+                  <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                    <SidebarMenu.Nav.Icon className="badge rounded-pill">8</SidebarMenu.Nav.Icon>
+                    <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
+                  </SidebarMenu.Nav.Link>
+                </SidebarMenu.Nav>
+              </SidebarMenu.Navbar.Collapse>
+            </SidebarMenu.Navbar>
             <SidebarMenu.Navbar eventKey={1}>
-              <SidebarMenu.Navbar.Toggle eventKey={1}>x</SidebarMenu.Navbar.Toggle>
+              <SidebarMenu.Navbar.Toggle>
+                <SidebarMenu.Nav.Icon className="badge rounded-pill">x</SidebarMenu.Nav.Icon>
+                <SidebarMenu.Nav.Title>Group 2</SidebarMenu.Nav.Title>
+              </SidebarMenu.Navbar.Toggle>
               <SidebarMenu.Navbar.Collapse>
                 <SidebarMenu.Nav>
                   <SidebarMenu.Nav.Link eventKey="#api_1_1">
@@ -98,8 +123,11 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
                 </SidebarMenu.Nav>
               </SidebarMenu.Navbar.Collapse>
             </SidebarMenu.Navbar>
-            <SidebarMenu.Navbar eventKey={0}>
-              <SidebarMenu.Navbar.Toggle eventKey={0}>x</SidebarMenu.Navbar.Toggle>
+            <SidebarMenu.Navbar eventKey={2}>
+              <SidebarMenu.Navbar.Toggle>
+                <SidebarMenu.Nav.Icon className="badge rounded-pill">x</SidebarMenu.Nav.Icon>
+                <SidebarMenu.Nav.Title>Group 3</SidebarMenu.Nav.Title>
+              </SidebarMenu.Navbar.Toggle>
               <SidebarMenu.Navbar.Collapse>
                 <SidebarMenu.Nav>
                   <SidebarMenu.Nav.Link eventKey="#api_2_1">

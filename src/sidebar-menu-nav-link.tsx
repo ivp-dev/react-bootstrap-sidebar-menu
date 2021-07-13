@@ -7,7 +7,7 @@ import SidebarMenuNavbarContext, { SidebarMenuNavbarContextType } from './sideba
 import NavContext from 'react-bootstrap/NavContext';
 import { makeEventKey } from 'react-bootstrap/SelectableContext';
 import classNames from 'classnames';
-import { SidebarMenuContext } from '.';
+import SidebarMenuContext from './sidebar-menu-context';
 
 type SidebarMenuNavLinkProps = NavLinkProps
 
@@ -23,10 +23,11 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
 }: SidebarMenuNavLinkProps, ref) => {
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-nav-link');
 
-  const { toggleStayExpanded, toggleActiveKey, onToggleSelect } = useContext(SidebarMenuContext);
   const sidebarMenuNavbarContext = useContext(SidebarMenuNavbarContext);
   const navContext = useContext(NavContext);
   const navKey = makeEventKey(eventKey, href);
+
+  const { toggleStayExpanded, onToggleSelect } = useContext(SidebarMenuContext);
 
   const isExpandable = !!sidebarMenuNavbarContext;
   const isExpanded = !!sidebarMenuNavbarContext?.expanded;
@@ -46,23 +47,20 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
 
   useEffect(() => {
     if (isExpandable && isActive && !isExpandedRef.current) {
-      navbarContextRef.current?.onToggle();
+      if(toggleStayExpanded) {
+        navbarContextRef.current?.onToggle();
+      } else {
+        onToggleSelect?.(navbarContextRef.current?.eventKey ?? null)
+      }
     }
-  }, [isActive, isExpandable]);
-
-  useEffect(() => { 
-    if(toggleStayExpanded) {
-      const eventKeyPassed = navbarContextRef.current?.eventKey === toggleActiveKey ? null : eventKey;
-
-      onToggleSelect(eventKeyPassed);
-    }
-  }, [eventKey, onToggleSelect, toggleActiveKey, toggleStayExpanded])
+  }, [isActive, isExpandable, onToggleSelect, toggleStayExpanded]);
 
   return (
     <AbstractNavItem
       ref={ref}
       as={As}
       href={href}
+      tabIndex={-1}
       active={active}
       eventKey={eventKey}
       disabled={disabled}

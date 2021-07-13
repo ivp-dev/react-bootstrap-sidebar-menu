@@ -31,7 +31,6 @@ const SidebarMenuNavbarCollapse: BsPrefixRefForwardingComponent<'div', SidebarMe
   }: SidebarMenuNavbarCollapseProps, ref) => {
     const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-navbar-collapse');
     const navbarContext = useContext(SidebarMenuNavbarContext);
-
     return (
       <Collapse in={!!(navbarContext && navbarContext.expanded)} {...props}>
         <div ref={ref} className={classNames(bsPrefix, className)}>

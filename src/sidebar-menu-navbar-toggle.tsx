@@ -8,27 +8,22 @@ import useEventCallback from '@restart/hooks/useEventCallback';
 import classNames from 'classnames';
 
 
-type EventHandler = React.EventHandler<React.SyntheticEvent>;
-
 type SidebarMenuNavbarToggleProps = NavbarToggleProps & {
   eventKey?: EventKey
 }
 
 export function useSidebarMenuNavbarToggle(
   eventKey: EventKey | null,
-  onClick?: EventHandler,
-): EventHandler {
+): () => void {
   const { toggleActiveKey, onToggleSelect } = useContext(SidebarMenuContext);
 
-  return (e) => {
+  return () => {
     /*
       Compare the event key in context with the given event key.
       If they are the same, then collapse the component.
     */
     const eventKeyPassed = eventKey === toggleActiveKey ? null : eventKey;
-
-    if (onToggleSelect) onToggleSelect(eventKeyPassed, e);
-    if (onClick) onClick(e);
+    onToggleSelect?.(eventKeyPassed);
   };
 }
 
@@ -36,7 +31,6 @@ const SidebarMenuNavbarToggle = React.forwardRef(
   ({
     bsPrefix: initialBsPrefix,
     onClick,
-    eventKey,
     className,
     as: Component = 'button',
     children,
@@ -44,16 +38,14 @@ const SidebarMenuNavbarToggle = React.forwardRef(
     ...props
   }: SidebarMenuNavbarToggleProps, ref) => {
 
-    const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-navbar-toggler');
-
-    const handlerOnClick = useSidebarMenuNavbarToggle(eventKey ?? null, onClick);
-
-    const { onToggle, expanded } = useContext(SidebarMenuNavbarContext) || {};
-
+    const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-navbar-toggle');
+    const { onToggle, expanded, eventKey } = useContext(SidebarMenuNavbarContext) || {};
+    const handlerOnClick = useSidebarMenuNavbarToggle(eventKey ?? null);
+    
     const handleClick = useEventCallback((e) => {
-      handlerOnClick(e);
-      if (onClick) onClick(e);
-      if (onToggle) onToggle();
+      onClick?.(e);
+      onToggle?.();
+      handlerOnClick();
     });
 
     if (Component === 'button') {

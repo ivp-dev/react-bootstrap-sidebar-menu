@@ -23,6 +23,8 @@ $sidebar-menu-padding-x: $navbar-padding-x !default;
 $sidebar-menu-nav-link-padding-x: 1rem !default;
 $sidebar-menu-nav-link-padding-y: null !default;
 
+$sidebar-menu-nav-link-margin-y: .25rem !default;
+
 $sidebar-menu-nav-link-height: $nav-link-height !default;
 
 $sidebar-menu-brand-height: $navbar-brand-height !default;
@@ -30,6 +32,10 @@ $sidebar-menu-brand-padding-y: $navbar-brand-padding-y !default;
 $sidebar-menu-brand-margin-end: $navbar-brand-margin-end !default;
 
 $sidebar-menu-toggler-padding-y: $navbar-toggler-padding-y !default;
+
+$sidebar-menu-navbar-toggle-dark-bg: $gray-800;
+$sidebar-menu-navbar-toggle-padding-x: $sidebar-menu-nav-link-padding-x;
+$sidebar-menu-navbar-toggle-padding-x: $sidebar-menu-nav-link-padding-y;
 
 $sidebar-menu-light-color: $navbar-light-color !default;
 $sidebar-menu-light-hover-color: $navbar-light-hover-color !default;
@@ -91,6 +97,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 }
 
 .sidebar-menu-body {
+  padding: 0.5rem;
   overflow-y: auto;
 }
 
@@ -104,7 +111,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
   padding-right: $sidebar-menu-header-padding-x;
 }
 
-.sidebar-menu-toggler {
+.sidebar-menu-toggle {
   @extend .navbar-toggler;
   &-icon {
     width: $sidebar-menu-toggler-icon-width;
@@ -119,7 +126,6 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 }
 
 .sidebar-menu-nav {
-  padding: 0.5rem;
 
   @extend .navbar-nav;
 
@@ -134,6 +140,9 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     padding-right: $sidebar-menu-nav-link-padding-x;
     padding-top: $sidebar-menu-nav-link-padding-y;
     padding-bottom: $sidebar-menu-nav-link-padding-y;
+
+    margin-bottom: $sidebar-menu-nav-link-margin-y;
+
     line-height: 1;
     @extend .nav-link;
 
@@ -151,11 +160,17 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
   @extend .navbar-text;
 }
 
-.sidebar-menu-navbar-toggler {
-  margin-left: 1rem;
-  border: none;
-  @extend .sidebar-menu-nav-link;
+.sidebar-menu-navbar-toggle {
+  padding-left: $sidebar-menu-nav-link-padding-x;
+  padding-right: $sidebar-menu-nav-link-padding-x;
+  padding-top: $sidebar-menu-nav-link-padding-y;
+  padding-bottom: $sidebar-menu-nav-link-padding-y;
+
   @extend .navbar-toggler;
+
+  @extend .accordion-button;
+
+  @extend .sidebar-menu-nav-link;
 }
 
 .sidebar-menu-nav-icon {
@@ -166,7 +181,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
   @extend .navbar-collapse;
 }
 
-.sidebar-menu-toggler-icon {
+.sidebar-menu-toggle-icon {
   display: inline-block;
   width: 1.5em;
   height: 1.5em;
@@ -247,12 +262,12 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     }
   }
 
-  .sidebar-menu-toggler {
+  .sidebar-menu-toggle {
     color: $sidebar-menu-light-color;
     border-color: $sidebar-menu-light-toggler-border-color;
   }
 
-  .sidebar-menu-toggler-icon {
+  .sidebar-menu-toggle-icon {
     background-image: escape-svg($sidebar-menu-light-toggler-icon-bg);
   }
 
@@ -299,12 +314,12 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     }
   }
 
-  .sidebar-menu-toggler {
+  .sidebar-menu-toggle {
     color: $sidebar-menu-dark-color;
     border-color: $sidebar-menu-dark-toggler-border-color;
   }
 
-  .sidebar-menu-toggler-icon {
+  .sidebar-menu-toggle-icon {
     background-image: escape-svg($sidebar-menu-dark-toggler-icon-bg);
   }
 
@@ -315,5 +330,9 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     a:focus {
       color: $sidebar-menu-dark-active-color;
     }
+  }
+
+  .sidebar-menu-navbar-toggle {
+    background-color: $sidebar-menu-navbar-toggle-dark-bg;
   }
 }

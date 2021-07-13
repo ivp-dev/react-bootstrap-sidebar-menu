@@ -49,7 +49,7 @@ export default [
         babelHelpers: 'bundled'
       }),
       //external(),
-      uglify(),
+      //uglify(),
     ],
   },
   {

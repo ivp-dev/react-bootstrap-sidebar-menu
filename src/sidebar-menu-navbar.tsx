@@ -66,7 +66,7 @@ const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'div', SidebarMenuNavbar
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-navbar');
 
   const { toggleActiveKey, toggleStayExpanded } = useContext(SidebarMenuContext);
-
+  
   const sidebarMenuNavbarContext = useMemo<SidebarMenuNavbarContextType>(
     () => ({
       bsPrefix,
@@ -76,8 +76,6 @@ const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'div', SidebarMenuNavbar
     }),
     [bsPrefix, eventKey, expanded, onToggle, toggleActiveKey, toggleStayExpanded]
   );
-
-  console.log(toggleActiveKey)
 
   return <SidebarMenuNavbarContext.Provider value={sidebarMenuNavbarContext}>
     <Component

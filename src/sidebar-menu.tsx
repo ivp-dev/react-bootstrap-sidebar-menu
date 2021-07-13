@@ -15,7 +15,7 @@ import SidebarMenuHeader from './sidebar-menu-header';
 import SidebarMenuBody from './sidebar-menu-body';
 import SidebarMenuFooter from './sidebar-menu-footer';
 import SidebarMenuText from './sidebar-menu-text';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import AbstractNav from 'react-bootstrap/AbstractNav';
 import { EventKey } from 'react-bootstrap/types';
 
@@ -27,7 +27,7 @@ export type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
   toggleStayExpanded?: boolean
   defaultActiveKey?: EventKey
   defaultExpanded?: boolean
-  onToggleSelect?: (eventKey: EventKey | null, e: React.SyntheticEvent<unknown>) => void;
+  onToggleSelect?: (eventKey: EventKey | null) => void;
 };
 
 const propTypes = {
@@ -212,6 +212,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
         <AbstractNav
           as={As}
           ref={ref}
+          tabIndex={0}
           activeKey={activeKey}
           className={classNames(
             className,
