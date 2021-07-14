@@ -1,19 +1,14 @@
-
-$sidebar-menu-nav-icon-transition: fill 0.15s ease-in-out,
-  background-color 0.15s ease-in-out;
-
-$sidebar-menu-toggler-icon-width: 1.5em !default;
-$sidebar-menu-toggler-icon-height: 1.5em !default;
-$sidebar-menu-toggler-padding-x: $navbar-toggler-padding-x !default;
+$sidebar-menu-toggle-icon-width: 1.5em !default;
+$sidebar-menu-toggle-icon-height: 1.5em !default;
+$sidebar-menu-toggle-padding-x: $navbar-toggler-padding-x !default;
 $sidebar-menu-width-expanded: 300px !default;
 $sidebar-menu-header-padding-x: 0.5rem !default;
 $sidebar-menu-header-padding-y: 0.5rem !default;
-$sidebar-menu-toggler-font-size: $navbar-toggler-font-size !default;
 $sidebar-menu-brand-font-size: $navbar-brand-font-size !default;
 
 // Toggle button size with padding
 $sidebar-menu-width-collapsed: calc(
-  #{$sidebar-menu-toggler-icon-width} * 1.25 + #{$sidebar-menu-toggler-padding-x} *
+  #{$sidebar-menu-toggle-icon-width} * 1.25 + #{$sidebar-menu-toggle-padding-x} *
     2 + #{$sidebar-menu-header-padding-x} * 2 + #{$border-width} * 2
 ) !default;
 
@@ -23,34 +18,38 @@ $sidebar-menu-padding-x: $navbar-padding-x !default;
 $sidebar-menu-nav-link-padding-x: 1rem !default;
 $sidebar-menu-nav-link-padding-y: null !default;
 
-$sidebar-menu-nav-link-margin-y: .25rem !default;
-
-$sidebar-menu-nav-link-height: $nav-link-height !default;
+$sidebar-menu-nav-link-margin-y: 0.25rem !default;
 
 $sidebar-menu-brand-height: $navbar-brand-height !default;
 $sidebar-menu-brand-padding-y: $navbar-brand-padding-y !default;
 $sidebar-menu-brand-margin-end: $navbar-brand-margin-end !default;
 
-$sidebar-menu-toggler-padding-y: $navbar-toggler-padding-y !default;
+$sidebar-menu-nav-icon-width: 1.5em !default;
+$sidebar-menu-nav-icon-height: 1.5em !default;
+$sidebar-menu-nav-icon-transition: $accordion-icon-transition !default;
 
-$sidebar-menu-navbar-toggle-dark-bg: $gray-800;
-$sidebar-menu-navbar-toggle-padding-x: $sidebar-menu-nav-link-padding-x;
-$sidebar-menu-navbar-toggle-padding-x: $sidebar-menu-nav-link-padding-y;
+$sidebar-menu-toggle-icon-width: $sidebar-menu-nav-icon-width !default;
+$sidebar-menu-toggle-icon-height: $sidebar-menu-nav-icon-height !default;
+$sidebar-menu-sub-toggle-dark-bg: $gray-800 !default;
+$sidebar-menu-sub-toggle-padding-x: $sidebar-menu-nav-link-padding-x !default;
+$sidebar-menu-sub-toggle-padding-x: $sidebar-menu-nav-link-padding-y;
 
-$sidebar-menu-nav-icon-dark-color: white;
-$sidebar-menu-nav-icon-light-color: gray;
+$sidebar-menu-nav-icon-dark-color: $accordion-icon-active-color !default;
+$sidebar-menu-nav-icon-light-color: $accordion-icon-color !default;
 
-$sidebar-menu-navbar-toggle-light-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$sidebar-menu-nav-icon-light-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
-$sidebar-menu-navbar-toggle-dark-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$sidebar-menu-nav-icon-dark-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
+$sidebar-menu-nav-title-padding-left: 1.25rem !default;
 
-$sidebar-menu-nav-icon-transition: $accordion-icon-transition;
+$sidebar-menu-sub-toggle-light-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$sidebar-menu-nav-icon-light-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
+$sidebar-menu-sub-toggle-dark-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$sidebar-menu-nav-icon-dark-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
+
+$sidebar-menu-nav-icon-transition: $accordion-icon-transition !default;
 
 $sidebar-menu-light-color: $navbar-light-color !default;
 $sidebar-menu-light-hover-color: $navbar-light-hover-color !default;
 $sidebar-menu-light-active-color: $nav-pills-link-active-color !default;
 $sidebar-menu-light-disabled-color: $navbar-light-disabled-color !default;
-$sidebar-menu-light-toggler-icon-bg: $navbar-light-toggler-icon-bg !default;
-$sidebar-menu-light-toggler-border-color: $navbar-light-toggler-border-color !default;
+$sidebar-menu-light-toggle-icon-bg: $navbar-light-toggler-icon-bg !default;
+$sidebar-menu-light-toggle-border-color: $navbar-light-toggler-border-color !default;
 $sidebar-menu-light-brand-color: $navbar-light-brand-color !default;
 $sidebar-menu-light-brand-hover-color: $navbar-light-brand-hover-color !default;
 
@@ -58,15 +57,12 @@ $sidebar-menu-dark-color: $navbar-dark-color !default;
 $sidebar-menu-dark-hover-color: $navbar-dark-hover-color !default;
 $sidebar-menu-dark-active-color: $nav-pills-link-active-color !default;
 $sidebar-menu-dark-disabled-color: $navbar-dark-disabled-color !default;
-$sidebar-menu-dark-toggler-icon-bg: $navbar-dark-toggler-icon-bg !default;
-$sidebar-menu-dark-toggler-border-color: $navbar-dark-toggler-border-color !default;
+$sidebar-menu-dark-toggle-icon-bg: $navbar-dark-toggler-icon-bg !default;
+$sidebar-menu-dark-toggle-border-color: $navbar-dark-toggler-border-color !default;
 $sidebar-menu-dark-brand-color: $navbar-dark-brand-color !default;
 $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 
 .sidebar-menu {
-  padding-top: 0;
-  flex-direction: column;
-
   @extend .navbar;
 }
 
@@ -121,9 +117,10 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 
 .sidebar-menu-toggle {
   @extend .navbar-toggler;
+
   &-icon {
-    width: $sidebar-menu-toggler-icon-width;
-    height: $sidebar-menu-toggler-icon-height;
+    width: $sidebar-menu-toggle-icon-width;
+    height: $sidebar-menu-toggle-icon-height;
 
     @extend .navbar-toggler-icon;
   }
@@ -134,11 +131,6 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 }
 
 .sidebar-menu-nav {
-
-  @extend .navbar-nav;
-
-  @extend .nav-pills;
-
   .sidebar-menu-nav-item {
     @extend .nav-item;
   }
@@ -151,15 +143,16 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 
     margin-bottom: $sidebar-menu-nav-link-margin-y;
 
-    line-height: 1;
-
     @extend .nav-link;
-
   }
+
+  @extend .navbar-nav;
+
+  @extend .nav-pills;
 }
 
 .sidebar-menu-nav-title {
-  padding-left: 1.25rem;
+  padding-left: $sidebar-menu-nav-title-padding-left;
 }
 
 .sidebar-menu-text {
@@ -169,19 +162,10 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
   @extend .navbar-text;
 }
 
-.sidebar-menu-navbar-toggle {
-  padding-left: $sidebar-menu-nav-link-padding-x;
-  padding-right: $sidebar-menu-nav-link-padding-x;
-  padding-top: $sidebar-menu-nav-link-padding-y;
-  padding-bottom: $sidebar-menu-nav-link-padding-y;
-
+.sidebar-menu-sub-toggle {
   display: flex !important;
 
   .sidebar-menu-nav-icon {
-    display: block;
-    width: 1.5rem;
-    height: $accordion-icon-width;
-    content: "";
     background-repeat: no-repeat;
     background-size: $accordion-icon-width;
     background-position: center;
@@ -207,6 +191,10 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
 }
 
 .sidebar-menu-nav-icon {
+  width: $sidebar-menu-nav-icon-width;
+  height: $sidebar-menu-nav-icon-height;
+  display: inline-block;
+  text-align: center;
   @include transition($sidebar-menu-nav-icon-transition);
 }
 
@@ -214,18 +202,6 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
   @extend .navbar-collapse;
 }
 
-.sidebar-menu-toggle-icon {
-  display: inline-block;
-  width: 1.5em;
-  height: 1.5em;
-  vertical-align: middle;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-}
-
-// Generate series of `.sidebar-menu-expand-*` responsive classes for configuring
-// where your navbar collapses.
 .sidebar-menu-expand {
   @each $breakpoint in map-keys($grid-breakpoints) {
     $next: breakpoint-next($breakpoint, $grid-breakpoints);
@@ -261,10 +237,6 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
   }
 }
 
-// SidebarMenu themes
-//
-// Styles for switching between navbars with light or dark background.
-
 // Dark links against a light background
 .sidebar-menu-light {
   .sidebar-menu-brand {
@@ -279,7 +251,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
   .sidebar-menu-nav {
     .sidebar-menu-nav-link {
       color: $sidebar-menu-light-color;
-      
+
       &:hover,
       &:focus {
         color: $sidebar-menu-light-hover-color;
@@ -295,19 +267,19 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     }
   }
 
-  .sidebar-menu-navbar-toggle {
+  .sidebar-menu-sub-toggle {
     .sidebar-menu-nav-icon {
-      background-image: escape-svg($sidebar-menu-navbar-toggle-light-icon);
+      background-image: escape-svg($sidebar-menu-sub-toggle-light-icon);
     }
   }
 
   .sidebar-menu-toggle {
     color: $sidebar-menu-light-color;
-    border-color: $sidebar-menu-light-toggler-border-color;
+    border-color: $sidebar-menu-light-toggle-border-color;
   }
 
   .sidebar-menu-toggle-icon {
-    background-image: escape-svg($sidebar-menu-light-toggler-icon-bg);
+    background-image: escape-svg($sidebar-menu-light-toggle-icon-bg);
   }
 
   .sidebar-menu-text {
@@ -336,7 +308,6 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
   .sidebar-menu-nav {
     .sidebar-menu-nav-link {
       color: $sidebar-menu-dark-color;
-      
 
       &:hover,
       &:focus {
@@ -353,19 +324,19 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     }
   }
 
-  .sidebar-menu-navbar-toggle {
+  .sidebar-menu-sub-toggle {
     .sidebar-menu-nav-icon {
-      background-image: escape-svg($sidebar-menu-navbar-toggle-dark-icon);
+      background-image: escape-svg($sidebar-menu-sub-toggle-dark-icon);
     }
   }
 
   .sidebar-menu-toggle {
     color: $sidebar-menu-dark-color;
-    border-color: $sidebar-menu-dark-toggler-border-color;
+    border-color: $sidebar-menu-dark-toggle-border-color;
   }
 
   .sidebar-menu-toggle-icon {
-    background-image: escape-svg($sidebar-menu-dark-toggler-icon-bg);
+    background-image: escape-svg($sidebar-menu-dark-toggle-icon-bg);
   }
 
   .sidebar-menu-text {
@@ -377,7 +348,7 @@ $sidebar-menu-dark-brand-hover-color: $navbar-dark-brand-hover-color !default;
     }
   }
 
-  .sidebar-menu-navbar-toggle {
-    background-color: $sidebar-menu-navbar-toggle-dark-bg;
+  .sidebar-menu-sub-toggle {
+    background-color: $sidebar-menu-sub-toggle-dark-bg;
   }
 }

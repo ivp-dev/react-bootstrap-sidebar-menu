@@ -10,7 +10,7 @@ import SidebarMenuBrand from './sidebar-menu-brand'
 import classNames from 'classnames';
 import SidebarMenuContext, { SidebarMenuContextProps } from './sidebar-menu-context';
 import { useUncontrolled } from 'uncontrollable';
-import SidebarMenuNavbar from './sidebar-menu-navbar';
+import SidebarMenuSub from './sidebar-menu-sub';
 import SidebarMenuHeader from './sidebar-menu-header';
 import SidebarMenuBody from './sidebar-menu-body';
 import SidebarMenuFooter from './sidebar-menu-footer';
@@ -22,11 +22,12 @@ import { EventKey } from 'react-bootstrap/types';
 export type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
   rtl?: boolean
   activeKey?: EventKey
-  toggleActiveKey?: EventKey
   hide?: boolean | 'sm' | 'md' | 'lg' | 'xl'
-  toggleStayExpanded?: boolean
+  exclusiveExpand?: boolean
   defaultActiveKey?: EventKey
   defaultExpanded?: boolean
+  toggleActiveKey?: EventKey
+  defaultToggleActiveKey?: EventKey
   onToggleSelect?: (eventKey: EventKey | null) => void;
 };
 
@@ -108,7 +109,7 @@ const propTypes = {
    * For basic closing behavior after all `<SidebarMenuNav>` descendant onSelect events in
    * mobile viewports, try using collapseOnSelect.
    *
-   * Note: If you are manually closing the navbar using this `OnSelect` prop,
+   * Note: If you are manually closing the sidebar using this `OnSelect` prop,
    * ensure that you are setting `expanded` to false and not *toggling* between
    * true and false.
    */
@@ -125,7 +126,7 @@ const propTypes = {
   collapseOnSelect: PropTypes.bool,
 
   /**
-   * The ARIA role for the navbar, will default to 'navigation' for
+   * The ARIA role for the sidebar, will default to 'navigation' for
    * SidebarMenu whose `as` is something other than `<nav>`.
    *
    * @default 'navigation'
@@ -135,7 +136,7 @@ const propTypes = {
   /**
  * Marks the SidebarMenuNavItem with a matching `eventKey` (or `href` if present) as active.
  */
-  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 const defaultProps = {
@@ -152,14 +153,14 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     bsPrefix: initialBsPrefix,
     collapseOnSelect,
     toggleActiveKey,
-    toggleStayExpanded,
+    exclusiveExpand,
+    onToggleSelect,
     expanded,
     className,
     activeKey,
     variant,
     onToggle,
     onSelect,
-    onToggleSelect,
     expand,
     hide,
     bg,
@@ -201,10 +202,10 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     rtl: !!rtl,
     expanded: !!expanded,
     onToggle: () => onToggle?.(!expanded),
-    toggleStayExpanded,
+    exclusiveExpand,
     toggleActiveKey,
     onToggleSelect
-  }), [expanded, onToggle, onToggleSelect, rtl, toggleActiveKey, toggleStayExpanded]);
+  }), [expanded, onToggle, onToggleSelect, rtl, toggleActiveKey, exclusiveExpand]);
 
   return (
     <SidebarMenuContext.Provider value={sidebarMenuContextValue}>
@@ -235,7 +236,7 @@ SidebarMenu.propTypes = propTypes;
 
 export default Object.assign(SidebarMenu, {
   Nav: SidebarMenuNav,
-  Navbar: SidebarMenuNavbar,
+  Sub: SidebarMenuSub,
   Brand: SidebarMenuBrand,
   Collapse: SidebarMenuCollapse,
   Toggle: SidebarMenuToggle,

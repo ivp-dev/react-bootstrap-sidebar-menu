@@ -4,14 +4,14 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/h
 import PropTypes from "prop-types";
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import { useUncontrolled } from 'uncontrollable';
-import SidebarMenuNavbarContext, { SidebarMenuNavbarContextType } from './sidebar-menu-navbar-context';
-import SidebarMenuNavbarToggle from './sidebar-menu-navbar-toggle';
-import SidebarMenuNavbarCollapse from './sidebar-menu-navbar-collapse';
+import SidebarMenuSubContext, { SidebarMenuSubContextType } from './sidebar-menu-sub-context';
+import SidebarMenuSubToggle from './sidebar-menu-sub-toggle';
+import SidebarMenuSubCollapse from './sidebar-menu-sub-collapse';
 import classNames from 'classnames';
 import { EventKey } from 'react-bootstrap/types';
 import { SidebarMenuContext } from '.';
 
-type SidebarMenuNavbarProps = BsPrefixProps & Omit<NavbarProps,
+type SidebarMenuSubProps = BsPrefixProps & Omit<NavbarProps,
   'sticky' | 'bg' | 'variant' | 'fixed' | 'expand' | 'collapseOnSelect' | 'onSelect' | 'role'
 > & {
   onToggle?: (expanded: boolean) => void
@@ -27,8 +27,8 @@ const propTypes = {
   as: PropTypes.elementType,
 
   /**
-   * A callback fired when the `<SidebarMenuNavbar>` body collapses or expands. Fired when
-   * a `<SidebarMenuNavbar.Toggle>` is clicked and called with the new `expanded`
+   * A callback fired when the `<SidebarMenuSub>` body collapses or expands. Fired when
+   * a `<SidebarMenuSub.Toggle>` is clicked and called with the new `expanded`
    * boolean value.
    *
    * @controllable expanded
@@ -36,21 +36,21 @@ const propTypes = {
   onToggle: PropTypes.func,
 
   /**
-   * Controls the visiblity of the navbar body
+   * Controls the visiblity of the submenu body
    *
    * @controllable onToggle
    */
   expanded: PropTypes.bool,
 
   /**
-   * The ARIA role for the SidebarMenuNavbar.
+   * The ARIA role for the SidebarMenuSub.
    *
    * @default 'navigation'
    */
   role: PropTypes.string
 };
 
-const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'div', SidebarMenuNavbarProps> = React.forwardRef((props, ref) => {
+const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps> = React.forwardRef((props, ref) => {
   const {
     bsPrefix: initialBsPrefix,
     as: Component = 'div',
@@ -63,33 +63,33 @@ const SidebarMenuNavbar: BsPrefixRefForwardingComponent<'div', SidebarMenuNavbar
     expanded: 'onToggle',
   });
 
-  const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-navbar');
+  const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-sub');
 
-  const { toggleActiveKey, toggleStayExpanded } = useContext(SidebarMenuContext);
+  const { toggleActiveKey, exclusiveExpand } = useContext(SidebarMenuContext);
   
-  const sidebarMenuNavbarContext = useMemo<SidebarMenuNavbarContextType>(
+  const sidebarMenuSubContext = useMemo<SidebarMenuSubContextType>(
     () => ({
       bsPrefix,
       onToggle: () => onToggle?.(!expanded),
-      expanded: toggleStayExpanded ? !!expanded : toggleActiveKey === eventKey,
+      expanded: exclusiveExpand ? toggleActiveKey === eventKey : !!expanded,
       eventKey
     }),
-    [bsPrefix, eventKey, expanded, onToggle, toggleActiveKey, toggleStayExpanded]
+    [bsPrefix, eventKey, expanded, onToggle, toggleActiveKey, exclusiveExpand]
   );
 
-  return <SidebarMenuNavbarContext.Provider value={sidebarMenuNavbarContext}>
+  return <SidebarMenuSubContext.Provider value={sidebarMenuSubContext}>
     <Component
       ref={ref}
       {...controlledProps}
       className={classNames(className, bsPrefix)} />
-  </SidebarMenuNavbarContext.Provider>;
+  </SidebarMenuSubContext.Provider>;
 });
 
-SidebarMenuNavbar.displayName = "SidebarMenuNavbar";
-SidebarMenuNavbar.propTypes = propTypes;
+SidebarMenuSub.displayName = "SidebarMenuSub";
+SidebarMenuSub.propTypes = propTypes;
 
-export default Object.assign(SidebarMenuNavbar, {
-  Collapse: SidebarMenuNavbarCollapse,
-  Toggle: SidebarMenuNavbarToggle
+export default Object.assign(SidebarMenuSub, {
+  Collapse: SidebarMenuSubCollapse,
+  Toggle: SidebarMenuSubToggle
 });
 

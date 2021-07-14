@@ -31,9 +31,17 @@ const GettingStarted = () => {
 
     <h3>Overview</h3>
 
-    <p>Here's a left (right) side vertical sidebar with collapsible menu items. The menu functions like an "accordion" where only a single menu is open at a time. It's also responsive which allows the main content area to be visible. The sidebar shrinks in width, hides the text labels and collapses to icons only on mobile devices.</p>
-    
-    <p>The component supports a header, body, footer and built in toggle button, of which you can optionally disable and provide your own header (if needed)</p>
+    <p>
+      Here's a left or right side vertical sidebar with collapsible menu items.
+      The menu functions like an "accordion" where only a single menu is open at a time.
+      It's also responsive which allows the main content area to be visible.
+      The sidebar shrinks in width, hides the text labels and collapses to icons only on mobile devices.
+    </p>
+
+    <p>
+      The component supports a header, body, footer and built in toggle button,
+      of which you can optionally disable and provide your own header (if needed)
+    </p>
 
     <br />
 
@@ -69,13 +77,20 @@ const GettingStarted = () => {
           <td>bg</td>
           <td>string</td>
           <td><CodeExample>'light'</CodeExample></td>
-          <td>A convenience prop for adding <CodeExample>bg-*</CodeExample> utility classes since they are so commonly used here. <CodeExample>light</CodeExample> and <CodeExample>dark</CodeExample> are common choices but any <CodeExample>bg-*</CodeExample> class is supported, including any custom ones you might define.</td>
+          <td>
+            A convenience prop for adding <CodeExample>bg-*</CodeExample> utility classes since they are so commonly used here.
+            <CodeExample>light</CodeExample> and <CodeExample>dark</CodeExample> are common choices but any <CodeExample>bg-*</CodeExample> class is supported,
+            including any custom ones you might define.
+          </td>
         </tr>
         <tr>
           <td>expand</td>
           <td><CodeExample>boolean</CodeExample> | <CodeExample>'sm'</CodeExample> | <CodeExample>'md'</CodeExample> | <CodeExample>'lg'</CodeExample> | <CodeExample>'xl'</CodeExample> | <CodeExample>'xxl'</CodeExample></td>
           <td><CodeExample>true</CodeExample></td>
-          <td>The breakpoint, below which, the SidebarMenu will collapse. When <CodeExample>true</CodeExample> the SidebarMenu will always be expanded regardless of screen size.</td>
+          <td>
+            The breakpoint, below which, the SidebarMenu will collapse.
+            When <CodeExample>true</CodeExample> the SidebarMenu will always be expanded regardless of screen size.
+          </td>
         </tr>
         <tr>
           <td>expanded</td>
@@ -103,7 +118,10 @@ const GettingStarted = () => {
           <td>hide</td>
           <td><CodeExample>boolean</CodeExample> | <CodeExample>'sm'</CodeExample> | <CodeExample>'md'</CodeExample> | <CodeExample>'lg'</CodeExample> | <CodeExample>'xl'</CodeExample></td>
           <td><CodeExample>false</CodeExample></td>
-          <td>The breakpoint, below which, the SidebarMenu will hide. When <CodeExample>true</CodeExample> the SidebarMenu will always be hidden regardless of screen size.</td>
+          <td>
+            The breakpoint, below which, the SidebarMenu will hide.
+            When <CodeExample>true</CodeExample> the SidebarMenu will always be hidden regardless of screen size.
+          </td>
         </tr>
         <tr>
           <td>activeKey</td>
@@ -117,6 +135,36 @@ const GettingStarted = () => {
           <td></td>
           <td>A callback fired when a descendant of a child <CodeExample>&lt;SidebarMenu&gt;</CodeExample> is selected.</td>
         </tr>
+
+
+        <tr>
+          <td>exclusiveExpand</td>
+          <td>boolean</td>
+          <td><CodeExample>false</CodeExample></td>
+          <td>Only allow one <CodeExample>&lt;SidebarMenu.Sub.Collapse&gt;</CodeExample> open at a time.</td>
+        </tr>
+        <tr>
+          <td>toggleActiveKey</td>
+          <td>string | number</td>
+          <td></td>
+          <td>
+            Marks the <CodeExample>&lt;SidebarMenu.Sub.Toggle&gt;</CodeExample> with a matching toggleActiveKey as active.
+          </td>
+        </tr>
+        <tr>
+          <td>defaultToggleActiveKey</td>
+          <td>boolean</td>
+          <td><CodeExample>false</CodeExample></td>
+          <td>Default value of the <CodeExample>toggleActiveKey</CodeExample> property.</td>
+        </tr>
+        <tr>
+          <td>onToggleSelect</td>
+          <td>function</td>
+          <td></td>
+          <td>A callback fired when a <CodeExample>&lt;SidebarMenu.Sub.Toggle&gt;</CodeExample> is selected.</td>
+        </tr>
+
+
         <tr>
           <td>onToggle</td>
           <td>function</td>
@@ -143,13 +191,19 @@ const GettingStarted = () => {
           <td>role</td>
           <td>string</td>
           <td><CodeExample>'navigation'</CodeExample></td>
-          <td>The ARIA role for the Sidebar, will default to 'navigation' for SidebarMenu whose <CodeExample>as</CodeExample> is something other than <CodeExample>&lt;nav&gt;</CodeExample>.</td>
+          <td>
+            The ARIA role for the Sidebar, will default to 'navigation' for SidebarMenu whose <CodeExample>as</CodeExample>
+            is something other than <CodeExample>&lt;nav&gt;</CodeExample>.
+          </td>
         </tr>
         <tr>
           <td>collapseOnSelect</td>
           <td>boolean</td>
           <td><CodeExample>false</CodeExample></td>
-          <td>Toggles <CodeExample>expanded</CodeExample> to <CodeExample>false</CodeExample> after the onSelect event of a descendant of a child <CodeExample>&lt;SidebarMenu&gt;</CodeExample> fires. Does nothing if no <CodeExample>&lt;SidebarMenu&gt;</CodeExample> descendants exist.</td>
+          <td>
+            Toggles <CodeExample>expanded</CodeExample> to <CodeExample>false</CodeExample> after the onSelect event of a descendant of a child <CodeExample>&lt;SidebarMenu&gt;</CodeExample>
+            fires. Does nothing if no <CodeExample>&lt;SidebarMenu&gt;</CodeExample> descendants exist.
+          </td>
         </tr>
         <tr>
           <td>variant</td>
@@ -207,7 +261,7 @@ const GettingStarted = () => {
 
     <br />
 
-    <ComponentTitle title="SidebarMenu.Navbar" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-navbar.tsx" />
+    <ComponentTitle title="SidebarMenu.Sub" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-navbar.tsx" />
 
     <PreContainer>
       <CodeExample copy="import { SidebarMenuNavbar } from 'react-bootstrap-sidebar-menu';">
@@ -244,7 +298,7 @@ const GettingStarted = () => {
               </em>
             </small>
             <br />
-            A callback fired when the <CodeExample>&lt;SidebarMenu.Navbar&gt;</CodeExample> body collapses or expands.
+            A callback fired when the <CodeExample>&lt;SidebarMenu.Sub&gt;</CodeExample> body collapses or expands.
           </td>
         </tr>
         <tr>
@@ -260,14 +314,14 @@ const GettingStarted = () => {
               </em>
             </small>
             <br />
-            Controls the visiblity of the SidebarMenu.Navbar.
+            Controls the visiblity of the SidebarMenu.Sub.
           </td>
         </tr>
         <tr>
           <td>role</td>
           <td>string</td>
           <td><CodeExample>'navigation'</CodeExample></td>
-          <td>The ARIA role for the SidebarMenu.Navbar, will default to 'navigation' for SidebarMenu whose <CodeExample>as</CodeExample> is something other than <CodeExample>&lt;nav&gt;</CodeExample>.</td>
+          <td>The ARIA role for the SidebarMenu.Sub, will default to 'navigation' for SidebarMenu whose <CodeExample>as</CodeExample> is something other than <CodeExample>&lt;nav&gt;</CodeExample>.</td>
 
         </tr>
         <tr>

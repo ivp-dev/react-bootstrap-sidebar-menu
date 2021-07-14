@@ -3,16 +3,16 @@ import { EventKey } from 'react-bootstrap/types';
 import NavbarToggle, { NavbarToggleProps } from "react-bootstrap/NavbarToggle";
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import SidebarMenuContext from './sidebar-menu-context';
-import { SidebarMenuNavbarContext } from '.';
+import SidebarMenuSubContext from './sidebar-menu-sub-context';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import classNames from 'classnames';
 
 
-type SidebarMenuNavbarToggleProps = NavbarToggleProps & {
+type SidebarMenuSubToggleProps = NavbarToggleProps & {
   eventKey?: EventKey
 }
 
-export function useSidebarMenuNavbarToggle(
+export function useSidebarMenuSubToggle(
   eventKey: EventKey | null,
 ): () => void {
   const { toggleActiveKey, onToggleSelect } = useContext(SidebarMenuContext);
@@ -27,7 +27,7 @@ export function useSidebarMenuNavbarToggle(
   };
 }
 
-const SidebarMenuNavbarToggle = React.forwardRef(
+const SidebarMenuSubToggle = React.forwardRef(
   ({
     bsPrefix: initialBsPrefix,
     onClick,
@@ -36,11 +36,11 @@ const SidebarMenuNavbarToggle = React.forwardRef(
     children,
     label,
     ...props
-  }: SidebarMenuNavbarToggleProps, ref) => {
+  }: SidebarMenuSubToggleProps, ref) => {
 
-    const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-navbar-toggle');
-    const { onToggle, expanded, eventKey } = useContext(SidebarMenuNavbarContext) || {};
-    const handlerOnClick = useSidebarMenuNavbarToggle(eventKey ?? null);
+    const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-sub-toggle');
+    const { onToggle, expanded, eventKey } = useContext(SidebarMenuSubContext) || {};
+    const handlerOnClick = useSidebarMenuSubToggle(eventKey ?? null);
     
     const handleClick = useEventCallback((e) => {
       onClick?.(e);
@@ -65,8 +65,8 @@ const SidebarMenuNavbarToggle = React.forwardRef(
     );
   })
 
-SidebarMenuNavbarToggle.displayName = "SidebarMenuNavbarToggle";
-//SidebarMenuNavbarToggle.propTypes = NavbarToggle.propTypes;
-//SidebarMenuNavbarToggle.defaultProps = NavbarToggle.defaultProps;
+SidebarMenuSubToggle.displayName = "SidebarMenuSubToggle";
+SidebarMenuSubToggle.propTypes = NavbarToggle.propTypes;
+SidebarMenuSubToggle.defaultProps = NavbarToggle.defaultProps;
 
-export default SidebarMenuNavbarToggle;
+export default SidebarMenuSubToggle;

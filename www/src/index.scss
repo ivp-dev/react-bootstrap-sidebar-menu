@@ -130,6 +130,8 @@ table.api {
 }
 
 .sidebar-menu {
+  padding-top: 0;
+  flex-direction: column;
   grid-area: sidebar;
 }
 

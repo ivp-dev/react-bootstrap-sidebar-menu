@@ -7,7 +7,7 @@ export interface SidebarMenuContextProps {
   onToggle?: (...args: []) => void
   onToggleSelect?: (eventKey: EventKey | null) => void;
   bsPrefix?: string
-  toggleStayExpanded?: boolean
+  exclusiveExpand?: boolean
   toggleActiveKey?: EventKey
 }
 
