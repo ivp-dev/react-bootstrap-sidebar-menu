@@ -27,7 +27,7 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
   const navContext = useContext(NavContext);
   const navKey = makeEventKey(eventKey, href);
 
-  const { exclusiveExpand, onToggleSelect } = useContext(SidebarMenuContext);
+  const { exclusiveExpand, onSubSelect } = useContext(SidebarMenuContext);
 
   const isExpandable = !!sidebarMenuSubContext;
   const isExpanded = !!sidebarMenuSubContext?.expanded;
@@ -50,10 +50,10 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
       if(!exclusiveExpand) {
         subContextRef.current?.onToggle();
       } else {
-        onToggleSelect?.(subContextRef.current?.eventKey ?? null)
+        onSubSelect?.(subContextRef.current?.eventKey ?? null)
       }
     }
-  }, [isActive, isExpandable, onToggleSelect, exclusiveExpand]);
+  }, [isActive, isExpandable, onSubSelect, exclusiveExpand]);
 
   return (
     <AbstractNavItem

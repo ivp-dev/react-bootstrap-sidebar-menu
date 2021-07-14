@@ -26,9 +26,9 @@ export type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
   exclusiveExpand?: boolean
   defaultActiveKey?: EventKey
   defaultExpanded?: boolean
-  toggleActiveKey?: EventKey
-  defaultToggleActiveKey?: EventKey
-  onToggleSelect?: (eventKey: EventKey | null) => void;
+  subActiveKey?: EventKey
+  defaultsubActiveKey?: EventKey
+  onSubSelect?: (eventKey: EventKey | null) => void;
 };
 
 const propTypes = {
@@ -126,6 +126,11 @@ const propTypes = {
   collapseOnSelect: PropTypes.bool,
 
   /**
+   * Only allow one `<SidebarMenu.Sub.Collapse>` open at a time.
+   */
+  exclusiveExpand: PropTypes.bool,
+
+  /**
    * The ARIA role for the sidebar, will default to 'navigation' for
    * SidebarMenu whose `as` is something other than `<nav>`.
    *
@@ -136,7 +141,12 @@ const propTypes = {
   /**
  * Marks the SidebarMenuNavItem with a matching `eventKey` (or `href` if present) as active.
  */
-  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Marks the SidebarMenu.Sub with a matching `eventKey` as active.
+   */
+  subActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 const defaultProps = {
@@ -152,9 +162,9 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
   const {
     bsPrefix: initialBsPrefix,
     collapseOnSelect,
-    toggleActiveKey,
+    subActiveKey,
     exclusiveExpand,
-    onToggleSelect,
+    onSubSelect,
     expanded,
     className,
     activeKey,
@@ -169,7 +179,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     ...controlledProps } = useUncontrolled(props, {
       expanded: 'onToggle',
       activeKey: 'onSelect',
-      toggleActiveKey: 'onToggleSelect'
+      subActiveKey: 'onSubSelect'
     });
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu');
@@ -203,9 +213,9 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     expanded: !!expanded,
     onToggle: () => onToggle?.(!expanded),
     exclusiveExpand,
-    toggleActiveKey,
-    onToggleSelect
-  }), [expanded, onToggle, onToggleSelect, rtl, toggleActiveKey, exclusiveExpand]);
+    subActiveKey,
+    onSubSelect
+  }), [expanded, onToggle, onSubSelect, rtl, subActiveKey, exclusiveExpand]);
 
   return (
     <SidebarMenuContext.Provider value={sidebarMenuContextValue}>

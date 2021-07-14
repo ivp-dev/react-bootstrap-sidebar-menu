@@ -144,21 +144,21 @@ const GettingStarted = () => {
           <td>Only allow one <CodeExample>&lt;SidebarMenu.Sub.Collapse&gt;</CodeExample> open at a time.</td>
         </tr>
         <tr>
-          <td>toggleActiveKey</td>
+          <td>subActiveKey</td>
           <td>string | number</td>
           <td></td>
           <td>
-            Marks the <CodeExample>&lt;SidebarMenu.Sub.Toggle&gt;</CodeExample> with a matching toggleActiveKey as active.
+            Marks the <CodeExample>&lt;SidebarMenu.Sub.Toggle&gt;</CodeExample> with a matching subActiveKey as active.
           </td>
         </tr>
         <tr>
-          <td>defaultToggleActiveKey</td>
+          <td>defaultSubActiveKey</td>
           <td>boolean</td>
           <td><CodeExample>false</CodeExample></td>
-          <td>Default value of the <CodeExample>toggleActiveKey</CodeExample> property.</td>
+          <td>Default value of the <CodeExample>subActiveKey</CodeExample> property.</td>
         </tr>
         <tr>
-          <td>onToggleSelect</td>
+          <td>onSubSelect</td>
           <td>function</td>
           <td></td>
           <td>A callback fired when a <CodeExample>&lt;SidebarMenu.Sub.Toggle&gt;</CodeExample> is selected.</td>

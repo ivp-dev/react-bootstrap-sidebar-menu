@@ -5,10 +5,10 @@ export interface SidebarMenuContextProps {
   rtl?: boolean
   expanded?: boolean
   onToggle?: (...args: []) => void
-  onToggleSelect?: (eventKey: EventKey | null) => void;
+  onSubSelect?: (eventKey: EventKey | null) => void;
   bsPrefix?: string
   exclusiveExpand?: boolean
-  toggleActiveKey?: EventKey
+  subActiveKey?: EventKey
 }
 
 export default createContext<SidebarMenuContextProps>({});

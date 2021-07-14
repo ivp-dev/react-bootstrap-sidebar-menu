@@ -15,15 +15,15 @@ type SidebarMenuSubToggleProps = NavbarToggleProps & {
 export function useSidebarMenuSubToggle(
   eventKey: EventKey | null,
 ): () => void {
-  const { toggleActiveKey, onToggleSelect } = useContext(SidebarMenuContext);
+  const { subActiveKey, onSubSelect } = useContext(SidebarMenuContext);
 
   return () => {
     /*
       Compare the event key in context with the given event key.
       If they are the same, then collapse the component.
     */
-    const eventKeyPassed = eventKey === toggleActiveKey ? null : eventKey;
-    onToggleSelect?.(eventKeyPassed);
+    const eventKeyPassed = eventKey === subActiveKey ? null : eventKey;
+    onSubSelect?.(eventKeyPassed);
   };
 }
 

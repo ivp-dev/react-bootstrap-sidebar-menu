@@ -65,16 +65,16 @@ const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps>
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-sub');
 
-  const { toggleActiveKey, exclusiveExpand } = useContext(SidebarMenuContext);
+  const { subActiveKey, exclusiveExpand } = useContext(SidebarMenuContext);
   
   const sidebarMenuSubContext = useMemo<SidebarMenuSubContextType>(
     () => ({
       bsPrefix,
       onToggle: () => onToggle?.(!expanded),
-      expanded: exclusiveExpand ? toggleActiveKey === eventKey : !!expanded,
+      expanded: exclusiveExpand ? subActiveKey === eventKey : !!expanded,
       eventKey
     }),
-    [bsPrefix, eventKey, expanded, onToggle, toggleActiveKey, exclusiveExpand]
+    [bsPrefix, eventKey, expanded, onToggle, subActiveKey, exclusiveExpand]
   );
 
   return <SidebarMenuSubContext.Provider value={sidebarMenuSubContext}>
