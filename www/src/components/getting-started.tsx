@@ -137,7 +137,7 @@ const GettingStarted = () => {
           <td>boolean</td>
           <td><CodeExample>false</CodeExample></td>
           <td>
-            Only allow one <CodeExample>&lt;SidebarMenu.Sub.Collapse&gt;</CodeExample> open at a time.  
+            Only allow one <CodeExample>&lt;SidebarMenu.Sub&gt;</CodeExample> open at a time.  
             When <CodeExample>true</CodeExample> the <CodeExample>&lt;SidebarMenu.Sub&gt;</CodeExample> will functions like an "accordion" where only a single menu is open at a time</td>
         </tr>
         <tr>

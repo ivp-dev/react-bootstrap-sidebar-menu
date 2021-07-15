@@ -184,7 +184,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu');
 
-  const handleCollapse = useCallback<SelectCallback>(
+  const handleSelect = useCallback<SelectCallback>(
     (...args) => {
       onSelect?.(...args);
       if (collapseOnSelect && expanded) {
@@ -219,7 +219,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
 
   return (
     <SidebarMenuContext.Provider value={sidebarMenuContextValue}>
-      <SelectableContext.Provider value={handleCollapse}>
+      <SelectableContext.Provider value={handleSelect}>
         <AbstractNav
           as={As}
           ref={ref}
@@ -232,7 +232,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
             expanded && 'show',
             rtl && `${bsPrefix}-rtl`,
             variant && `${bsPrefix}-${variant}`,
-            bg && `bg-${bg}`,
+            bg && `bg-${bg}`
           )}
           {...controlledProps} />
       </SelectableContext.Provider>
