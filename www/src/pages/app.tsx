@@ -45,14 +45,14 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-    <SidebarMenu 
+    <SidebarMenu
       exclusiveExpand={exclusiveExpand}
       collapseOnSelect={collapseOnSelect}
       defaultActiveKey="#setup"
-      variant={themeName} 
-      bg={themeName} 
-      rtl={isRtl} 
-      expand="lg" 
+      variant={themeName}
+      bg={themeName}
+      rtl={isRtl}
+      expand="lg"
       hide="md"
     >
       <SidebarMenu.Collapse getScrollValue={300}>
@@ -72,81 +72,67 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
               <SidebarMenu.Nav.Icon>2</SidebarMenu.Nav.Icon>
               <SidebarMenu.Nav.Title>Usage</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
-            <SidebarMenu.Nav.Link eventKey="#api">
+            <SidebarMenu.Nav.Link eventKey="#overview">
               <SidebarMenu.Nav.Icon>3</SidebarMenu.Nav.Icon>
-              <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
-            </SidebarMenu.Nav.Link>
-            <SidebarMenu.Nav.Link eventKey="#api1">
-              <SidebarMenu.Nav.Icon>4</SidebarMenu.Nav.Icon>
-              <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
-            </SidebarMenu.Nav.Link>
-            <SidebarMenu.Nav.Link eventKey="#api2">
-              <SidebarMenu.Nav.Icon>5</SidebarMenu.Nav.Icon>
-              <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
-            </SidebarMenu.Nav.Link>
-            <SidebarMenu.Nav.Link eventKey="#api3">
-              <SidebarMenu.Nav.Icon>6</SidebarMenu.Nav.Icon>
-              <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
-            </SidebarMenu.Nav.Link>
-            <SidebarMenu.Nav.Link eventKey="#api4">
-              <SidebarMenu.Nav.Icon>7</SidebarMenu.Nav.Icon>
-              <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
-            </SidebarMenu.Nav.Link>
-            <SidebarMenu.Nav.Link eventKey="#api_1">
-              <SidebarMenu.Nav.Icon>8</SidebarMenu.Nav.Icon>
-              <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
+              <SidebarMenu.Nav.Title>Overview</SidebarMenu.Nav.Title>
             </SidebarMenu.Nav.Link>
             <SidebarMenu.Sub eventKey={0}>
               <SidebarMenu.Sub.Toggle>
-                <SidebarMenu.Nav.Icon/>
-                <SidebarMenu.Nav.Title>Group 1</SidebarMenu.Nav.Title>
-              </SidebarMenu.Sub.Toggle>
-              <SidebarMenu.Sub.Collapse>
-                <SidebarMenu.Nav>
-                  <SidebarMenu.Nav.Link eventKey="#api_0_0">
-                    <SidebarMenu.Nav.Icon>7</SidebarMenu.Nav.Icon>
-                    <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
-                  </SidebarMenu.Nav.Link>
-                  <SidebarMenu.Nav.Link eventKey="#api_0_1">
-                    <SidebarMenu.Nav.Icon>8</SidebarMenu.Nav.Icon>
-                    <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
-                  </SidebarMenu.Nav.Link>
-                </SidebarMenu.Nav>
-              </SidebarMenu.Sub.Collapse>
-            </SidebarMenu.Sub>
-            <SidebarMenu.Sub eventKey={1}>
-              <SidebarMenu.Sub.Toggle>
                 <SidebarMenu.Nav.Icon />
-                <SidebarMenu.Nav.Title>Group 2</SidebarMenu.Nav.Title>
+                <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
               </SidebarMenu.Sub.Toggle>
               <SidebarMenu.Sub.Collapse>
                 <SidebarMenu.Nav>
-                  <SidebarMenu.Nav.Link eventKey="#api_1_1">
-                    <SidebarMenu.Nav.Icon>7</SidebarMenu.Nav.Icon>
-                    <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
+                  <SidebarMenu.Nav.Link eventKey="#sidebarmenu">
+                    <SidebarMenu.Nav.Icon>4</SidebarMenu.Nav.Icon>
+                    <SidebarMenu.Nav.Title>SidebarMenu</SidebarMenu.Nav.Title>
                   </SidebarMenu.Nav.Link>
-                  <SidebarMenu.Nav.Link eventKey="#api_1_2">
-                    <SidebarMenu.Nav.Icon>8</SidebarMenu.Nav.Icon>
-                    <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
-                  </SidebarMenu.Nav.Link>
-                </SidebarMenu.Nav>
-              </SidebarMenu.Sub.Collapse>
-            </SidebarMenu.Sub>
-            <SidebarMenu.Sub eventKey={2}>
-              <SidebarMenu.Sub.Toggle>
-                <SidebarMenu.Nav.Icon />
-                <SidebarMenu.Nav.Title>Group 3</SidebarMenu.Nav.Title>
-              </SidebarMenu.Sub.Toggle>
-              <SidebarMenu.Sub.Collapse>
-                <SidebarMenu.Nav>
-                  <SidebarMenu.Nav.Link eventKey="#api_2_1">
-                    <SidebarMenu.Nav.Icon>7</SidebarMenu.Nav.Icon>
-                    <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
-                  </SidebarMenu.Nav.Link>
-                  <SidebarMenu.Nav.Link eventKey="#api_2_2">
-                    <SidebarMenu.Nav.Icon>8</SidebarMenu.Nav.Icon>
-                    <SidebarMenu.Nav.Title>Api</SidebarMenu.Nav.Title>
-                  </SidebarMenu.Nav.Link>
+                  <SidebarMenu.Sub eventKey={1}>
+                    <SidebarMenu.Sub.Toggle>
+                      <SidebarMenu.Nav.Icon />
+                      <SidebarMenu.Nav.Title>Supported content</SidebarMenu.Nav.Title>
+                    </SidebarMenu.Sub.Toggle>
+                    <SidebarMenu.Sub.Collapse>
+                      <SidebarMenu.Nav>
+                        <SidebarMenu.Nav.Link eventKey="#sidebarmenu.nav">
+                          <SidebarMenu.Nav.Icon>4.1</SidebarMenu.Nav.Icon>
+                          <SidebarMenu.Nav.Title>SidebarMenu.Nav</SidebarMenu.Nav.Title>
+                        </SidebarMenu.Nav.Link>
+                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                          <SidebarMenu.Nav.Icon>4.2</SidebarMenu.Nav.Icon>
+                          <SidebarMenu.Nav.Title>SidebarMenu.Sub</SidebarMenu.Nav.Title>
+                        </SidebarMenu.Nav.Link>
+                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                          <SidebarMenu.Nav.Icon>4.3</SidebarMenu.Nav.Icon>
+                          <SidebarMenu.Nav.Title>SidebarMenu.Brand</SidebarMenu.Nav.Title>
+                        </SidebarMenu.Nav.Link>
+                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                          <SidebarMenu.Nav.Icon>4.4</SidebarMenu.Nav.Icon>
+                          <SidebarMenu.Nav.Title>SidebarMenu.Toggle</SidebarMenu.Nav.Title>
+                        </SidebarMenu.Nav.Link>
+                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                          <SidebarMenu.Nav.Icon>4.5</SidebarMenu.Nav.Icon>
+                          <SidebarMenu.Nav.Title>SidebarMenu.Collapse</SidebarMenu.Nav.Title>
+                        </SidebarMenu.Nav.Link>
+                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                          <SidebarMenu.Nav.Icon>4.6</SidebarMenu.Nav.Icon>
+                          <SidebarMenu.Nav.Title>SidebarMenu.Text</SidebarMenu.Nav.Title>
+                        </SidebarMenu.Nav.Link>
+                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                          <SidebarMenu.Nav.Icon>4.7</SidebarMenu.Nav.Icon>
+                          <SidebarMenu.Nav.Title>SidebarMenu.Header</SidebarMenu.Nav.Title>
+                        </SidebarMenu.Nav.Link>
+                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                          <SidebarMenu.Nav.Icon>4.8</SidebarMenu.Nav.Icon>
+                          <SidebarMenu.Nav.Title>SidebarMenu.Body</SidebarMenu.Nav.Title>
+                        </SidebarMenu.Nav.Link>
+                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                          <SidebarMenu.Nav.Icon>4.9</SidebarMenu.Nav.Icon>
+                          <SidebarMenu.Nav.Title>SidebarMenu.Footer</SidebarMenu.Nav.Title>
+                        </SidebarMenu.Nav.Link>
+                      </SidebarMenu.Nav>
+                    </SidebarMenu.Sub.Collapse>
+                  </SidebarMenu.Sub>
                 </SidebarMenu.Nav>
               </SidebarMenu.Sub.Collapse>
             </SidebarMenu.Sub>

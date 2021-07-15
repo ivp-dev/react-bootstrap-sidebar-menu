@@ -32,15 +32,10 @@ const GettingStarted = () => {
     <h3>Overview</h3>
 
     <p>
-      Here's a left or right side vertical sidebar with collapsible menu items.
-      The menu functions like an "accordion" where only a single menu is open at a time.
-      It's also responsive which allows the main content area to be visible.
-      The sidebar shrinks in width, hides the text labels and collapses to icons only on mobile devices.
-    </p>
-
-    <p>
-      The component supports a header, body, footer and built in toggle button,
-      of which you can optionally disable and provide your own header (if needed)
+      <CodeExample>&lt;SidebarMenu&gt;</CodeExample> is an expandable and collapsible component that acts as a side container to place 
+      primary or secondary content alongside the main content. It provides flexible options to be shown and hidden based on user interactions. 
+      The component supports some built in elements, such as header, body, footer, toggle button and others, of which you can optionally 
+      disable and provide your own (if needed).
     </p>
 
     <br />
@@ -141,7 +136,9 @@ const GettingStarted = () => {
           <td>exclusiveExpand</td>
           <td>boolean</td>
           <td><CodeExample>false</CodeExample></td>
-          <td>Only allow one <CodeExample>&lt;SidebarMenu.Sub.Collapse&gt;</CodeExample> open at a time.</td>
+          <td>
+            Only allow one <CodeExample>&lt;SidebarMenu.Sub.Collapse&gt;</CodeExample> open at a time.  
+            When <CodeExample>true</CodeExample> the <CodeExample>&lt;SidebarMenu.Sub&gt;</CodeExample> will functions like an "accordion" where only a single menu is open at a time</td>
         </tr>
         <tr>
           <td>subActiveKey</td>
@@ -265,7 +262,7 @@ const GettingStarted = () => {
 
     <PreContainer>
       <CodeExample copy="import { SidebarMenuNavbar } from 'react-bootstrap-sidebar-menu';">
-        <CodeExample.Directive>import</CodeExample.Directive> <CodeExample.Variable>&#123; SidebarMenuNavbar &#125;</CodeExample.Variable> <CodeExample.Directive>from</CodeExample.Directive> 'react-bootstrap-sidebar-menu';
+        <CodeExample.Directive>import</CodeExample.Directive> <CodeExample.Variable>&#123; SidebarMenuSub &#125;</CodeExample.Variable> <CodeExample.Directive>from</CodeExample.Directive> 'react-bootstrap-sidebar-menu';
       </CodeExample>
     </PreContainer>
 
@@ -327,7 +324,7 @@ const GettingStarted = () => {
         <tr>
           <td>bsPrefix</td>
           <td>string</td>
-          <td><CodeExample>'sidebar-menu-navbar'</CodeExample></td>
+          <td><CodeExample>'sidebar-menu-sub'</CodeExample></td>
           <td>Change the underlying component CSS base class name and modifier class names prefix.</td>
         </tr>
       </tbody>
