@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import { useUncontrolled } from 'uncontrollable';
 import SidebarMenuSubContext, { SidebarMenuSubContextType } from './sidebar-menu-sub-context';
+import SidebarMenuNodeContext from './sidebar-menu-node-context';
 import SidebarMenuSubToggle from './sidebar-menu-sub-toggle';
 import SidebarMenuSubCollapse from './sidebar-menu-sub-collapse';
 import classNames from 'classnames';
@@ -66,7 +67,7 @@ const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps>
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-sub');
 
   const { subActiveKey, exclusiveExpand } = useContext(SidebarMenuContext);
-  
+
   const sidebarMenuSubContext = useMemo<SidebarMenuSubContextType>(
     () => ({
       bsPrefix,
@@ -78,10 +79,9 @@ const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps>
   );
 
   return <SidebarMenuSubContext.Provider value={sidebarMenuSubContext}>
-    <Component
-      ref={ref}
-      {...controlledProps}
-      className={classNames(className, bsPrefix)} />
+    <SidebarMenuNodeContext.Provider value={({})}>
+      <Component ref={ref} {...controlledProps} className={classNames(className, bsPrefix)} />
+    </SidebarMenuNodeContext.Provider>
   </SidebarMenuSubContext.Provider>;
 });
 

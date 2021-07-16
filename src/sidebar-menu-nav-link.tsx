@@ -37,7 +37,7 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
     : active;
 
   const isExpandedRef = useRef<boolean>(isExpanded);
-  const subContextRef = useRef<SidebarMenuSubContextType | null>();
+  const subContextRef = useRef<SidebarMenuSubContextType>();
 
   subContextRef.current = sidebarMenuSubContext;
 
@@ -48,7 +48,7 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
   useEffect(() => {
     if (isExpandable && isActive && !isExpandedRef.current) {
       if(!exclusiveExpand) {
-        subContextRef.current?.onToggle();
+        subContextRef.current?.onToggle?.();
       } else {
         onSubSelect?.(subContextRef.current?.eventKey ?? null)
       }
