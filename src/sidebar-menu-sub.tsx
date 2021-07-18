@@ -1,22 +1,18 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { NavbarProps } from "react-bootstrap";
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import PropTypes from "prop-types";
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
-import { useUncontrolled } from 'uncontrollable';
-import SidebarMenuSubContext, { SidebarMenuSubContextType } from './sidebar-menu-sub-context';
-import SidebarMenuNodeContext from './sidebar-menu-node-context';
+import SidebarMenuSubContext, { SidebarMenuSubContextProps } from './sidebar-menu-sub-context';
 import SidebarMenuSubToggle from './sidebar-menu-sub-toggle';
 import SidebarMenuSubCollapse from './sidebar-menu-sub-collapse';
 import classNames from 'classnames';
 import { EventKey } from 'react-bootstrap/types';
-import { SidebarMenuContext } from '.';
+import SidebarMenuNode from './sidebar-menu-node';
 
 type SidebarMenuSubProps = BsPrefixProps & Omit<NavbarProps,
   'sticky' | 'bg' | 'variant' | 'fixed' | 'expand' | 'collapseOnSelect' | 'onSelect' | 'role'
 > & {
-  onToggle?: (expanded: boolean) => void
-  expanded?: boolean
   eventKey?: EventKey
 };
 
@@ -51,37 +47,26 @@ const propTypes = {
   role: PropTypes.string
 };
 
-const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps> = React.forwardRef((props, ref) => {
-  const {
-    bsPrefix: initialBsPrefix,
-    as: Component = 'div',
-    expanded,
-    onToggle,
-    eventKey,
-    className,
-    ...controlledProps
-  } = useUncontrolled(props, {
-    expanded: 'onToggle',
-  });
+const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps> = React.forwardRef(({
+  bsPrefix: initialBsPrefix,
+  as: Component = 'div',
+  eventKey,
+  className,
+  ...props
+}: SidebarMenuSubProps, ref) => {
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-sub');
 
-  const { subActiveKey, exclusiveExpand } = useContext(SidebarMenuContext);
-
-  const sidebarMenuSubContext = useMemo<SidebarMenuSubContextType>(
+  const subContext = useMemo<SidebarMenuSubContextProps>(
     () => ({
       bsPrefix,
-      onToggle: () => onToggle?.(!expanded),
-      expanded: exclusiveExpand ? subActiveKey === eventKey : !!expanded,
       eventKey
     }),
-    [bsPrefix, eventKey, expanded, onToggle, subActiveKey, exclusiveExpand]
+    [bsPrefix, eventKey]
   );
 
-  return <SidebarMenuSubContext.Provider value={sidebarMenuSubContext}>
-    <SidebarMenuNodeContext.Provider value={({})}>
-      <Component ref={ref} {...controlledProps} className={classNames(className, bsPrefix)} />
-    </SidebarMenuNodeContext.Provider>
+  return <SidebarMenuSubContext.Provider value={subContext}>
+    <SidebarMenuNode with={Component} ref={ref} className={classNames(className, bsPrefix)} {...props} />
   </SidebarMenuSubContext.Provider>;
 });
 

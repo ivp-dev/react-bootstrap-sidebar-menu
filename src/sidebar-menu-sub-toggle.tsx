@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { EventKey } from 'react-bootstrap/types';
 import NavbarToggle, { NavbarToggleProps } from "react-bootstrap/NavbarToggle";
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
-import SidebarMenuContext from './sidebar-menu-context';
+import SidebarMenuNodeContext from './sidebar-menu-node-context';
 import SidebarMenuSubContext from './sidebar-menu-sub-context';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import classNames from 'classnames';
@@ -10,21 +10,6 @@ import classNames from 'classnames';
 
 type SidebarMenuSubToggleProps = NavbarToggleProps & {
   eventKey?: EventKey
-}
-
-export function useSidebarMenuSubToggle(
-  eventKey: EventKey | null,
-): () => void {
-  const { subActiveKey, onSubSelect } = useContext(SidebarMenuContext);
-
-  return () => {
-    /*
-      Compare the event key in context with the given event key.
-      If they are the same, then collapse the component.
-    */
-    const eventKeyPassed = eventKey === subActiveKey ? null : eventKey;
-    onSubSelect?.(eventKeyPassed);
-  };
 }
 
 const SidebarMenuSubToggle = React.forwardRef(
@@ -39,16 +24,22 @@ const SidebarMenuSubToggle = React.forwardRef(
   }: SidebarMenuSubToggleProps, ref) => {
 
     const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-sub-toggle');
-    const { onToggle, expanded, eventKey } = useContext(SidebarMenuSubContext) || {};
-    const handlerOnClick = useSidebarMenuSubToggle(eventKey ?? null);
-    
+    const { activeNode, onSelect, onToggle, expanded } = useContext(SidebarMenuNodeContext);
+    const { eventKey } = useContext(SidebarMenuSubContext);
+
+    const handleOnClick = useCallback(() => {
+      const eventKeyPassed = eventKey === activeNode ? null : eventKey;
+      onSelect?.(eventKeyPassed);
+    }, [eventKey, activeNode, onSelect]);
+
     const handleClick = useEventCallback((e) => {
       onClick?.(e);
       onToggle?.();
-      handlerOnClick();
+      handleOnClick();
     });
 
     if (Component === 'button') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (props as any).type = 'button';
     }
 

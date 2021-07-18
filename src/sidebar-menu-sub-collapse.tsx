@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { Collapse, CollapseProps } from 'react-bootstrap';
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
-import SidebarMenuSubContext from './sidebar-menu-sub-context'
+import SidebarMenuNodeContext from './sidebar-menu-node-context'
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import classNames from 'classnames';
 
@@ -26,9 +26,9 @@ const SidebarMenuSubCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuS
     ...props
   }: SidebarMenuSubCollapseProps, ref) => {
     const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-sub-collapse');
-    const subContext = useContext(SidebarMenuSubContext);
+    const nodeContext = useContext(SidebarMenuNodeContext);
     return (
-      <Collapse in={!!(subContext && subContext.expanded)} {...props}>
+      <Collapse in={!!(nodeContext && nodeContext.expanded)} {...props}>
         <div ref={ref} className={classNames(bsPrefix, className)}>
           {children}
         </div>

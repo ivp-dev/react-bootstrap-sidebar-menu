@@ -17,8 +17,8 @@ import SidebarMenuFooter from './sidebar-menu-footer';
 import SidebarMenuText from './sidebar-menu-text';
 import PropTypes from 'prop-types';
 import AbstractNav from 'react-bootstrap/AbstractNav';
-import SidebarMenuNodeContext from './sidebar-menu-node-context';
 import { EventKey } from 'react-bootstrap/types';
+import SidebarMenuNode from './sidebar-menu-node';
 
 export type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
   rtl?: boolean
@@ -27,9 +27,6 @@ export type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
   exclusiveExpand?: boolean
   defaultActiveKey?: EventKey
   defaultExpanded?: boolean
-  subActiveKey?: EventKey
-  defaultsubActiveKey?: EventKey
-  onSubSelect?: (eventKey: EventKey | null) => void;
 };
 
 const propTypes = {
@@ -163,9 +160,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
   const {
     bsPrefix: initialBsPrefix,
     collapseOnSelect,
-    subActiveKey,
     exclusiveExpand,
-    onSubSelect,
     expanded,
     className,
     activeKey,
@@ -179,8 +174,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     as: As = 'aside',
     ...controlledProps } = useUncontrolled(props, {
       expanded: 'onToggle',
-      activeKey: 'onSelect',
-      subActiveKey: 'onSubSelect'
+      activeKey: 'onSelect'
     });
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu');
@@ -212,32 +206,24 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     rtl: !!rtl,
     expanded: !!expanded,
     onToggle: () => onToggle?.(!expanded),
-    exclusiveExpand,
-    subActiveKey,
-    onSubSelect
-  }), [expanded, onToggle, onSubSelect, rtl, subActiveKey, exclusiveExpand]);
+    exclusiveExpand
+  }), [expanded, onToggle, rtl, exclusiveExpand]);
 
   return (
     <SidebarMenuContext.Provider value={sidebarMenuContextValue}>
-      <SidebarMenuNodeContext.Provider value={({})}> 
-        <SelectableContext.Provider value={handleSelect}>
-          <AbstractNav
-            as={As}
-            ref={ref}
-            activeKey={activeKey}
-            className={classNames(
-              className,
-              bsPrefix,
-              hide && hideClass,
-              expand && expandClass,
-              expanded && 'show',
-              rtl && `${bsPrefix}-rtl`,
-              variant && `${bsPrefix}-${variant}`,
-              bg && `bg-${bg}`
-            )}
-            {...controlledProps} />
-        </SelectableContext.Provider>
-      </SidebarMenuNodeContext.Provider>
+      <SelectableContext.Provider value={handleSelect}>
+        <SidebarMenuNode with={AbstractNav} as={As} ref={ref} activeKey={activeKey} className={classNames(
+          className,
+          bsPrefix,
+          hide && hideClass,
+          expand && expandClass,
+          expanded && 'show',
+          rtl && `${bsPrefix}-rtl`,
+          variant && `${bsPrefix}-${variant}`,
+          bg && `bg-${bg}`
+        )}
+          {...controlledProps} />
+      </SelectableContext.Provider>
     </SidebarMenuContext.Provider>
   )
 });

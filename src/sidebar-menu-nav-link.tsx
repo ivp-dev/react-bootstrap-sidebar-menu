@@ -3,11 +3,12 @@ import { NavLink, NavLinkProps } from "react-bootstrap";
 import AbstractNavItem from 'react-bootstrap/AbstractNavItem'
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import { BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
-import SidebarMenuSubContext, { SidebarMenuSubContextType } from './sidebar-menu-sub-context';
+import SidebarMenuSubContext, { SidebarMenuSubContextProps } from './sidebar-menu-sub-context';
 import NavContext from 'react-bootstrap/NavContext';
 import { makeEventKey } from 'react-bootstrap/SelectableContext';
 import classNames from 'classnames';
 import SidebarMenuContext from './sidebar-menu-context';
+import SidebarMenuNodeContext, { SidebarMenuNodeContextProps } from './sidebar-menu-node-context';
 
 type SidebarMenuNavLinkProps = NavLinkProps
 
@@ -23,23 +24,27 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
 }: SidebarMenuNavLinkProps, ref) => {
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-nav-link');
 
-  const sidebarMenuSubContext = useContext(SidebarMenuSubContext);
+  const subContext = useContext(SidebarMenuSubContext);
+  const nodeContext = useContext(SidebarMenuNodeContext)
   const navContext = useContext(NavContext);
   const navKey = makeEventKey(eventKey, href);
 
-  const { exclusiveExpand, onSubSelect } = useContext(SidebarMenuContext);
+  const { exclusiveExpand } = useContext(SidebarMenuContext);
 
-  const isExpandable = !!sidebarMenuSubContext;
-  const isExpanded = !!sidebarMenuSubContext?.expanded;
+  const isExpandable = !!subContext;
+  const isExpanded = !!nodeContext?.expanded;
 
   const isActive = active == null && navKey != null
     ? navContext && navContext.activeKey === navKey
     : active;
 
   const isExpandedRef = useRef<boolean>(isExpanded);
-  const subContextRef = useRef<SidebarMenuSubContextType>();
 
-  subContextRef.current = sidebarMenuSubContext;
+  const subContextRef = useRef<SidebarMenuSubContextProps>();
+  subContextRef.current = subContext;
+
+  const nodeContextRef = useRef<SidebarMenuNodeContextProps>();
+  nodeContextRef.current = nodeContext;
 
   useEffect(() => {
     isExpandedRef.current = isExpanded;
@@ -47,13 +52,13 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
 
   useEffect(() => {
     if (isExpandable && isActive && !isExpandedRef.current) {
-      if(!exclusiveExpand) {
-        subContextRef.current?.onToggle?.();
+      if (!exclusiveExpand) {
+        nodeContextRef.current?.onToggle?.();
       } else {
-        onSubSelect?.(subContextRef.current?.eventKey ?? null)
+        nodeContextRef.current?.onSelect?.(subContextRef.current?.eventKey ?? null)
       }
     }
-  }, [isActive, isExpandable, onSubSelect, exclusiveExpand]);
+  }, [isActive, isExpandable, exclusiveExpand]);
 
   return (
     <AbstractNavItem

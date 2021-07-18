@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { EventKey } from 'react-bootstrap/types';
 
-export interface SidebarMenuSubContextType {
-  onToggle?: () => void
+export interface SidebarMenuSubContextProps {
   bsPrefix?: string
-  expanded?: boolean
   eventKey?: EventKey
 }
 
-const context = React.createContext<SidebarMenuSubContextType>({});
+const context = React.createContext<SidebarMenuSubContextProps>({});
 context.displayName = 'SidebarMenuSubContext';
 
 export default context;
