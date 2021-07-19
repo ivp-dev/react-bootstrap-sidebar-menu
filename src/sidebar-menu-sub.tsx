@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { NavbarProps } from "react-bootstrap";
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import PropTypes from "prop-types";
@@ -9,11 +9,16 @@ import SidebarMenuSubCollapse from './sidebar-menu-sub-collapse';
 import classNames from 'classnames';
 import { EventKey } from 'react-bootstrap/types';
 import SidebarMenuNode from './sidebar-menu-node';
+import { useUncontrolled } from 'uncontrollable';
+import SidebarMenuNodeContext from './sidebar-menu-node-context';
+import { SidebarMenuContext } from '.';
 
 type SidebarMenuSubProps = BsPrefixProps & Omit<NavbarProps,
   'sticky' | 'bg' | 'variant' | 'fixed' | 'expand' | 'collapseOnSelect' | 'onSelect' | 'role'
 > & {
   eventKey?: EventKey
+  activeNodeKey?: EventKey
+  onNodeSelect?: (eventKey?: EventKey | null) => void
 };
 
 const propTypes = {
@@ -55,6 +60,13 @@ const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps>
   ...props
 }: SidebarMenuSubProps, ref) => {
 
+  const {
+    activeNodeKey,
+    onNodeSelect
+  } = useUncontrolled(props, {
+    activeNodeKey: 'onNodeSelect'
+  })
+
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-sub');
 
   const subContext = useMemo<SidebarMenuSubContextProps>(
@@ -65,8 +77,20 @@ const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps>
     [bsPrefix, eventKey]
   );
 
+  const { activeNodeKey: parentActiveNodeKey, onSelect: onParentNodeSelect } = useContext(SidebarMenuNodeContext);
+  const { exclusiveExpand } = useContext(SidebarMenuContext)
+  console.log(`sidebar-menu-sub eventKey - ${eventKey} parentActiveNodeKey - ${parentActiveNodeKey}`)
+
+  const onSelectInternal = (selectedKey?: EventKey | null) => {
+    if(exclusiveExpand) {
+      onParentNodeSelect?.(selectedKey);
+    } else {
+      onNodeSelect?.(selectedKey);
+    }
+  }
+
   return <SidebarMenuSubContext.Provider value={subContext}>
-    <SidebarMenuNode with={Component} ref={ref} className={classNames(className, bsPrefix)} {...props} />
+    <SidebarMenuNode activeNodeKey={parentActiveNodeKey} onSelect={onSelectInternal} with={Component} ref={ref} className={classNames(className, bsPrefix)} {...props} />
   </SidebarMenuSubContext.Provider>;
 });
 

@@ -8,7 +8,7 @@ import SidebarMenuSubContext from './sidebar-menu-sub-context';
 
 export interface SidebarMenuNodeProps<With extends React.ElementType = React.ElementType> {
   with: With
-  activeNode?: EventKey
+  activeNodeKey?: EventKey
   expanded?: boolean
   onToggle?: (expanded: boolean) => void
   onSelect?: (eventKey?: EventKey | null) => void
@@ -20,32 +20,32 @@ interface SidebarMenuNode<P = unknown, WithInner extends React.ElementType = Rea
 
 const SidebarMenuNode: SidebarMenuNode = ({
   with: With,
+  activeNodeKey,
+  expanded,
+  onToggle,
+  onSelect,
   ...props
 }: SidebarMenuNodeProps): React.ReactElement => {
-  const {
-    activeNode,
-    expanded,
-    onToggle,
-    onSelect,
-    ...controlledProps
-  } = useUncontrolled(props, {
-    activeNode: 'onSelect',
-    expanded: 'onToggle'
-  });
 
   const { eventKey } = useContext(SidebarMenuSubContext)
   const { exclusiveExpand } = useContext(SidebarMenuContext)
 
-  const nodeContextValue = useMemo<SidebarMenuNodeContextProps>(() => ({
+  console.log(`eventKey: ${eventKey} - activeNodeKey: ${activeNodeKey}`)
+
+  const newContext = {
     onToggle: () => onToggle?.(!expanded),
     onSelect,
-    expanded: exclusiveExpand ? eventKey === activeNode : !!expanded,
-    activeNode
-  }), [activeNode, eventKey, exclusiveExpand, expanded, onSelect, onToggle])
+    expanded: exclusiveExpand ? eventKey === activeNodeKey : !!expanded,
+    activeNodeKey
+  }
 
-  return <SidebarMenuNodeContext.Provider value={nodeContextValue}>
-    <With {...controlledProps} />
-  </SidebarMenuNodeContext.Provider>;
+  return <SidebarMenuNodeContext.Consumer>
+    {
+      (context) => <SidebarMenuNodeContext.Provider value={({...context, ...newContext})}>
+        <With {...props} />
+      </SidebarMenuNodeContext.Provider>
+    }
+  </SidebarMenuNodeContext.Consumer>;
 }
 
 export default SidebarMenuNode;

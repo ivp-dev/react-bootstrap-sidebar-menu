@@ -154,6 +154,24 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
                 </SidebarMenu.Nav>
               </SidebarMenu.Sub.Collapse>
             </SidebarMenu.Sub>
+            <SidebarMenu.Sub eventKey={3}>
+              <SidebarMenu.Sub.Toggle>
+                <SidebarMenu.Nav.Icon />
+                <SidebarMenu.Nav.Title>Supported content 1</SidebarMenu.Nav.Title>
+              </SidebarMenu.Sub.Toggle>
+              <SidebarMenu.Sub.Collapse>
+                <SidebarMenu.Nav>
+                  <SidebarMenu.Nav.Link eventKey="#sidebarmenu.nav">
+                    <SidebarMenu.Nav.Icon>5.1</SidebarMenu.Nav.Icon>
+                    <SidebarMenu.Nav.Title>SidebarMenu.Nav</SidebarMenu.Nav.Title>
+                  </SidebarMenu.Nav.Link>
+                  <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                    <SidebarMenu.Nav.Icon>5.2</SidebarMenu.Nav.Icon>
+                    <SidebarMenu.Nav.Title>SidebarMenu.Sub</SidebarMenu.Nav.Title>
+                  </SidebarMenu.Nav.Link>
+                </SidebarMenu.Nav>
+              </SidebarMenu.Sub.Collapse>
+            </SidebarMenu.Sub>
           </SidebarMenu.Nav>
         </SidebarMenu.Body>
         <SidebarMenu.Footer>

@@ -55,7 +55,7 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
       if (!exclusiveExpand) {
         nodeContextRef.current?.onToggle?.();
       } else {
-        nodeContextRef.current?.onSelect?.(subContextRef.current?.eventKey ?? null)
+        //nodeContextRef.current?.onSelect?.(subContextRef.current?.eventKey ?? null)
       }
     }
   }, [isActive, isExpandable, exclusiveExpand]);

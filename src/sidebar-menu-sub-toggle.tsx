@@ -24,13 +24,13 @@ const SidebarMenuSubToggle = React.forwardRef(
   }: SidebarMenuSubToggleProps, ref) => {
 
     const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-sub-toggle');
-    const { activeNode, onSelect, onToggle, expanded } = useContext(SidebarMenuNodeContext);
+    const { activeNodeKey, onSelect, onToggle, expanded } = useContext(SidebarMenuNodeContext);
     const { eventKey } = useContext(SidebarMenuSubContext);
 
     const handleOnClick = useCallback(() => {
-      const eventKeyPassed = eventKey === activeNode ? null : eventKey;
+      const eventKeyPassed = eventKey === activeNodeKey ? null : eventKey;
       onSelect?.(eventKeyPassed);
-    }, [eventKey, activeNode, onSelect]);
+    }, [eventKey, activeNodeKey, onSelect]);
 
     const handleClick = useEventCallback((e) => {
       onClick?.(e);
