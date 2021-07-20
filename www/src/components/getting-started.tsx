@@ -130,8 +130,6 @@ const GettingStarted = () => {
           <td></td>
           <td>A callback fired when a descendant of a child <CodeExample>&lt;SidebarMenu&gt;</CodeExample> is selected.</td>
         </tr>
-
-
         <tr>
           <td>exclusiveExpand</td>
           <td>boolean</td>
@@ -140,7 +138,6 @@ const GettingStarted = () => {
             Only allow one <CodeExample>&lt;SidebarMenu.Sub&gt;</CodeExample> open at a time.  
             When <CodeExample>true</CodeExample> the <CodeExample>&lt;SidebarMenu.Sub&gt;</CodeExample> will functions like an "accordion" where only a single menu is open at a time</td>
         </tr>
-
         <tr>
           <td>onToggle</td>
           <td>function</td>

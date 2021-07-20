@@ -156,22 +156,25 @@ const defaultProps = {
   defaultExpanded: true
 };
 
-const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = React.forwardRef((props: SidebarMenuProps, ref) => {
+const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = React.forwardRef(({
+  bsPrefix: initialBsPrefix,
+  collapseOnSelect,
+  exclusiveExpand,
+  className,
+  variant,
+  expand,
+  hide,
+  bg,
+  rtl,
+  as: Component = 'aside',
+  ...props
+}: SidebarMenuProps, ref) => {
+
   const {
-    bsPrefix: initialBsPrefix,
-    collapseOnSelect,
-    exclusiveExpand,
     expanded,
-    className,
-    activeKey,
-    variant,
-    onToggle,
     onSelect,
-    expand,
-    hide,
-    bg,
-    rtl,
-    as: As = 'aside',
+    activeKey,
+    onToggle,
     ...controlledProps } = useUncontrolled(props, {
       expanded: 'onToggle',
       activeKey: 'onSelect'
@@ -186,7 +189,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     }
   }, [onSelect, collapseOnSelect, expanded, onToggle]);
 
-  if (controlledProps.role === undefined && As !== 'nav') {
+  if (controlledProps.role === undefined && Component !== 'nav') {
     controlledProps.role = 'navigation';
   }
 
@@ -212,9 +215,9 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
       <SelectableContext.Provider value={handleSelect}>
         <SidebarMenuNode
           with={AbstractNav}
-          activeKey={activeKey}
-          as={As}
+          as={Component}
           ref={ref}
+          activeKey={activeKey}
           className={classNames(
             className,
             bsPrefix,

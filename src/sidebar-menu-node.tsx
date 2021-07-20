@@ -28,12 +28,12 @@ const SidebarMenuNode: SidebarMenuNode = ({
     activeNodeKey: 'onNodeSelect'
   });
 
-  const nodeContext: SidebarMenuNodeContextProps = useMemo(() => ({
+  const nodeContextValue: SidebarMenuNodeContextProps = useMemo(() => ({
     onSelect: onNodeSelect,
     activeKey: activeNodeKey
   }), [activeNodeKey, onNodeSelect]);
 
-  return <SidebarMenuNodeContext.Provider value={nodeContext}>
+  return <SidebarMenuNodeContext.Provider value={nodeContextValue}>
     <With {...props} />
   </SidebarMenuNodeContext.Provider>;
 }

@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 
 import { Collapse, CollapseProps } from 'react-bootstrap';
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
-import SidebarMenuNodeContext from './sidebar-menu-node-context'
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import classNames from 'classnames';
-import { SidebarMenuSubContext } from '.';
+import SidebarMenuSubContext from './sidebar-menu-sub-context';
 
 export type SidebarMenuSubCollapseProps =
   Omit<CollapseProps, 'children'> &

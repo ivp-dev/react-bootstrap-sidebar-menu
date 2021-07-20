@@ -71,20 +71,17 @@ const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps>
 
   const { activeKey: parentActiveKey, onSelect: onParentSelect } = useContext(SidebarMenuNodeContext);
   const { exclusiveExpand } = useContext(SidebarMenuContext)
-  
-  const subContext = useMemo<SidebarMenuSubContextProps>(
-    () => ({
-      bsPrefix,
-      eventKey,
-      activeKey: parentActiveKey,
-      onSelect: (eventKey?: EventKey | null) => { onParentSelect?.(eventKey) },
-      onToggle: () => onToggle?.(!expanded),
-      expanded: exclusiveExpand ? eventKey === parentActiveKey : !!expanded,
-    }),
-    [bsPrefix, eventKey, exclusiveExpand, expanded, onParentSelect, onToggle, parentActiveKey]
-  );
 
-  return <SidebarMenuSubContext.Provider value={subContext}>
+  const subContextValue = useMemo<SidebarMenuSubContextProps>(() => ({
+    bsPrefix,
+    eventKey,
+    activeKey: parentActiveKey,
+    onSelect: onParentSelect,
+    onToggle: () => onToggle?.(!expanded),
+    expanded: exclusiveExpand ? eventKey === parentActiveKey : !!expanded,
+  }), [bsPrefix, eventKey, exclusiveExpand, expanded, onParentSelect, onToggle, parentActiveKey]);
+
+  return <SidebarMenuSubContext.Provider value={subContextValue}>
     <SidebarMenuNode with={Component} ref={ref} className={classNames(className, bsPrefix)} {...props} />
   </SidebarMenuSubContext.Provider>;
 });
@@ -96,4 +93,3 @@ export default Object.assign(SidebarMenuSub, {
   Collapse: SidebarMenuSubCollapse,
   Toggle: SidebarMenuSubToggle
 });
-
