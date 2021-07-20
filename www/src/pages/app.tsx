@@ -55,7 +55,7 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
       expand="lg"
       hide="md"
     >
-      <SidebarMenu.Collapse getScrollValue={300}>
+      <SidebarMenu.Collapse>
         <SidebarMenu.Header>
           <SidebarMenu.Brand title="React-Bootstrap" href="https://github.com/react-bootstrap/react-bootstrap">
             <span className="react-bootstrap-img" />

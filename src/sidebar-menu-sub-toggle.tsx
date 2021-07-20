@@ -2,7 +2,6 @@ import React, { useCallback, useContext } from 'react';
 import { EventKey } from 'react-bootstrap/types';
 import NavbarToggle, { NavbarToggleProps } from "react-bootstrap/NavbarToggle";
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
-import SidebarMenuNodeContext from './sidebar-menu-node-context';
 import SidebarMenuSubContext from './sidebar-menu-sub-context';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import classNames from 'classnames';

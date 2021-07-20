@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import classNames from 'classnames';
 
 export type SidebarMenuCollapseProps = Omit<CollapseProps, 'children'> & HTMLAttributes<HTMLDivElement> & BsPrefixProps & {
-  getScrollValue: ((el: HTMLElement) => number) | number | string
+  getScrollValue?: ((el: HTMLElement) => string | number) | number | string
 }
 
 const propTypes = {
@@ -18,13 +18,13 @@ const propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.func
-  ]).isRequired
+  ])
 };
 
 const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuCollapseProps> =
   React.forwardRef<HTMLDivElement, SidebarMenuCollapseProps>(({
     dimension = "width",
-    getScrollValue,
+    getScrollValue = () => 300,
     children,
     onEntering,
     className,
@@ -38,13 +38,12 @@ const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuColl
 
     const handleEntering = useMemo(() => createChainedFunction((elem: HTMLElement) => {
       if (typeof getScrollValue === 'function') {
-        elem.style[computedDimension] = `${getScrollValue(elem)}px`;
+        const scrollValue = getScrollValue(elem);
+        elem.style[computedDimension] = typeof scrollValue === 'string' ? scrollValue : `${scrollValue}px`;
       } else if (typeof getScrollValue === 'number') {
         elem.style[computedDimension] = `${getScrollValue}px`;
       } else if (typeof getScrollValue === 'string') {
         elem.style[computedDimension] = getScrollValue;
-      } else {
-        throw `Not supported type of the getScrollValue. Function, string or number are only supported, you provided ${typeof getScrollValue}.`
       }
     }, onEntering),
       [computedDimension, getScrollValue, onEntering],

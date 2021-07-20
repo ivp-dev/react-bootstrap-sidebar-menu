@@ -8,7 +8,6 @@ import NavContext from 'react-bootstrap/NavContext';
 import { makeEventKey } from 'react-bootstrap/SelectableContext';
 import classNames from 'classnames';
 import SidebarMenuContext from './sidebar-menu-context';
-import SidebarMenuNodeContext, { SidebarMenuNodeContextProps } from './sidebar-menu-node-context';
 
 type SidebarMenuNavLinkProps = NavLinkProps
 
@@ -61,7 +60,6 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
       ref={ref}
       as={As}
       href={href}
-      tabIndex={-1}
       active={active}
       eventKey={eventKey}
       disabled={disabled}

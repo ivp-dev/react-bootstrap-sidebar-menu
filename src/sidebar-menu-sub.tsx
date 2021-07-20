@@ -68,7 +68,6 @@ const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps>
   });
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-sub');
-
   const { activeKey: parentActiveKey, onSelect: onParentSelect } = useContext(SidebarMenuNodeContext);
   const { exclusiveExpand } = useContext(SidebarMenuContext)
 

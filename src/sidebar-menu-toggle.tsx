@@ -47,9 +47,9 @@ const SidebarMenuToggle: SidebarMenuToggle = React.forwardRef(({
 
   const { onToggle, expanded } = useContext(SidebarMenuContext) || {};
 
-  const handleOnClick = useEventCallback((event) => {
-    if (onClick) onClick(event);
-    if (onToggle) onToggle();
+  const handleOnClick = useEventCallback((e) => {
+    onClick?.(e);
+    onToggle?.();
   });
 
   if (Component === 'button') {

@@ -13,7 +13,7 @@ const SidebarMenuNavItem: SidebarMenuNavItem = React.forwardRef(({ bsPrefix: ini
   return <NavItem ref={ref} bsPrefix={bsPrefix} {...props} />
 })
 
-SidebarMenuNavItem.displayName = "SidebarMenuItem";
+SidebarMenuNavItem.displayName = "SidebarMenuNavItem";
 SidebarMenuNavItem.propTypes = NavItem.propTypes;
 SidebarMenuNavItem.defaultProps = NavItem.defaultProps;
 
