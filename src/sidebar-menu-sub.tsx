@@ -9,16 +9,16 @@ import SidebarMenuSubCollapse from './sidebar-menu-sub-collapse';
 import classNames from 'classnames';
 import { EventKey } from 'react-bootstrap/types';
 import SidebarMenuNode from './sidebar-menu-node';
-import { useUncontrolled } from 'uncontrollable';
 import SidebarMenuNodeContext from './sidebar-menu-node-context';
-import { SidebarMenuContext } from '.';
+import SidebarMenuContext from './sidebar-menu-context';
+import { useUncontrolled } from 'uncontrollable';
 
 type SidebarMenuSubProps = BsPrefixProps & Omit<NavbarProps,
   'sticky' | 'bg' | 'variant' | 'fixed' | 'expand' | 'collapseOnSelect' | 'onSelect' | 'role'
 > & {
   eventKey?: EventKey
-  activeNodeKey?: EventKey
-  onNodeSelect?: (eventKey?: EventKey | null) => void
+  expanded?: boolean,
+  onToggle?: (expanded: boolean) => void
 };
 
 const propTypes = {
@@ -61,36 +61,31 @@ const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps>
 }: SidebarMenuSubProps, ref) => {
 
   const {
-    activeNodeKey,
-    onNodeSelect
+    expanded,
+    onToggle
   } = useUncontrolled(props, {
-    activeNodeKey: 'onNodeSelect'
-  })
+    expanded: 'onToggle'
+  });
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-sub');
 
+  const { activeKey: parentActiveKey, onSelect: onParentSelect } = useContext(SidebarMenuNodeContext);
+  const { exclusiveExpand } = useContext(SidebarMenuContext)
+  
   const subContext = useMemo<SidebarMenuSubContextProps>(
     () => ({
       bsPrefix,
-      eventKey
+      eventKey,
+      activeKey: parentActiveKey,
+      onSelect: (eventKey?: EventKey | null) => { onParentSelect?.(eventKey) },
+      onToggle: () => onToggle?.(!expanded),
+      expanded: exclusiveExpand ? eventKey === parentActiveKey : !!expanded,
     }),
-    [bsPrefix, eventKey]
+    [bsPrefix, eventKey, exclusiveExpand, expanded, onParentSelect, onToggle, parentActiveKey]
   );
 
-  const { activeNodeKey: parentActiveNodeKey, onSelect: onParentNodeSelect } = useContext(SidebarMenuNodeContext);
-  const { exclusiveExpand } = useContext(SidebarMenuContext)
-  console.log(`sidebar-menu-sub eventKey - ${eventKey} parentActiveNodeKey - ${parentActiveNodeKey}`)
-
-  const onSelectInternal = (selectedKey?: EventKey | null) => {
-    if(exclusiveExpand) {
-      onParentNodeSelect?.(selectedKey);
-    } else {
-      onNodeSelect?.(selectedKey);
-    }
-  }
-
   return <SidebarMenuSubContext.Provider value={subContext}>
-    <SidebarMenuNode activeNodeKey={parentActiveNodeKey} onSelect={onSelectInternal} with={Component} ref={ref} className={classNames(className, bsPrefix)} {...props} />
+    <SidebarMenuNode with={Component} ref={ref} className={classNames(className, bsPrefix)} {...props} />
   </SidebarMenuSubContext.Provider>;
 });
 

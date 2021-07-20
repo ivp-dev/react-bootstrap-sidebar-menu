@@ -27,8 +27,6 @@ export type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
   exclusiveExpand?: boolean
   defaultActiveKey?: EventKey
   defaultExpanded?: boolean
-  activeNodeKey?: EventKey
-  onNodeSelect?: (eventKey?: EventKey | null) => void
 };
 
 const propTypes = {
@@ -163,8 +161,6 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     bsPrefix: initialBsPrefix,
     collapseOnSelect,
     exclusiveExpand,
-    activeNodeKey,
-    onNodeSelect,
     expanded,
     className,
     activeKey,
@@ -178,8 +174,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     as: As = 'aside',
     ...controlledProps } = useUncontrolled(props, {
       expanded: 'onToggle',
-      activeKey: 'onSelect',
-      activeNodeKey: 'onNodeSelect'
+      activeKey: 'onSelect'
     });
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu');
@@ -212,14 +207,10 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     exclusiveExpand
   }), [expanded, onToggle, rtl, exclusiveExpand]);
 
-  console.log(`sidebar-menu:activeNodeKey: ${activeNodeKey}`)
-
   return (
     <SidebarMenuContext.Provider value={sidebarMenuContextValue}>
       <SelectableContext.Provider value={handleSelect}>
         <SidebarMenuNode
-          activeNodeKey={activeNodeKey}
-          onSelect={onNodeSelect}
           with={AbstractNav}
           activeKey={activeKey}
           as={As}

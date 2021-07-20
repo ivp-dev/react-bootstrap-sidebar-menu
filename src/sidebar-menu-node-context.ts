@@ -4,7 +4,7 @@ import { EventKey } from 'react-bootstrap/types';
 
 export interface SidebarMenuNodeContextProps {
   expanded?: boolean
-  activeNode?: EventKey
+  activeKey?: EventKey
   onToggle?: () => void
   onSelect?: (eventKey?: EventKey | null) => void
 }

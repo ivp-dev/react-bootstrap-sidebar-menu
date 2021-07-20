@@ -140,27 +140,6 @@ const GettingStarted = () => {
             Only allow one <CodeExample>&lt;SidebarMenu.Sub&gt;</CodeExample> open at a time.  
             When <CodeExample>true</CodeExample> the <CodeExample>&lt;SidebarMenu.Sub&gt;</CodeExample> will functions like an "accordion" where only a single menu is open at a time</td>
         </tr>
-        <tr>
-          <td>subActiveKey</td>
-          <td>string | number</td>
-          <td></td>
-          <td>
-            Marks the <CodeExample>&lt;SidebarMenu.Sub.Toggle&gt;</CodeExample> with a matching subActiveKey as active.
-          </td>
-        </tr>
-        <tr>
-          <td>defaultSubActiveKey</td>
-          <td>boolean</td>
-          <td><CodeExample>false</CodeExample></td>
-          <td>Default value of the <CodeExample>subActiveKey</CodeExample> property.</td>
-        </tr>
-        <tr>
-          <td>onSubSelect</td>
-          <td>function</td>
-          <td></td>
-          <td>A callback fired when a <CodeExample>&lt;SidebarMenu.Sub.Toggle&gt;</CodeExample> is selected.</td>
-        </tr>
-
 
         <tr>
           <td>onToggle</td>

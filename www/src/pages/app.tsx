@@ -98,35 +98,35 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
                           <SidebarMenu.Nav.Icon>4.1</SidebarMenu.Nav.Icon>
                           <SidebarMenu.Nav.Title>SidebarMenu.Nav</SidebarMenu.Nav.Title>
                         </SidebarMenu.Nav.Link>
-                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                        <SidebarMenu.Nav.Link eventKey="#sidebarmenu.sub">
                           <SidebarMenu.Nav.Icon>4.2</SidebarMenu.Nav.Icon>
                           <SidebarMenu.Nav.Title>SidebarMenu.Sub</SidebarMenu.Nav.Title>
                         </SidebarMenu.Nav.Link>
-                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                        <SidebarMenu.Nav.Link eventKey="#sidebarmenu.brand">
                           <SidebarMenu.Nav.Icon>4.3</SidebarMenu.Nav.Icon>
                           <SidebarMenu.Nav.Title>SidebarMenu.Brand</SidebarMenu.Nav.Title>
                         </SidebarMenu.Nav.Link>
-                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                        <SidebarMenu.Nav.Link eventKey="#sidebarmenu.toggle">
                           <SidebarMenu.Nav.Icon>4.4</SidebarMenu.Nav.Icon>
                           <SidebarMenu.Nav.Title>SidebarMenu.Toggle</SidebarMenu.Nav.Title>
                         </SidebarMenu.Nav.Link>
-                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                        <SidebarMenu.Nav.Link eventKey="#sidebarmenu.collapse">
                           <SidebarMenu.Nav.Icon>4.5</SidebarMenu.Nav.Icon>
                           <SidebarMenu.Nav.Title>SidebarMenu.Collapse</SidebarMenu.Nav.Title>
                         </SidebarMenu.Nav.Link>
-                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                        <SidebarMenu.Nav.Link eventKey="#sidebarmenu.text">
                           <SidebarMenu.Nav.Icon>4.6</SidebarMenu.Nav.Icon>
                           <SidebarMenu.Nav.Title>SidebarMenu.Text</SidebarMenu.Nav.Title>
                         </SidebarMenu.Nav.Link>
-                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                        <SidebarMenu.Nav.Link eventKey="#sidebarmenu.header">
                           <SidebarMenu.Nav.Icon>4.7</SidebarMenu.Nav.Icon>
                           <SidebarMenu.Nav.Title>SidebarMenu.Header</SidebarMenu.Nav.Title>
                         </SidebarMenu.Nav.Link>
-                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                        <SidebarMenu.Nav.Link eventKey="#sidebarmenu.body">
                           <SidebarMenu.Nav.Icon>4.8</SidebarMenu.Nav.Icon>
                           <SidebarMenu.Nav.Title>SidebarMenu.Body</SidebarMenu.Nav.Title>
                         </SidebarMenu.Nav.Link>
-                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                        <SidebarMenu.Nav.Link eventKey="#sidebarmenu.footer">
                           <SidebarMenu.Nav.Icon>4.9</SidebarMenu.Nav.Icon>
                           <SidebarMenu.Nav.Title>SidebarMenu.Footer</SidebarMenu.Nav.Title>
                         </SidebarMenu.Nav.Link>
@@ -140,11 +140,11 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
                     </SidebarMenu.Sub.Toggle>
                     <SidebarMenu.Sub.Collapse>
                       <SidebarMenu.Nav>
-                        <SidebarMenu.Nav.Link eventKey="#sidebarmenu.nav">
+                        <SidebarMenu.Nav.Link eventKey="#sidebarmenu.nav1">
                           <SidebarMenu.Nav.Icon>5.1</SidebarMenu.Nav.Icon>
                           <SidebarMenu.Nav.Title>SidebarMenu.Nav</SidebarMenu.Nav.Title>
                         </SidebarMenu.Nav.Link>
-                        <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                        <SidebarMenu.Nav.Link eventKey="#sidebarmenu.nav2">
                           <SidebarMenu.Nav.Icon>5.2</SidebarMenu.Nav.Icon>
                           <SidebarMenu.Nav.Title>SidebarMenu.Sub</SidebarMenu.Nav.Title>
                         </SidebarMenu.Nav.Link>
@@ -161,11 +161,29 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
               </SidebarMenu.Sub.Toggle>
               <SidebarMenu.Sub.Collapse>
                 <SidebarMenu.Nav>
-                  <SidebarMenu.Nav.Link eventKey="#sidebarmenu.nav">
+                  <SidebarMenu.Nav.Link eventKey="#sidebarmenu.nav3">
                     <SidebarMenu.Nav.Icon>5.1</SidebarMenu.Nav.Icon>
                     <SidebarMenu.Nav.Title>SidebarMenu.Nav</SidebarMenu.Nav.Title>
                   </SidebarMenu.Nav.Link>
-                  <SidebarMenu.Nav.Link eventKey="#api_0_1">
+                  <SidebarMenu.Nav.Link eventKey="#sidebarmenu.nav4">
+                    <SidebarMenu.Nav.Icon>5.2</SidebarMenu.Nav.Icon>
+                    <SidebarMenu.Nav.Title>SidebarMenu.Sub</SidebarMenu.Nav.Title>
+                  </SidebarMenu.Nav.Link>
+                </SidebarMenu.Nav>
+              </SidebarMenu.Sub.Collapse>
+            </SidebarMenu.Sub>
+            <SidebarMenu.Sub eventKey={4}>
+              <SidebarMenu.Sub.Toggle>
+                <SidebarMenu.Nav.Icon />
+                <SidebarMenu.Nav.Title>Supported content 1</SidebarMenu.Nav.Title>
+              </SidebarMenu.Sub.Toggle>
+              <SidebarMenu.Sub.Collapse>
+                <SidebarMenu.Nav>
+                  <SidebarMenu.Nav.Link eventKey="#sidebarmenu.nav3">
+                    <SidebarMenu.Nav.Icon>5.1</SidebarMenu.Nav.Icon>
+                    <SidebarMenu.Nav.Title>SidebarMenu.Nav</SidebarMenu.Nav.Title>
+                  </SidebarMenu.Nav.Link>
+                  <SidebarMenu.Nav.Link eventKey="#sidebarmenu.nav4">
                     <SidebarMenu.Nav.Icon>5.2</SidebarMenu.Nav.Icon>
                     <SidebarMenu.Nav.Title>SidebarMenu.Sub</SidebarMenu.Nav.Title>
                   </SidebarMenu.Nav.Link>

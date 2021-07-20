@@ -25,14 +25,13 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-nav-link');
 
   const subContext = useContext(SidebarMenuSubContext);
-  const nodeContext = useContext(SidebarMenuNodeContext)
   const navContext = useContext(NavContext);
   const navKey = makeEventKey(eventKey, href);
 
   const { exclusiveExpand } = useContext(SidebarMenuContext);
 
   const isExpandable = !!subContext;
-  const isExpanded = !!nodeContext?.expanded;
+  const isExpanded = !!subContext?.expanded;
 
   const isActive = active == null && navKey != null
     ? navContext && navContext.activeKey === navKey
@@ -43,9 +42,6 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
   const subContextRef = useRef<SidebarMenuSubContextProps>();
   subContextRef.current = subContext;
 
-  const nodeContextRef = useRef<SidebarMenuNodeContextProps>();
-  nodeContextRef.current = nodeContext;
-
   useEffect(() => {
     isExpandedRef.current = isExpanded;
   }, [isExpanded]);
@@ -53,9 +49,9 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
   useEffect(() => {
     if (isExpandable && isActive && !isExpandedRef.current) {
       if (!exclusiveExpand) {
-        nodeContextRef.current?.onToggle?.();
+        subContextRef.current?.onToggle?.();
       } else {
-        //nodeContextRef.current?.onSelect?.(subContextRef.current?.eventKey ?? null)
+        subContextRef.current?.onSelect?.(subContextRef.current?.eventKey ?? null)
       }
     }
   }, [isActive, isExpandable, exclusiveExpand]);
