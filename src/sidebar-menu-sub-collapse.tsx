@@ -33,9 +33,8 @@ const SidebarMenuSubCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuS
           {children}
         </div>
       </Collapse>
-    );
-  },
-  );
+    )
+  });
 
 SidebarMenuSubCollapse.displayName = 'SidebarMenuSubCollapse';
 SidebarMenuSubCollapse.propTypes = propTypes;

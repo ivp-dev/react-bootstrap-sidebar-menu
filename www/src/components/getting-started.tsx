@@ -29,12 +29,12 @@ const GettingStarted = () => {
 
     <br />
 
-    <h3>Overview</h3>
+    <h3 id="overview">Overview</h3>
 
     <p>
-      <CodeExample>&lt;SidebarMenu&gt;</CodeExample> is an expandable and collapsible component that acts as a side container to place 
-      primary or secondary content alongside the main content. It provides flexible options to be shown and hidden based on user interactions. 
-      The component supports some built in elements, such as header, body, footer, toggle button and others, of which you can optionally 
+      <CodeExample>&lt;SidebarMenu&gt;</CodeExample> is an expandable and collapsible component that acts as a side container to place
+      primary or secondary content alongside the main content. It provides flexible options to be shown and hidden based on user interactions.
+      The component supports some built in elements, such as header, body, footer, toggle button and others, of which you can optionally
       disable and provide your own (if needed).
     </p>
 
@@ -44,7 +44,7 @@ const GettingStarted = () => {
 
     <br />
 
-    <ComponentTitle title="SidebarMenu" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu.tsx" />
+    <ComponentTitle id="sidebarmenu" title="SidebarMenu" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu.tsx" />
 
     <PreContainer>
       <CodeExample copy="import SidebarMenu from 'react-bootstrap-sidebar-menu';">
@@ -122,7 +122,7 @@ const GettingStarted = () => {
           <td>activeKey</td>
           <td>string | number</td>
           <td></td>
-          <td>Marks the SidbarMenu.Nav.Link with a matching <CodeExample>eventKey</CodeExample> (or <CodeExample>href</CodeExample> if present) as active.</td>
+          <td>Marks the <CodeExample>&lt;SidebarMenu.Nav.Link&gt;</CodeExample> with a matching <CodeExample>eventKey</CodeExample> (or <CodeExample>href</CodeExample> if present) as active.</td>
         </tr>
         <tr>
           <td>onSelect</td>
@@ -135,7 +135,7 @@ const GettingStarted = () => {
           <td>boolean</td>
           <td><CodeExample>false</CodeExample></td>
           <td>
-            Only allow one <CodeExample>&lt;SidebarMenu.Sub&gt;</CodeExample> open at a time.  
+            Only allow one <CodeExample>&lt;SidebarMenu.Sub&gt;</CodeExample> open at a time.
             When <CodeExample>true</CodeExample> the <CodeExample>&lt;SidebarMenu.Sub&gt;</CodeExample> will functions like an "accordion" where only a single menu is open at a time</td>
         </tr>
         <tr>
@@ -199,7 +199,7 @@ const GettingStarted = () => {
 
     <br />
 
-    <ComponentTitle title="SidebarMenu.Nav" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-nav.tsx" />
+    <ComponentTitle id="sidebarmenu.nav" title="SidebarMenu.Nav" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-nav.tsx" />
 
     <PreContainer>
       <CodeExample copy="import { SidebarMenuNav } from 'react-bootstrap-sidebar-menu';">
@@ -234,10 +234,162 @@ const GettingStarted = () => {
 
     <br />
 
-    <ComponentTitle title="SidebarMenu.Sub" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-navbar.tsx" />
+    <ComponentTitle id="sidebarmenu.nav.link" title="SidebarMenu.Nav.Link" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-nav-link.tsx" />
 
     <PreContainer>
-      <CodeExample copy="import { SidebarMenuNavbar } from 'react-bootstrap-sidebar-menu';">
+      <CodeExample copy="import { SidebarMenuNavLink } from 'react-bootstrap-sidebar-menu';">
+        <CodeExample.Directive>import</CodeExample.Directive> <CodeExample.Variable>&#123; SidebarMenuNavLink &#125;</CodeExample.Variable> <CodeExample.Directive>from</CodeExample.Directive> 'react-bootstrap-sidebar-menu';
+      </CodeExample>
+    </PreContainer>
+
+    <table className="table table-bordered table-responsive api">
+      <thead>
+        <tr>
+          <th className="name">Name</th>
+          <th className="type">Type</th>
+          <th className="default">Default</th>
+          <th className="description">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>as</td>
+          <td>elementType</td>
+          <td><CodeExample>&lt;a&gt;</CodeExample></td>
+          <td>Set a custom element for this component.</td>
+        </tr>
+        <tr>
+          <td>bsPrefix</td>
+          <td>string</td>
+          <td><CodeExample>'sidebar-menu-nav-link'</CodeExample></td>
+          <td>Change the undrlying component CSS base class name and modifier class names prefix.</td>
+        </tr>
+        <tr>
+          <td>disabled</td>
+          <td>boolean</td>
+          <td><CodeExample>false</CodeExample></td>
+          <td>The disabled state of the <CodeExample>SidebarMenuNavLink</CodeExample> item.</td>
+        </tr>
+        <tr>
+          <td>eventKey</td>
+          <td>string | number</td>
+          <td></td>
+          <td>Uniquely identifies the <CodeExample>SidebarMenuNavLink</CodeExample> amongst its siblings, used to determine and control the active state of the <CodeExample>SidebarMenu</CodeExample></td>
+        </tr>
+        <tr>
+          <td>onSelect</td>
+          <td>function</td>
+          <td></td>
+          <td>A callback fired when the <CodeExample>SidebarMenuNavLink</CodeExample> is selected.</td>
+        </tr>
+        <tr>
+          <td>href</td>
+          <td>string</td>
+          <td></td>
+          <td>The HTML href attribute for the <CodeExample>SidebarMenuNavLink</CodeExample></td>
+        </tr>
+        <tr>
+          <td>role</td>
+          <td>string</td>
+          <td></td>
+          <td>The ARIA role for the <CodeExample>SidebarMenuNavLink</CodeExample></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br />
+
+    <ComponentTitle id="sidebarmenu.nav.item" title="SidebarMenu.Nav.Item" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-nav-item.tsx" />
+
+    <PreContainer>
+      <CodeExample copy="import { SidebarMenuNavItem } from 'react-bootstrap-sidebar-menu';">
+        <CodeExample.Directive>import</CodeExample.Directive> <CodeExample.Variable>&#123; SidebarMenuNavItem &#125;</CodeExample.Variable> <CodeExample.Directive>from</CodeExample.Directive> 'react-bootstrap-sidebar-menu';
+      </CodeExample>
+    </PreContainer>
+
+    <table className="table table-bordered table-responsive api">
+      <thead>
+        <tr>
+          <th className="name">Name</th>
+          <th className="type">Type</th>
+          <th className="default">Default</th>
+          <th className="description">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>bsPrefix</td>
+          <td>string</td>
+          <td><CodeExample>'sidebar-menu-sub-collapse'</CodeExample></td>
+          <td>Change the undrlying component CSS base class name and modifier class names prefix.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br />
+
+    <ComponentTitle id="sidebarmenu.nav.icon" title="SidebarMenu.Nav.Icon" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-nav-icon.tsx" />
+
+    <PreContainer>
+      <CodeExample copy="import { SidebarMenuNavIcon } from 'react-bootstrap-sidebar-menu';">
+        <CodeExample.Directive>import</CodeExample.Directive> <CodeExample.Variable>&#123; SidebarMenuNavIcon &#125;</CodeExample.Variable> <CodeExample.Directive>from</CodeExample.Directive> 'react-bootstrap-sidebar-menu';
+      </CodeExample>
+    </PreContainer>
+
+    <table className="table table-bordered table-responsive api">
+      <thead>
+        <tr>
+          <th className="name">Name</th>
+          <th className="type">Type</th>
+          <th className="default">Default</th>
+          <th className="description">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>bsPrefix</td>
+          <td>string</td>
+          <td><CodeExample>'sidebar-menu-sub-collapse'</CodeExample></td>
+          <td>Change the undrlying component CSS base class name and modifier class names prefix.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br />
+
+    <ComponentTitle id="sidebarmenu.nav.title" title="SidebarMenu.Nav.Title" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-nav-title.tsx" />
+
+    <PreContainer>
+      <CodeExample copy="import { SidebarMenuNavTitle } from 'react-bootstrap-sidebar-menu';">
+        <CodeExample.Directive>import</CodeExample.Directive> <CodeExample.Variable>&#123; SidebarMenuNavTitle &#125;</CodeExample.Variable> <CodeExample.Directive>from</CodeExample.Directive> 'react-bootstrap-sidebar-menu';
+      </CodeExample>
+    </PreContainer>
+
+    <table className="table table-bordered table-responsive api">
+      <thead>
+        <tr>
+          <th className="name">Name</th>
+          <th className="type">Type</th>
+          <th className="default">Default</th>
+          <th className="description">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>bsPrefix</td>
+          <td>string</td>
+          <td><CodeExample>'sidebar-menu-sub-collapse'</CodeExample></td>
+          <td>Change the undrlying component CSS base class name and modifier class names prefix.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br />
+
+    <ComponentTitle id="sidebarmenu.sub" title="SidebarMenu.Sub" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-sub.tsx" />
+
+    <PreContainer>
+      <CodeExample copy="import { SidebarMenuSub } from 'react-bootstrap-sidebar-menu';">
         <CodeExample.Directive>import</CodeExample.Directive> <CodeExample.Variable>&#123; SidebarMenuSub &#125;</CodeExample.Variable> <CodeExample.Directive>from</CodeExample.Directive> 'react-bootstrap-sidebar-menu';
       </CodeExample>
     </PreContainer>
@@ -308,7 +460,71 @@ const GettingStarted = () => {
 
     <br />
 
-    <ComponentTitle title="SidebarMenu.Brand" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-brand.tsx" />
+    <ComponentTitle id="sidebarmenu.sub.collapse" title="SidebarMenu.Sub.Collapse" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-sub-collapse.tsx" />
+
+    <PreContainer>
+      <CodeExample copy="import { SidebarMenuSubCollapse } from 'react-bootstrap-sidebar-menu';">
+        <CodeExample.Directive>import</CodeExample.Directive> <CodeExample.Variable>&#123; SidebarMenuSubCollapse &#125;</CodeExample.Variable> <CodeExample.Directive>from</CodeExample.Directive> 'react-bootstrap-sidebar-menu';
+      </CodeExample>
+    </PreContainer>
+
+    <table className="table table-bordered table-responsive api">
+      <thead>
+        <tr>
+          <th className="name">Name</th>
+          <th className="type">Type</th>
+          <th className="default">Default</th>
+          <th className="description">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>bsPrefix</td>
+          <td>string</td>
+          <td><CodeExample>'sidebar-menu-sub-collapse'</CodeExample></td>
+          <td>Change the undrlying component CSS base class name and modifier class names prefix.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br />
+
+    <ComponentTitle id="sidebarmenu.sub.toggle" title="SidebarMenu.Sub.Toggle" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-sub-toggle.tsx" />
+
+    <PreContainer>
+      <CodeExample copy="import { SidebarMenuSubToggle } from 'react-bootstrap-sidebar-menu';">
+        <CodeExample.Directive>import</CodeExample.Directive> <CodeExample.Variable>&#123; SidebarMenuSubToggle &#125;</CodeExample.Variable> <CodeExample.Directive>from</CodeExample.Directive> 'react-bootstrap-sidebar-menu';
+      </CodeExample>
+    </PreContainer>
+
+    <table className="table table-bordered table-responsive api">
+      <thead>
+        <tr>
+          <th className="name">Name</th>
+          <th className="type">Type</th>
+          <th className="default">Default</th>
+          <th className="description">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>as</td>
+          <td>elementType</td>
+          <td><CodeExample>&lt;button&gt;</CodeExample></td>
+          <td>Set a custom element for this component.</td>
+        </tr>
+        <tr>
+          <td>bsPrefix</td>
+          <td>string</td>
+          <td><CodeExample>'sidebar-menu-sub-collapse'</CodeExample></td>
+          <td>Change the undrlying component CSS base class name and modifier class names prefix.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br />
+
+    <ComponentTitle id="sidebarmenu.brand" title="SidebarMenu.Brand" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-brand.tsx" />
 
     <PreContainer>
       <CodeExample copy="import { SidebarMenuBrand } from 'react-bootstrap-sidebar-menu';">
@@ -349,7 +565,7 @@ const GettingStarted = () => {
 
     <br />
 
-    <ComponentTitle title="SidebarMenu.Toggle" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-toggle.tsx" />
+    <ComponentTitle id="sidebarmenu.toggle" title="SidebarMenu.Toggle" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-toggle.tsx" />
 
     <PreContainer>
       <CodeExample copy="import { SidebarMenuToggle } from 'react-bootstrap-sidebar-menu';">
@@ -396,7 +612,7 @@ const GettingStarted = () => {
 
     <br />
 
-    <ComponentTitle title="SidebarMenu.Collapse" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-collapse.tsx" />
+    <ComponentTitle id="sidebarmenu.collapse" title="SidebarMenu.Collapse" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-collapse.tsx" />
 
     <PreContainer>
       <CodeExample copy="import { SidebarMenuCollapse } from 'react-bootstrap-sidebar-menu';">
@@ -415,29 +631,23 @@ const GettingStarted = () => {
       </thead>
       <tbody>
         <tr>
-          <td>as</td>
-          <td>elementType</td>
-          <td><CodeExample>&lt;div&gt;</CodeExample></td>
-          <td>Set a custom element for this component.</td>
-        </tr>
-        <tr>
-          <td>getScrollValue</td>
-          <td>function | string | number</td>
-          <td></td>
-          <td>Set width of the SidebarMenu when expanded.</td>
-        </tr>
-        <tr>
           <td>bsPrefix</td>
           <td>string</td>
           <td><CodeExample>'sidebar-menu-navbar-collapse'</CodeExample></td>
           <td>Change the underlying component CSS base class name and modifier class names prefix.</td>
+        </tr>
+        <tr>
+          <td>getScrollValue</td>
+          <td>function | string | number</td>
+          <td><CodeExample>300px</CodeExample></td>
+          <td>Set width of the SidebarMenu when expanded.</td>
         </tr>
       </tbody>
     </table>
 
     <br />
 
-    <ComponentTitle title="SidebarMenu.Text" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-text.tsx" />
+    <ComponentTitle id="sidebarmenu.text" title="SidebarMenu.Text" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-text.tsx" />
 
 
     <PreContainer>
@@ -473,7 +683,7 @@ const GettingStarted = () => {
 
     <br />
 
-    <ComponentTitle title="SidebarMenu.Header" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-header.tsx" />
+    <ComponentTitle id="sidebarmenu.header" title="SidebarMenu.Header" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-header.tsx" />
 
     <PreContainer>
       <CodeExample copy="import { SidebarMenuHeader } from 'react-bootstrap-sidebar-menu';">
@@ -508,7 +718,7 @@ const GettingStarted = () => {
 
     <br />
 
-    <ComponentTitle title="SidebarMenu.Body" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-body.tsx" />
+    <ComponentTitle id="sidebarmenu.body" title="SidebarMenu.Body" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-body.tsx" />
 
     <PreContainer>
       <CodeExample copy="import { SidebarMenuBody } from 'react-bootstrap-sidebar-menu';">
@@ -543,7 +753,7 @@ const GettingStarted = () => {
 
     <br />
 
-    <ComponentTitle title="SidebarMenu.Footer" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-footer.tsx" />
+    <ComponentTitle id="sidebarmenu.footer" title="SidebarMenu.Footer" href="https://github.com/ivp-dev/react-bootstrap-sidebar-menu/blob/main/src/sidebar-menu-footer.tsx" />
 
     <PreContainer>
       <CodeExample copy="import { SidebarMenuFooter } from 'react-bootstrap-sidebar-menu';">

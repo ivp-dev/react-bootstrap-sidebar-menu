@@ -12,6 +12,7 @@ import SidebarMenuNode from './sidebar-menu-node';
 import SidebarMenuNodeContext from './sidebar-menu-node-context';
 import SidebarMenuContext from './sidebar-menu-context';
 import { useUncontrolled } from 'uncontrollable';
+import createChainedFunction from 'react-bootstrap/createChainedFunction'
 
 type SidebarMenuSubProps = BsPrefixProps & Omit<NavbarProps,
   'sticky' | 'bg' | 'variant' | 'fixed' | 'expand' | 'collapseOnSelect' | 'onSelect' | 'role'
@@ -68,20 +69,23 @@ const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps>
   });
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-sub');
-  const { activeKey: parentActiveKey, onSelect: onParentSelect } = useContext(SidebarMenuNodeContext);
-  const { exclusiveExpand } = useContext(SidebarMenuContext)
+  const { activeKey: parentActiveKey, onSelect: onParentSelect, bubble: parentBubble } = useContext(SidebarMenuNodeContext);
+  const { exclusiveExpand } = useContext(SidebarMenuContext);
 
   const subContextValue = useMemo<SidebarMenuSubContextProps>(() => ({
     bsPrefix,
     eventKey,
-    activeKey: parentActiveKey,
+    bubble: parentBubble,
     onSelect: onParentSelect,
+    activeKey: parentActiveKey,
     onToggle: () => onToggle?.(!expanded),
     expanded: exclusiveExpand ? eventKey === parentActiveKey : !!expanded,
-  }), [bsPrefix, eventKey, exclusiveExpand, expanded, onParentSelect, onToggle, parentActiveKey]);
+  }), [bsPrefix, eventKey, exclusiveExpand, expanded, onParentSelect, onToggle, parentActiveKey, parentBubble]);
+
+  const bubble = createChainedFunction(() => console.log(eventKey), parentBubble);
 
   return <SidebarMenuSubContext.Provider value={subContextValue}>
-    <SidebarMenuNode with={Component} ref={ref} className={classNames(className, bsPrefix)} {...props} />
+    <SidebarMenuNode with={Component} ref={ref}  bubble={bubble} className={classNames(className, bsPrefix)} {...props} />
   </SidebarMenuSubContext.Provider>;
 });
 

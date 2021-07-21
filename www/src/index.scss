@@ -133,6 +133,7 @@ table.api {
   padding-top: 0;
   flex-direction: column;
   grid-area: sidebar;
+  overflow-y: auto;
 }
 
 .navbar-brand {

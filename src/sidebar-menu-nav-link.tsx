@@ -8,6 +8,7 @@ import NavContext from 'react-bootstrap/NavContext';
 import { makeEventKey } from 'react-bootstrap/SelectableContext';
 import classNames from 'classnames';
 import SidebarMenuContext from './sidebar-menu-context';
+import SidebarMenuNodeContext from './sidebar-menu-node-context';
 
 type SidebarMenuNavLinkProps = NavLinkProps
 
@@ -24,6 +25,9 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-nav-link');
 
   const subContext = useContext(SidebarMenuSubContext);
+
+  const nodeContext = useContext(SidebarMenuNodeContext)
+
   const navContext = useContext(NavContext);
   const navKey = makeEventKey(eventKey, href);
 
@@ -40,6 +44,11 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
 
   const subContextRef = useRef<SidebarMenuSubContextProps>();
   subContextRef.current = subContext;
+
+  if (isActive) {
+    subContext.bubble?.()
+    //nodeContext.bubble?.()
+  }
 
   useEffect(() => {
     isExpandedRef.current = isExpanded;
