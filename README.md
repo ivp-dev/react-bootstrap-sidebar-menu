@@ -6,7 +6,7 @@ Example page: open [Demo](https://ivp-dev.github.io/react-bootstrap-sidebar-menu
 Description
 ------------------------------------------------------------------------------
 
-React sidebar based on react-bootstrap
+React sidebar menu based on react-bootstrap
 
 
 Installation
