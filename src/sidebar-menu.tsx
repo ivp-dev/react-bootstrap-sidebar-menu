@@ -139,12 +139,7 @@ const propTypes = {
   /**
    * Marks the SidebarMenuNavItem with a matching `eventKey` (or `href` if present) as active.
    */
-  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /**
-   * Marks the SidebarMenu.Sub with a matching `eventKey` as active.
-   */
-  subActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 const defaultProps = {

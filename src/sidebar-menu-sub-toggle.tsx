@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { EventKey } from 'react-bootstrap/types';
 import NavbarToggle, { NavbarToggleProps } from "react-bootstrap/NavbarToggle";
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
@@ -26,7 +26,7 @@ const SidebarMenuSubToggle = React.forwardRef(
     const { activeKey, onSelect, onToggle, expanded } = useContext(SidebarMenuSubContext);
     const { eventKey } = useContext(SidebarMenuSubContext);
 
-    const handleOnClick = useCallback(() => {
+    const handleOnClick = useMemo(() => () => {
       const eventKeyPassed = eventKey === activeKey ? null : eventKey;
       onSelect?.(eventKeyPassed);
     }, [eventKey, activeKey, onSelect]);

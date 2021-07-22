@@ -53,7 +53,6 @@ const App: React.FC<PropsWithChildren<AppProps>> = ({ children }) => {
     <SidebarMenu
       exclusiveExpand={exclusiveExpand}
       collapseOnSelect={collapseOnSelect}
-      defaultActiveKey="#setup"
       variant={themeName}
       bg={themeName}
       rtl={isRtl}

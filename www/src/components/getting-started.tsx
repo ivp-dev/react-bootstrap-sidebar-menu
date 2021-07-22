@@ -320,7 +320,7 @@ const GettingStarted = () => {
         <tr>
           <td>bsPrefix</td>
           <td>string</td>
-          <td><CodeExample>'sidebar-menu-sub-collapse'</CodeExample></td>
+          <td><CodeExample>'sidebar-menu-nav-item'</CodeExample></td>
           <td>Change the undrlying component CSS base class name and modifier class names prefix.</td>
         </tr>
       </tbody>
@@ -349,7 +349,7 @@ const GettingStarted = () => {
         <tr>
           <td>bsPrefix</td>
           <td>string</td>
-          <td><CodeExample>'sidebar-menu-sub-collapse'</CodeExample></td>
+          <td><CodeExample>'sidebar-menu-sidebar-menu'</CodeExample></td>
           <td>Change the undrlying component CSS base class name and modifier class names prefix.</td>
         </tr>
       </tbody>
@@ -378,7 +378,7 @@ const GettingStarted = () => {
         <tr>
           <td>bsPrefix</td>
           <td>string</td>
-          <td><CodeExample>'sidebar-menu-sub-collapse'</CodeExample></td>
+          <td><CodeExample>'sidebar-menu-nav-title'</CodeExample></td>
           <td>Change the undrlying component CSS base class name and modifier class names prefix.</td>
         </tr>
       </tbody>
@@ -516,7 +516,7 @@ const GettingStarted = () => {
         <tr>
           <td>bsPrefix</td>
           <td>string</td>
-          <td><CodeExample>'sidebar-menu-sub-collapse'</CodeExample></td>
+          <td><CodeExample>'sidebar-menu-sub-toggle'</CodeExample></td>
           <td>Change the undrlying component CSS base class name and modifier class names prefix.</td>
         </tr>
       </tbody>
@@ -604,7 +604,7 @@ const GettingStarted = () => {
         <tr>
           <td>bsPrefix</td>
           <td>string</td>
-          <td><CodeExample>'sidebar-menu-toggler'</CodeExample></td>
+          <td><CodeExample>'sidebar-menu-toggle'</CodeExample></td>
           <td>Change the undrlying component CSS base class name and modifier class names prefix.</td>
         </tr>
       </tbody>

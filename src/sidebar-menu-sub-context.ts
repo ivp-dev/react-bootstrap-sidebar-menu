@@ -3,7 +3,7 @@ import { EventKey } from 'react-bootstrap/types';
 
 export interface SidebarMenuSubContextProps {
   bsPrefix?: string
-  bubble?: () => void
+  bubble?: (navKey: string | null) => void
   eventKey?: EventKey
   activeKey?: EventKey
   onSelect?: (eventKey?: EventKey | null) => void

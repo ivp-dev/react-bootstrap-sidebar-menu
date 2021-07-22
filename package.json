@@ -1,11 +1,11 @@
 {
   "name": "react-bootstrap-sidebar-menu",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sidebar menu based on bootstrap",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
-  "module": "dist/index.modern.js",
-  "source": "src/index.tsx",
+  "module": "dist/index.es.js",
+  "source": "src/index.ts",
   "types": "types/index.d.ts",
   "author": "ivp.dev",
   "license": "MIT",
@@ -15,15 +15,16 @@
   ],
   "scripts": {
     "start": "npm run start --prefix www",
-    "prepare": "run-s build",
+    "prepare": "run-s build build:types ",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
     "test:lint": "eslint .",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom --passWithNoTests",
     "test:watch": "react-scripts test --env=jsdom",
-    "predeploy": "cd www && npm install && npm run build",
+    "predeploy": "cd www && npm run build",
     "deploy": "gh-pages -d www/build",
-    "build": "rollup -c -w",
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
     "build:types": "tsc -d --outDir types"
   },
   "repository": {
@@ -39,7 +40,7 @@
   "bugs": {
     "url": "https://github.com/ivp-dev/react-bootstrap-sidebar-menu/issues"
   },
-  "homepage": "https://github.com/ivp-dev/react-bootstrap-sidebar-menu#readme",
+  "homepage": "https://ivp-dev.github.io/react-bootstrap-sidebar-menu",
   "peerDependencies": {
     "react": ">=16.14.0",
     "react-dom": ">=16.14.0"

@@ -6,7 +6,7 @@ import { useUncontrolled } from 'uncontrollable';
 
 export interface SidebarMenuNodeProps<With extends React.ElementType = React.ElementType> {
   with: With
-  bubble?: () => void
+  onActiveKeyChanged?: () => void
   activeNodeKey?: EventKey
   onNodeSelect?: (eventKey?: EventKey | null) => void
 }
@@ -17,25 +17,26 @@ interface SidebarMenuNode<P = unknown, WithInner extends React.ElementType = Rea
 
 const SidebarMenuNode: SidebarMenuNode = ({
   with: With,
-  bubble,
+  onActiveKeyChanged,
   ...props
 }: SidebarMenuNodeProps): React.ReactElement => {
 
   const {
     activeNodeKey,
-    onNodeSelect
+    onNodeSelect,
+    ...controlledProps
   } = useUncontrolled(props, {
     activeNodeKey: 'onNodeSelect'
   });
 
   const nodeContextValue: SidebarMenuNodeContextProps = useMemo(() => ({
-    bubble,
+    onActiveKeyChanged,
     onSelect: onNodeSelect,
     activeKey: activeNodeKey
-  }), [activeNodeKey, bubble, onNodeSelect]);
+  }), [activeNodeKey, onActiveKeyChanged, onNodeSelect]);
 
   return <SidebarMenuNodeContext.Provider value={nodeContextValue}>
-    <With {...props} />
+    <With {...controlledProps} />
   </SidebarMenuNodeContext.Provider>;
 }
 

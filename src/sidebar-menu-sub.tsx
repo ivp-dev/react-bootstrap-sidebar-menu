@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { NavbarProps } from "react-bootstrap";
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import PropTypes from "prop-types";
@@ -13,12 +13,13 @@ import SidebarMenuNodeContext from './sidebar-menu-node-context';
 import SidebarMenuContext from './sidebar-menu-context';
 import { useUncontrolled } from 'uncontrollable';
 import createChainedFunction from 'react-bootstrap/createChainedFunction'
+import NavContext from 'react-bootstrap/NavContext';
 
 type SidebarMenuSubProps = BsPrefixProps & Omit<NavbarProps,
   'sticky' | 'bg' | 'variant' | 'fixed' | 'expand' | 'collapseOnSelect' | 'onSelect' | 'role'
 > & {
   eventKey?: EventKey
-  expanded?: boolean,
+  expanded?: boolean
   onToggle?: (expanded: boolean) => void
 };
 
@@ -50,7 +51,12 @@ const propTypes = {
    *
    * @default 'navigation'
    */
-  role: PropTypes.string
+  role: PropTypes.string,
+
+  /**
+   * 
+   */
+  defaultExpanded: PropTypes.bool
 };
 
 const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps> = React.forwardRef(({
@@ -63,29 +69,48 @@ const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps>
 
   const {
     expanded,
-    onToggle
+    onToggle,
+    ...controlledProps
   } = useUncontrolled(props, {
     expanded: 'onToggle'
   });
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-sub');
-  const { activeKey: parentActiveKey, onSelect: onParentSelect, bubble: parentBubble } = useContext(SidebarMenuNodeContext);
+
+  const { activeKey: parentNodeActiveKey, onSelect: onParentSelect, onActiveKeyChanged: onParentActiveKeyChanged } = useContext(SidebarMenuNodeContext);
   const { exclusiveExpand } = useContext(SidebarMenuContext);
+
+  const [activeKey, setActiveKey] = useState<string | null>(null);
+  const navContext = useContext(NavContext);
+
+  const currentActiveKey: string | null = navContext?.activeKey;
 
   const subContextValue = useMemo<SidebarMenuSubContextProps>(() => ({
     bsPrefix,
     eventKey,
-    bubble: parentBubble,
     onSelect: onParentSelect,
-    activeKey: parentActiveKey,
+    activeKey: parentNodeActiveKey,
     onToggle: () => onToggle?.(!expanded),
-    expanded: exclusiveExpand ? eventKey === parentActiveKey : !!expanded,
-  }), [bsPrefix, eventKey, exclusiveExpand, expanded, onParentSelect, onToggle, parentActiveKey, parentBubble]);
+    onActiveKeyChanged: onParentActiveKeyChanged,
+    expanded: exclusiveExpand && typeof eventKey !== 'undefined' ? eventKey === parentNodeActiveKey : !!expanded,
+  }), [bsPrefix, eventKey, exclusiveExpand, expanded, onParentSelect, onToggle, parentNodeActiveKey, onParentActiveKeyChanged]);
 
-  const bubble = createChainedFunction(() => console.log(eventKey), parentBubble);
+  const onActiveKeyChanged = useMemo(() => {
+    return createChainedFunction((eventKey: string | null) => setActiveKey(eventKey), onParentActiveKeyChanged)
+  }, [onParentActiveKeyChanged]);
+
+  const activeKeyChangedCallback = useMemo(() => (currentActiveKey: string | null) => {
+    if (currentActiveKey && currentActiveKey === activeKey) {
+      exclusiveExpand ? onParentSelect?.(eventKey) : onToggle?.(true);
+    }
+  }, [activeKey, eventKey, exclusiveExpand, onParentSelect, onToggle]);
+
+  useEffect(() => {
+    activeKeyChangedCallback(currentActiveKey);
+  }, [currentActiveKey, activeKeyChangedCallback]);
 
   return <SidebarMenuSubContext.Provider value={subContextValue}>
-    <SidebarMenuNode with={Component} ref={ref}  bubble={bubble} className={classNames(className, bsPrefix)} {...props} />
+    <SidebarMenuNode with={Component} ref={ref} onActiveKeyChanged={onActiveKeyChanged} className={classNames(className, bsPrefix)} {...controlledProps} />
   </SidebarMenuSubContext.Provider>;
 });
 
