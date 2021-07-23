@@ -53,7 +53,10 @@ const propTypes = {
    * The breakpoint, below which, the SidebarMenu will collapse.
    * When `true` the SidebarMenu will always be expanded regardless of screen size.
    */
-  expand: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']).isRequired,
+  expand: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.oneOf(['sm', 'md', 'lg', 'xl', 'xxl'])
+  ]).isRequired,
 
   /**
   * The breakpoint, below which, the SidebarMenu will hide.
@@ -61,7 +64,7 @@ const propTypes = {
   * 
   * * @default false
   */
-  hide: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', 'xxl']).isRequired,
+  hide: PropTypes.oneOf([true, false, 'sm', 'md', 'lg', 'xl', 'xxl']).isRequired,
 
   /**
    * Controls the visiblity of the sidebar body
