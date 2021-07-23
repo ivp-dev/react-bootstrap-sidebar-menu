@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-sidebar-menu",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Sidebar menu based on bootstrap",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
