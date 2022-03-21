@@ -35,7 +35,9 @@ const SidebarMenuNode: SidebarMenuNode = ({
     activeKey: activeNodeKey
   }), [activeNodeKey, onActiveKeyChanged, onNodeSelect]);
 
-  return <SidebarMenuNodeContext.Provider value={nodeContextValue}>
+  return <SidebarMenuNodeContext.Provider
+    value={nodeContextValue}
+  >
     <With {...controlledProps} />
   </SidebarMenuNodeContext.Provider>;
 }

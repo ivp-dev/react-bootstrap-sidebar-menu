@@ -22,7 +22,7 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
   ...props
 }: SidebarMenuNavLinkProps, ref) => {
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'sidebar-menu-nav-link');
-  const nodeContext = useContext(SidebarMenuNodeContext)
+  const { onActiveKeyChanged } = useContext(SidebarMenuNodeContext)
   const navContext = useContext(NavContext);
 
   const navKey = makeEventKey(eventKey, href);
@@ -32,8 +32,8 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
     : active;
 
   useEffect(() => {
-    if (isActive) nodeContext.onActiveKeyChanged?.(navKey);
-  }, [isActive, navKey, nodeContext]);
+    isActive && onActiveKeyChanged?.(navKey);
+  }, [isActive, navKey, onActiveKeyChanged]);
 
   const [navItemProps, meta] = useNavItem({
     key: navKey,

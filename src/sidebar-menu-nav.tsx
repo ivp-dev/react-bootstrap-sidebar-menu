@@ -31,8 +31,8 @@ export interface SidebarMenuNavProps extends BsPrefixProps, React.InputHTMLAttri
 }
 
 const SidebarMenuNav: BsPrefixRefForwardingComponent<'div', BsPrefixProps> = React.forwardRef<HTMLElement, SidebarMenuNavProps>(({
-  as: Component = 'div',
   bsPrefix: initialBsPrefix,
+  as: Component = 'div',
   className,
   ...props
 }, ref) => {

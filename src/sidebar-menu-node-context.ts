@@ -5,7 +5,7 @@ import { EventKey } from '@restart/ui/types'
 export interface SidebarMenuNodeContextProps {
   expanded?: boolean
   activeKey?: EventKey
-  onActiveKeyChanged?: (eventKey: string | null) => void
+  onActiveKeyChanged?: (eventKey: EventKey | null) => void
   onToggle?: () => void
   onSelect?: (eventKey?: EventKey | null) => void
 }
