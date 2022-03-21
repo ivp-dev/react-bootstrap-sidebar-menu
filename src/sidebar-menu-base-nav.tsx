@@ -8,11 +8,10 @@ import SelectableContext, { makeEventKey } from '@restart/ui/SelectableContext';
 import { BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import { EventKey, SelectCallback } from "@restart/ui/types";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const noop = () => { };
+const noop = () => { /**/ };
 
 const propTypes = {
-  onSelect: PropTypes.func.isRequired,
+  onSelect: PropTypes.func,
 
   as: PropTypes.elementType,
 

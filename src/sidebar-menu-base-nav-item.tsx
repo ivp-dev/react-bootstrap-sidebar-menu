@@ -88,14 +88,6 @@ const BaseNavItem: BaseNavItem = React.forwardRef<'div', BaseNavItemProps>(
           : active;
     }
 
-    if (props.role === 'tab') {
-      if (props.disabled) {
-        props.tabIndex = -1;
-        props['aria-disabled'] = true;
-      }
-      props['aria-selected'] = isActive;
-    }
-
     const handleOnclick = useEventCallback((e) => {
       if (onClick) onClick(e);
       if (navKey == null) return;

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { NavLink, NavLinkProps } from 'react-bootstrap';
+import { Anchor, NavLink, NavLinkProps } from 'react-bootstrap';
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import { BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import NavContext from 'react-bootstrap/NavContext';
@@ -9,21 +9,19 @@ import SidebarMenuNodeContext from './sidebar-menu-node-context';
 import BaseNavItem from './sidebar-menu-base-nav-item';
 import { SelectCallback } from "@restart/ui/types";
 
-interface SidebarMenuNavLinkProps extends Omit<NavLinkProps, 'onSelect'> {
+export interface SidebarMenuNavLinkProps extends Omit<NavLinkProps, 'onSelect'> {
   onSelect?: SelectCallback 
 }
 
 const defaultProps = {
   disabled: false,
-  as: 'a',
 };
 
 const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLinkProps> = React.forwardRef(({
   bsPrefix: initialBsPrefix,
-  as: As = 'a',
+  as: As = Anchor,
   className,
   eventKey,
-  onSelect,
   active,
   href,
   disabled,
@@ -50,7 +48,6 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
     active={active}
     eventKey={eventKey}
     disabled={disabled}
-    onSelect={onSelect}
     className={classNames(className, bsPrefix, disabled && 'disabled')}
     {...props}
   />
@@ -58,6 +55,6 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
 
 SidebarMenuNavLink.displayName = "SidebarMenuNavLink";
 SidebarMenuNavLink.propTypes = NavLink.propTypes;
-SidebarMenuNavLink.defaultProps = NavLink.defaultProps;
+SidebarMenuNavLink.defaultProps = defaultProps;
 
 export default SidebarMenuNavLink;
