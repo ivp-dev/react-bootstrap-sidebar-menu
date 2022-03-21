@@ -2,7 +2,7 @@ import React from 'react';
 import { NavbarBrand, NavbarBrandProps } from "react-bootstrap";
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 
-type SidebarMenuBrand = NavbarBrand;
+type SidebarMenuBrand = typeof NavbarBrand;
 
 type SidebarMenuBrandProps = NavbarBrandProps
 

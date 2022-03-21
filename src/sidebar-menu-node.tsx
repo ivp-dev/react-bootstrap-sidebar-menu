@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { EventKey } from 'react-bootstrap/types';
+import { EventKey } from '@restart/ui/types';
 import { ReplaceProps } from 'react-bootstrap/helpers';
 import SidebarMenuNodeContext, { SidebarMenuNodeContextProps } from './sidebar-menu-node-context';
 import { useUncontrolled } from 'uncontrollable';

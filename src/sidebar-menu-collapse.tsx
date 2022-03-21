@@ -23,7 +23,7 @@ const propTypes = {
 
 const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuCollapseProps> =
   React.forwardRef<HTMLDivElement, SidebarMenuCollapseProps>(({
-    dimension = "width",
+    dimension = 'width',
     getScrollValue = () => 300,
     children,
     onEntering,

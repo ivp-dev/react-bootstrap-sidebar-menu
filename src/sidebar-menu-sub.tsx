@@ -7,7 +7,7 @@ import SidebarMenuSubContext, { SidebarMenuSubContextProps } from './sidebar-men
 import SidebarMenuSubToggle from './sidebar-menu-sub-toggle';
 import SidebarMenuSubCollapse from './sidebar-menu-sub-collapse';
 import classNames from 'classnames';
-import { EventKey } from 'react-bootstrap/types';
+import { EventKey } from '@restart/ui/types';
 import SidebarMenuNode from './sidebar-menu-node';
 import SidebarMenuNodeContext from './sidebar-menu-node-context';
 import SidebarMenuContext from './sidebar-menu-context';
@@ -83,7 +83,7 @@ const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps>
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const navContext = useContext(NavContext);
 
-  const currentActiveKey: string | null = navContext?.activeKey;
+  const currentActiveKey: EventKey | null = navContext?.activeKey ?? null;
 
   const subContextValue = useMemo<SidebarMenuSubContextProps>(() => ({
     bsPrefix,
@@ -99,7 +99,7 @@ const SidebarMenuSub: BsPrefixRefForwardingComponent<'div', SidebarMenuSubProps>
     return createChainedFunction((eventKey: string | null) => setActiveKey(eventKey), onParentActiveKeyChanged)
   }, [onParentActiveKeyChanged]);
 
-  const activeKeyChangedCallback = useMemo(() => (currentActiveKey: string | null) => {
+  const activeKeyChangedCallback = useMemo(() => (currentActiveKey: EventKey | null) => {
     if (currentActiveKey && currentActiveKey === activeKey) {
       exclusiveExpand ? onParentSelect?.(eventKey) : onToggle?.(true);
     }

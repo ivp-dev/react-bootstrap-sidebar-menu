@@ -1,7 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 import { NavbarProps } from "react-bootstrap";
-import { BsPrefixRefForwardingComponent, SelectCallback } from 'react-bootstrap/helpers';
-import SelectableContext from 'react-bootstrap/SelectableContext'
+import { BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
+import { SelectCallback } from '@restart/ui/types'
+import SelectableContext from '@restart/ui/SelectableContext'
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import SidebarMenuToggle from './sidebar-menu-toggle';
 import SidebarMenuCollapse from './sidebar-menu-collapse'
@@ -16,9 +17,9 @@ import SidebarMenuBody from './sidebar-menu-body';
 import SidebarMenuFooter from './sidebar-menu-footer';
 import SidebarMenuText from './sidebar-menu-text';
 import PropTypes from 'prop-types';
-import AbstractNav from 'react-bootstrap/AbstractNav';
-import { EventKey } from 'react-bootstrap/types';
+import { EventKey } from '@restart/ui/types'
 import SidebarMenuNode from './sidebar-menu-node';
+import BaseNav from '@restart/ui/Nav'
 
 export type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
   rtl?: boolean
@@ -212,7 +213,7 @@ const SidebarMenu: BsPrefixRefForwardingComponent<'aside', SidebarMenuProps> = R
     <SidebarMenuContext.Provider value={sidebarMenuContextValue}>
       <SelectableContext.Provider value={handleSelect}>
         <SidebarMenuNode
-          with={AbstractNav}
+          with={BaseNav}
           as={Component}
           ref={ref}
           activeKey={activeKey}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EventKey } from 'react-bootstrap/types';
+import { EventKey } from '@restart/ui/types'
 
 export interface SidebarMenuSubContextProps {
   bsPrefix?: string

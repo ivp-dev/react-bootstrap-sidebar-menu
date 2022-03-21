@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useMemo } from 'react';
-import { EventKey } from 'react-bootstrap/types';
+import { EventKey } from '@restart/ui/types'
 import NavbarToggle, { NavbarToggleProps } from "react-bootstrap/NavbarToggle";
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import SidebarMenuSubContext from './sidebar-menu-sub-context';
