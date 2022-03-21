@@ -19,7 +19,7 @@ import SidebarMenuText from './sidebar-menu-text';
 import PropTypes from 'prop-types';
 import { EventKey } from '@restart/ui/types'
 import SidebarMenuNode from './sidebar-menu-node';
-import BaseNav from '@restart/ui/Nav'
+import BaseNav from './sidebar-menu-base-nav'
 
 export type SidebarMenuProps = Omit<NavbarProps, "sticky" | "fixed"> & {
   rtl?: boolean

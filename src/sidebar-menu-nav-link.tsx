@@ -13,7 +13,7 @@ type SidebarMenuNavLinkProps = NavLinkProps
 
 const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLinkProps> = React.forwardRef(({
   bsPrefix: initialBsPrefix,
-  as: Component = Anchor,
+  as: As = 'a',
   className,
   eventKey,
   active,
@@ -35,22 +35,17 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
     isActive && onActiveKeyChanged?.(navKey);
   }, [isActive, navKey, onActiveKeyChanged]);
 
-  const [navItemProps, meta] = useNavItem({
-    key: navKey,
-    active,
-    ...props,
-  });
 
-  return <Component
-    {...props}
-    {...navItemProps}
+
+  return <AbstractNavItem
     ref={ref}
-    className={classNames(
-      className,
-      bsPrefix,
-      disabled && 'disabled',
-      meta.isActive && 'active',
-    )}
+    as={As}
+    href={href}
+    active={active}
+    eventKey={eventKey}
+    disabled={disabled}
+    className={classNames(className, bsPrefix, disabled && 'disabled')}
+    {...props}
   />
 })
 
