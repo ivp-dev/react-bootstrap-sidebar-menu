@@ -6,7 +6,7 @@ import warning from 'warning';
 import NavContext from '@restart/ui/NavContext';
 import SelectableContext, { makeEventKey } from '@restart/ui/SelectableContext';
 import { BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
-import { EventKey } from '@restart/ui/types';
+import { EventKey, SelectCallback } from '@restart/ui/types';
 
 // TODO: check this
 interface BaseNavItemProps {
@@ -19,14 +19,11 @@ interface BaseNavItemProps {
   role?: string;
   id?: string;
   tabIndex?: number;
-  onClick?: (e: any) => void;
-  onSelect?: (navKey: string, e: any) => void;
+  onClick?: React.MouseEventHandler;
+  onSelect?: SelectCallback;
 }
 
-type BaseNavItem = BsPrefixRefForwardingComponent<
-  'div',
-  BaseNavItemProps
->;
+type BaseNavItem = BsPrefixRefForwardingComponent<'div', BaseNavItemProps>;
 
 const propTypes = {
   id: PropTypes.string,
@@ -36,7 +33,6 @@ const propTypes = {
   href: PropTypes.string,
   tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   eventKey: PropTypes.any,
-  onclick: PropTypes.func,
 
   as: PropTypes.any,
   onClick: PropTypes.func,
@@ -49,7 +45,7 @@ const defaultProps = {
   disabled: false,
 };
 
-const BaseNavItem: BaseNavItem = React.forwardRef(
+const BaseNavItem: BaseNavItem = React.forwardRef<'div', BaseNavItemProps>(
   (
     {
       active,

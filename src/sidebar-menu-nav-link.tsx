@@ -4,18 +4,26 @@ import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import { BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import NavContext from 'react-bootstrap/NavContext';
 import { makeEventKey } from '@restart/ui/SelectableContext';
-import { useNavItem } from '@restart/ui/NavItem'
-import Anchor from '@restart/ui/Anchor';
 import classNames from 'classnames';
 import SidebarMenuNodeContext from './sidebar-menu-node-context';
+import BaseNavItem from './sidebar-menu-base-nav-item';
+import { SelectCallback } from "@restart/ui/types";
 
-type SidebarMenuNavLinkProps = NavLinkProps
+interface SidebarMenuNavLinkProps extends Omit<NavLinkProps, 'onSelect'> {
+  onSelect?: SelectCallback 
+}
+
+const defaultProps = {
+  disabled: false,
+  as: 'a',
+};
 
 const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLinkProps> = React.forwardRef(({
   bsPrefix: initialBsPrefix,
   as: As = 'a',
   className,
   eventKey,
+  onSelect,
   active,
   href,
   disabled,
@@ -35,15 +43,14 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
     isActive && onActiveKeyChanged?.(navKey);
   }, [isActive, navKey, onActiveKeyChanged]);
 
-
-
-  return <AbstractNavItem
+  return <BaseNavItem
     ref={ref}
     as={As}
     href={href}
     active={active}
     eventKey={eventKey}
     disabled={disabled}
+    onSelect={onSelect}
     className={classNames(className, bsPrefix, disabled && 'disabled')}
     {...props}
   />
