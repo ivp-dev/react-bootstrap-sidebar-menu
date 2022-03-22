@@ -6,10 +6,11 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/h
 import classNames from 'classnames';
 import SidebarMenuSubContext from './sidebar-menu-sub-context';
 
-export type SidebarMenuSubCollapseProps =
-  CollapseProps &
-  React.HTMLAttributes<HTMLDivElement> &
-  BsPrefixProps;
+export interface SidebarMenuSubCollapseProps extends 
+  Omit<CollapseProps, 'children'>, 
+  React.HTMLAttributes<HTMLDivElement>, 
+  BsPrefixProps {
+}
 
 const SidebarMenuSubCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuSubCollapseProps> =
   React.forwardRef<HTMLDivElement, SidebarMenuSubCollapseProps>(({
