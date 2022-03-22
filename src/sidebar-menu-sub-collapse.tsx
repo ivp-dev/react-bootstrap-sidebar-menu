@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { useContext } from 'react';
-import PropTypes from 'prop-types';
-
 import { Collapse, CollapseProps } from 'react-bootstrap';
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
@@ -9,14 +7,9 @@ import classNames from 'classnames';
 import SidebarMenuSubContext from './sidebar-menu-sub-context';
 
 export type SidebarMenuSubCollapseProps =
-  Omit<CollapseProps, 'children'> &
+  CollapseProps &
   React.HTMLAttributes<HTMLDivElement> &
   BsPrefixProps;
-
-const propTypes = {
-  /** @default 'sidebar-menu-sub-collapse' */
-  bsPrefix: PropTypes.string
-};
 
 const SidebarMenuSubCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuSubCollapseProps> =
   React.forwardRef<HTMLDivElement, SidebarMenuSubCollapseProps>(({
@@ -37,6 +30,6 @@ const SidebarMenuSubCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuS
   });
 
 SidebarMenuSubCollapse.displayName = 'SidebarMenuSubCollapse';
-SidebarMenuSubCollapse.propTypes = propTypes;
+SidebarMenuSubCollapse.propTypes = Collapse.propTypes;
 
 export default SidebarMenuSubCollapse;

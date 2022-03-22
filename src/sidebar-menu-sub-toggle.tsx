@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { EventKey } from '@restart/ui/types'
 import NavbarToggle, { NavbarToggleProps } from "react-bootstrap/NavbarToggle";
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';

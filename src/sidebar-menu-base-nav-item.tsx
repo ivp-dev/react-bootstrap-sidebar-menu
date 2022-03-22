@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import warning from 'warning';
-import NavContext from '@restart/ui/NavContext';
+import NavContext from 'react-bootstrap/NavContext';
 import SelectableContext, { makeEventKey } from '@restart/ui/SelectableContext';
 import { BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import { EventKey, SelectCallback } from '@restart/ui/types';
@@ -63,6 +63,7 @@ const BaseNavItem: BaseNavItem = React.forwardRef<'div', BaseNavItemProps>(
     const navContext = useContext(NavContext);
 
     let isActive = active;
+    
     if (navContext) {
       if (!props.role && navContext.role === 'tablist') props.role = 'tab';
 
@@ -88,18 +89,23 @@ const BaseNavItem: BaseNavItem = React.forwardRef<'div', BaseNavItemProps>(
           : active;
     }
 
-    const handleOnclick = useEventCallback((e) => {
-      if (onClick) onClick(e);
-      if (navKey == null) return;
-      if (onSelect) onSelect(navKey, e);
-      if (parentOnSelect) parentOnSelect(navKey, e);
+    const handleOnClick = useEventCallback((event: React.MouseEvent<Element, MouseEvent>) => {
+      onClick?.(event);
+
+      if (navKey == null) {
+        return;
+      }
+
+      onSelect?.(navKey, event);
+
+      parentOnSelect?.(navKey, event);
     });
 
     return (
       <Component
         {...props}
         ref={ref}
-        onClick={handleOnclick}
+        onClick={handleOnClick}
         className={classNames(className, isActive && 'active')}
       />
     );

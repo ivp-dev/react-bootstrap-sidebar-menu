@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useRef } from 'react';
 import useForceUpdate from '@restart/hooks/useForceUpdate';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
-import NavContext from '@restart/ui/NavContext';
+import NavContext from 'react-bootstrap/NavContext';
 import SelectableContext, { makeEventKey } from '@restart/ui/SelectableContext';
 import { BsPrefixRefForwardingComponent } from 'react-bootstrap/helpers';
 import { EventKey, SelectCallback } from "@restart/ui/types";
 
-const noop = () => { /**/ };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const noop: any = () => { /**/ };
 
 const propTypes = {
   onSelect: PropTypes.func,
@@ -33,9 +34,9 @@ const propTypes = {
 interface BaseNavProps {
   activeKey?: EventKey | null;
   as?: React.ElementType;
-  getControlledId?: any;
-  getControllerId?: any;
-  onKeyDown?: any;
+  getControlledId?: (key: EventKey | null) => string;
+  getControllerId?: (key: EventKey | null) => string;
+  onKeyDown?: (event: React.SyntheticEvent<unknown, KeyboardEvent>) => void;
   onSelect?: SelectCallback;
   parentOnSelect?: SelectCallback;
   role?: string;
@@ -49,6 +50,8 @@ const BaseNav: BaseNav = React.forwardRef(({
   onSelect,
   activeKey,
   onKeyDown,
+  getControlledId,
+  getControllerId,
   role,
   ...props
 }: BaseNavProps,
@@ -59,8 +62,6 @@ const BaseNav: BaseNav = React.forwardRef(({
   const forceUpdate = useForceUpdate();
   const needsRefocusRef = useRef(false);
   const parentOnSelect = useContext(SelectableContext);
-
-  let getControlledId, getControllerId;
 
   const listNode = useRef<HTMLElement>(null);
 
@@ -87,11 +88,13 @@ const BaseNav: BaseNav = React.forwardRef(({
     if (parentOnSelect) parentOnSelect(key, event);
   };
 
-  const handleKeyDown = (event) => {
-    if (onKeyDown) onKeyDown(event);
+  const handleKeyDown = (event: React.SyntheticEvent<typeof Component, KeyboardEvent>) => {
+    if (onKeyDown) {
+      onKeyDown(event);
+    }
 
-    let nextActiveChild;
-    switch (event.key) {
+    let nextActiveChild: HTMLElement | null;
+    switch (event.nativeEvent.key) {
       case 'ArrowLeft':
       case 'ArrowUp':
         nextActiveChild = getNextActiveChild(-1);
@@ -106,7 +109,7 @@ const BaseNav: BaseNav = React.forwardRef(({
     if (!nextActiveChild) return;
 
     event.preventDefault();
-    handleSelect(nextActiveChild.dataset.rbEventKey, event);
+    handleSelect(nextActiveChild.dataset.rbEventKey ?? null, event);
     needsRefocusRef.current = true;
     forceUpdate();
   };
@@ -117,7 +120,9 @@ const BaseNav: BaseNav = React.forwardRef(({
         '[data-rb-event-key].active',
       );
 
-      if (activeChild) activeChild.focus();
+      if (activeChild) {
+        activeChild.focus();
+      }
     }
 
     needsRefocusRef.current = false;
@@ -131,8 +136,8 @@ const BaseNav: BaseNav = React.forwardRef(({
         value={{
           role, // used by NavLink to determine it's role
           activeKey: makeEventKey(activeKey),
-          getControlledId: getControlledId || noop,
-          getControllerId: getControllerId || noop,
+          getControlledId: getControlledId ?? noop,
+          getControllerId: getControllerId ?? noop,
         }}
       >
         <Component
@@ -144,8 +149,7 @@ const BaseNav: BaseNav = React.forwardRef(({
       </NavContext.Provider>
     </SelectableContext.Provider>
   );
-},
-);
+});
 
 BaseNav.propTypes = propTypes;
 BaseNav.displayName = 'BaseNav';

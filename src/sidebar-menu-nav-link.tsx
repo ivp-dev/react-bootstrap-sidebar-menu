@@ -9,6 +9,7 @@ import SidebarMenuNodeContext from './sidebar-menu-node-context';
 import BaseNavItem from './sidebar-menu-base-nav-item';
 import { SelectCallback } from "@restart/ui/types";
 
+
 export interface SidebarMenuNavLinkProps extends Omit<NavLinkProps, 'onSelect'> {
   onSelect?: SelectCallback 
 }
@@ -23,7 +24,6 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
   className,
   eventKey,
   active,
-  href,
   disabled,
   ...props
 }: SidebarMenuNavLinkProps, ref) => {
@@ -31,7 +31,7 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
   const { onActiveKeyChanged } = useContext(SidebarMenuNodeContext)
   const navContext = useContext(NavContext);
 
-  const navKey = makeEventKey(eventKey, href);
+  const navKey = makeEventKey(eventKey, props.href);
 
   const isActive = active == null && navKey != null
     ? navContext && navContext.activeKey === navKey
@@ -44,7 +44,6 @@ const SidebarMenuNavLink: BsPrefixRefForwardingComponent<'a', SidebarMenuNavLink
   return <BaseNavItem
     ref={ref}
     as={As}
-    href={href}
     active={active}
     eventKey={eventKey}
     disabled={disabled}

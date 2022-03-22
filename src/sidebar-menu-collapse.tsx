@@ -4,22 +4,11 @@ import { BsPrefixProps, BsPrefixRefForwardingComponent } from 'react-bootstrap/h
 import { useBootstrapPrefix } from 'react-bootstrap/ThemeProvider';
 import SidebarMenuContext from './sidebar-menu-context';
 import createChainedFunction from 'react-bootstrap/createChainedFunction'
-import PropTypes from "prop-types";
 import classNames from 'classnames';
 
-export type SidebarMenuCollapseProps = Omit<CollapseProps, 'children'> & HTMLAttributes<HTMLDivElement> & BsPrefixProps & {
+export type SidebarMenuCollapseProps = CollapseProps & HTMLAttributes<HTMLDivElement> & BsPrefixProps & {
   getScrollValue?: ((el: HTMLElement) => string | number) | number | string
 }
-
-const propTypes = {
-  /** @default 'sidebar-menu-collapse' */
-  bsPrefix: PropTypes.string,
-  getScrollValue: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.func
-  ])
-};
 
 const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuCollapseProps> =
   React.forwardRef<HTMLDivElement, SidebarMenuCollapseProps>(({
@@ -57,6 +46,6 @@ const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuColl
   });
 
 SidebarMenuCollapse.displayName = "SidebarMenuCollapse";
-SidebarMenuCollapse.propTypes = propTypes;
+SidebarMenuCollapse.propTypes = Collapse.propTypes;
 
 export default SidebarMenuCollapse;
