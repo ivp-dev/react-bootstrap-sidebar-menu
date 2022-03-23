@@ -41,7 +41,6 @@ const SidebarMenuCollapse: BsPrefixRefForwardingComponent<'div', SidebarMenuColl
     return <Collapse {...props} dimension={dimension} onEntering={handleEntering} in={!!sidebarMenuContext?.expanded}>
       <div ref={ref} className={classNames(className, bsPrefix)}>
         {children}
-        <span></span>
       </div>
     </Collapse>
   });
