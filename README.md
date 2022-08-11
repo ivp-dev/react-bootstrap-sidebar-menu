@@ -12,21 +12,17 @@ React sidebar menu based on react-bootstrap
 Installation
 ------------------------------------------------------------------------------
 
-```
-
-npm install react-bootstrap-sidebar-menu
-
-```
+```npm install react-bootstrap-sidebar-menu```
 
 Usage
 ------------------------------------------------------------------------------
 
-```
+```import SidebarMenu from 'react-bootstrap-sidebar-menu';```
 
-import SidebarMenu from 'react-bootstrap-sidebar-menu';
+If you are using sass you can import the index.scss directly into your scss file
+------------------------------------------------------------------------------
 
-```
-
+```@import 'react-bootstrap-sidebar-menu/dist/sideabr-menu.scss'```
 
 
 Compatibility
