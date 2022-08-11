@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-sidebar-menu",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Sidebar menu based on react-bootstrap",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
@@ -78,6 +78,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "rollup": "^2.70.1",
+    "rollup-plugin-copy": "^3.4.0",
     "typescript": "^4.6.2",
     "uncontrollable": "^7.2.1"
   },

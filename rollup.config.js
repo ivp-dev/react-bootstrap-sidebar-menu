@@ -1,104 +1,108 @@
 import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
+import copy from "rollup-plugin-copy";
 //import { terser } from "rollup-plugin-terser";
 //import { uglify } from "rollup-plugin-uglify";
 
-const input = 'src/index.ts';
-const output = 'dist/index';
-const extensions = ['.js', '.ts', '.tsx'];
+const input = "src/index.ts";
+const output = "dist/index";
+const extensions = [".js", ".ts", ".tsx", ".scss"];
 
 const globals = {
-  'react': 'React',
-  'react-dom': 'ReactDOM',
-  'prop-types': 'PropTypes',
-  'react-bootstrap': 'ReactBootstrap'
-}
+  react: "React",
+  "react-dom": "ReactDOM",
+  "prop-types": "PropTypes",
+  "react-bootstrap": "ReactBootstrap",
+};
 
 const external = [
-  'react',
-  'react-dom',
-  'react-bootstrap',
-  'prop-types',
-  'classnames'
-]
+  "react",
+  "react-dom",
+  "react-bootstrap",
+  "prop-types",
+  "classnames",
+];
 
 export default [
   {
     input: input,
     output: {
       file: `${output}.js`,
-      format: 'cjs',
+      format: "cjs",
       sourcemap: false,
-      globals
+      globals,
     },
     external,
     plugins: [
       resolve({
         browser: true,
-        extensions
+        extensions,
       }),
       commonjs({
-        include: [
-          'node_modules/**'
-        ]
+        include: ["node_modules/**"],
       }),
       babel({
         extensions,
         exclude: "node_modules/**",
-        babelHelpers: 'bundled'
+        babelHelpers: "bundled",
       }),
-      external
+      copy({
+        targets: [
+          {
+            src: "src/sidebar-menu.scss",
+            dest: "dist",
+          },
+        ],
+      }),
+      external,
     ],
   },
   {
     input: input,
     output: {
-      name: 'react-bootstrap-sidebar-menu',
+      name: "react-bootstrap-sidebar-menu",
       file: `${output}.umd.js`,
-      format: 'umd',
-      globals
+      format: "umd",
+      globals,
     },
     external,
     plugins: [
       resolve({
-        extensions
+        extensions,
       }),
       commonjs({
-        include: [
-          'node_modules/**'
-        ]
+        include: ["node_modules/**"],
       }),
       babel({
         extensions,
         exclude: "node_modules/**",
-        babelHelpers: 'bundled'
+        babelHelpers: "bundled",
       }),
-      external
+      external,
     ],
-  }, {
+  },
+  {
     input: input,
     output: {
       file: `${output}.es.js`,
-      format: 'es',
-      globals
+      format: "es",
+      globals,
     },
     external,
     plugins: [
       resolve({
-        extensions
+        extensions,
       }),
       commonjs({
-        include: [
-          'node_modules/**'
-        ]
+        include: ["node_modules/**"],
       }),
       babel({
         extensions,
         exclude: "node_modules/**",
-        babelHelpers: 'bundled'
+        babelHelpers: "bundled",
       }),
-      external
-    ]
+      external,
+    ],
   }
-]
+];
