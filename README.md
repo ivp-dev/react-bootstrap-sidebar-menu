@@ -40,6 +40,9 @@ import SidebarMenu from 'react-bootstrap-sidebar-menu';
 
 ```
 
+You can import the sidebar-menu.scss directly into your scss file
+
+```@import 'react-bootstrap-sidebar-menu/dist/sidebar-menu.scss'```
 
 Compatibility
 ------------------------------------------------------------------------------
