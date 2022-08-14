@@ -37,13 +37,17 @@ import SidebarMenu from 'react-bootstrap-sidebar-menu';
 
 <SidebarMenu>
   <SidebarMenu.Header>
-    <SidebarMenu.Brand>{/* Your brand icon */}</SidebarMenu.Brand>
+    <SidebarMenu.Brand>
+      {/* Your brand icon */}
+    </SidebarMenu.Brand>
     <SidebarMenu.Toggle />
   </SidebarMenu.Header>
   <SidebarMenu.Body>
     <SidebarMenu.Nav>
       <SidebarMenu.Nav.Link>
-        <SidebarMenu.Nav.Icon>{/* Menu item icon */}</SidebarMenu.Nav.Icon>
+        <SidebarMenu.Nav.Icon>
+          {/* Menu item icon */}
+        </SidebarMenu.Nav.Icon>
         <SidebarMenu.Nav.Title>
           {/* Menu item title */}
         </SidebarMenu.Nav.Title>
@@ -52,7 +56,9 @@ import SidebarMenu from 'react-bootstrap-sidebar-menu';
     <SidebarMenu.Sub>
       <SidebarMenu.Sub.Toggle>
         <SidebarMenu.Nav.Icon />
-        <SidebarMenu.Nav.Title>{/* Submenu title */}</SidebarMenu.Nav.Title>
+        <SidebarMenu.Nav.Title>
+          {/* Submenu title */}
+        </SidebarMenu.Nav.Title>
       </SidebarMenu.Sub.Toggle>
       <SidebarMenu.Sub.Collapse>
         <SidebarMenu.Nav>
@@ -71,11 +77,13 @@ import SidebarMenu from 'react-bootstrap-sidebar-menu';
 </SidebarMenu>
 ```
 
-You can import the sidebar-menu.scss directly into your scss file
+You can import the sidebar-menu.scss directly into your scss file (please note that you should import bootstrap styles before importing the library's stylesheet)
 
 ```
-@import 'react-bootstrap-sidebar-menu/dist/sidebar-menu.scss'
+@import '~react-bootstrap-sidebar-menu/dist/sidebar-menu.scss'
 ```
+
+
 
 Compatibility
 ------------------------------------------------------------------------------
