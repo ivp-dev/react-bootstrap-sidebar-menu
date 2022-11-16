@@ -35,48 +35,36 @@ Usage
 ```jsx
 import SidebarMenu from 'react-bootstrap-sidebar-menu';
 
-<SidebarMenu>
-  <SidebarMenu.Collapse>
-    <SidebarMenu.Header>
-      <SidebarMenu.Brand>
-        {/* Your brand icon */}
-      </SidebarMenu.Brand>
-      <SidebarMenu.Toggle />
-    </SidebarMenu.Header>
-    <SidebarMenu.Body>
-      <SidebarMenu.Nav>
-        <SidebarMenu.Nav.Link>
-          <SidebarMenu.Nav.Icon>
-            {/* Menu item icon */}
-          </SidebarMenu.Nav.Icon>
-          <SidebarMenu.Nav.Title>
-            {/* Menu item title */}
-          </SidebarMenu.Nav.Title>
-        </SidebarMenu.Nav.Link>
-      </SidebarMenu.Nav>
-      <SidebarMenu.Sub>
-        <SidebarMenu.Sub.Toggle>
-          <SidebarMenu.Nav.Icon />
-          <SidebarMenu.Nav.Title>
-            {/* Submenu title */}
-          </SidebarMenu.Nav.Title>
-        </SidebarMenu.Sub.Toggle>
-        <SidebarMenu.Sub.Collapse>
-          <SidebarMenu.Nav>
-            <SidebarMenu.Nav.Link>
-              <SidebarMenu.Nav.Icon>
-                {/* Submenu item icon */}
-              </SidebarMenu.Nav.Icon>
-              <SidebarMenu.Nav.Title>
-                {/* Submenu item title */}
-              </SidebarMenu.Nav.Title>
-            </SidebarMenu.Nav.Link>
-          </SidebarMenu.Nav>
-        </SidebarMenu.Sub.Collapse>
-      </SidebarMenu.Sub>
-    </SidebarMenu.Body>
-  </SidebarMenu.Collapse>
-</SidebarMenu>
+<Sidebar>
+  <Sidebar.Collapse>
+    <Sidebar.Header>
+      <Sidebar.Brand>{/* brand icon */}</Sidebar.Brand>
+      <Sidebar.Toggle />
+    </Sidebar.Header>
+    <Sidebar.Body>
+      <Sidebar.Nav>
+        <Sidebar.Nav.Link>
+          <Sidebar.Nav.Icon>{/* menu item icon */}</Sidebar.Nav.Icon>
+          <Sidebar.Nav.Title>{/* menu item title */}</Sidebar.Nav.Title>
+        </Sidebar.Nav.Link>
+        <Sidebar.Sub>
+          <Sidebar.Sub.Toggle>
+            <Sidebar.Nav.Icon />
+            <Sidebar.Nav.Title>{/* sub menu item title */}</Sidebar.Nav.Title>
+          </Sidebar.Sub.Toggle>
+          <Sidebar.Sub.Collapse>
+            <Sidebar.Nav>
+              <Sidebar.Nav.Link>
+                <Sidebar.Nav.Icon>{/* sum menu item icon */}</Sidebar.Nav.Icon>
+                <Sidebar.Nav.Title>{/* sub menu item title */}</Sidebar.Nav.Title>
+              </Sidebar.Nav.Link>
+            </Sidebar.Nav>
+          </Sidebar.Sub.Collapse>
+        </Sidebar.Sub>
+      </Sidebar.Nav>
+    </Sidebar.Body>
+  </Sidebar.Collapse>
+</Sidebar>
 ```
 
 You can import the sidebar-menu.scss directly into your scss file (please note that you should import bootstrap styles before importing the library's stylesheet)
