@@ -33,7 +33,7 @@ Usage
 ------------------------------------------------------------------------------
 
 ```jsx
-import SidebarMenu from 'react-bootstrap-sidebar-menu';
+import Sidebar from 'react-bootstrap-sidebar-menu';
 
 <Sidebar>
   <Sidebar.Collapse>
